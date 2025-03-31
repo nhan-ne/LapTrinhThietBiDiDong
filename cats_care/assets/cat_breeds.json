@@ -1,0 +1,814 @@
+[
+  {
+    "name": "Mèo Mỹ lông ngắn",
+    "imageUrl": "assets/images/cats/american_shorthair.png",
+    "weight": "3 - 6 kg",
+    "height": "25 - 30 cm",
+    "lifespan": "15 - 20 năm",
+    "fur": "Ngắn, dày",
+    "appearance": {
+      "longFur": "Nhiều màu sắc (bạc mướp, trắng, đen, nâu, đỏ, kem), kiểu lông đa dạng (hai màu, ba màu, mai rùa).",
+      "body": "Thân hình tròn trịa, cơ bắp chắc chắn, mặt tròn, má phúng phính, mắt to tròn."
+    },
+    "grooming": {
+      "brushing": "Chải lông định kỳ.",
+      "nails": "Cắt tỉa móng khi cần thiết."
+    },
+    "health": {
+      "obesity": "Ít nguy cơ, nhưng vẫn cần kiểm soát cân nặng.",
+      "urinaryStones": "Nguy cơ thấp, nhưng vẫn cần theo dõi sức khỏe.",
+      "checkups": "Kiểm tra sức khỏe định kỳ với bác sĩ thú y."
+    },
+    "personality": {
+      "description": "Thân thiện, dễ thích nghi, tình cảm, vui tươi, dễ huấn luyện."
+    }
+  },
+  {
+    "name": "Mèo Abyssinian",
+    "imageUrl": "assets/images/cats/abyssinian.png",
+    "weight": "2.7 - 4.5 kg",
+    "height": "20 - 25 cm",
+    "lifespan": "12 - 18 năm",
+    "fur": "Ngắn, sợi lông đa sắc độc đáo",
+    "appearance": {
+      "longFur": "Nâu đỏ, xanh lam, nâu vàng, quế; lông đa sắc tạo hiệu ứng lung linh.",
+      "body": "Thân hình trung bình, cơ bắp, dáng vẻ thanh lịch, mắt hình quả hạnh, tai to nhọn."
+    },
+    "grooming": {
+      "brushing": "Chải lông hàng tuần.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Vệ sinh răng miệng, kiểm tra tai định kỳ."
+    },
+    "health": {
+      "commonIssues": "Teo võng mạc tiến triển (PRA), bệnh amyloidosis thận, vấn đề răng miệng, béo phì.",
+      "checkups": "Khám bác sĩ thú y định kỳ."
+    },
+    "personality": {
+      "description": "Năng động, tinh nghịch, dễ hòa nhập, thích chơi tương tác."
+    }
+  },
+  {
+    "name": "Mèo Bali",
+    "imageUrl": "assets/images/cats/bali.png",
+    "weight": "2.5 - 5 kg",
+    "height": "28 – 32 cm",
+    "lifespan": "12 - 15 năm",
+    "fur": "Dài trung bình, mềm mại",
+    "appearance": {
+      "longFur": "Màu lông điểm (xanh lam, tử đinh hương, chì, sô cô la), đuôi dài xù.",
+      "body": "Thân hình mảnh mai, mắt xanh lam hình quả hạnh."
+    },
+    "grooming": {
+      "brushing": "Chải lông định kỳ, ít rụng lông hơn mèo lông dài khác.",
+      "nails": "Cắt tỉa móng thường xuyên."
+    },
+    "health": {
+      "commonIssues": "Tương tự mèo Xiêm (các vấn đề về hô hấp, tim mạch).",
+      "checkups": "Kiểm tra sức khỏe định kỳ với bác sĩ thú y."
+    },
+    "personality": {
+      "description": "Năng động, ồn ào, tình cảm, thích giao tiếp, thích ôm ấp."
+    },
+    "additional_info":{
+      "origin": "Hoa Kỳ, từ mèo Xiêm lông dài.",
+      "characteristics": "Thanh nhã, duyên dáng như vũ công Bali.",
+      "vocalization": "Thích 'trò chuyện' với chủ nhân."
+    }
+  },
+  {
+    "name": "Mèo Bengal",
+    "imageUrl": "assets/images/cats/bengal.png",
+    "weight": "3.6 - 5.4 kg",
+    "height": "20 - 25 cm",
+    "lifespan": "14 - 16 năm",
+    "fur": "Ngắn, dày rậm",
+    "appearance": {
+      "longFur": "Vàng, rỉ sét, cam, ngà với đốm đen, rỉ sét, sô cô la, nâu, cát, cam; lông phủ ánh bạc.",
+      "body": "Thân hình cơ bắp, chân săn chắc, đầu nhỏ tròn, mắt to."
+    },
+    "grooming": {
+      "brushing": "Chải lông hàng ngày.",
+      "bathing": "Tắm mỗi tháng một lần.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Đánh răng, vệ sinh tai thường xuyên."
+    },
+    "health": {
+      "commonIssues": "Nhìn chung khỏe mạnh, cần kiểm tra sức khỏe định kỳ.",
+      "checkups": "Kiểm tra sức khỏe định kỳ, đặc biệt sau các hoạt động ngoài trời."
+    },
+    "personality": {
+      "description": "Năng động, hiếu kỳ, thích phiêu lưu, thông minh, tình cảm, dễ huấn luyện."
+    }
+  },
+  {
+    "name": "Mèo Birman",
+    "imageUrl": "assets/images/cats/birman.png",
+    "weight": "4.5 - 5.4 kg",
+    "height": "20 - 25 cm",
+    "lifespan": "12 - 16 năm",
+    "fur": "Trung bình đến dài, mềm mại",
+    "appearance": {
+      "longFur": "Màu kem, mặt tai và bàn chân tối màu, mắt xanh sapphire (hoặc vàng, xanh lục).",
+      "body": "Thân hình dài, thanh lịch."
+    },
+    "grooming": {
+      "brushing": "Chải lông thường xuyên.",
+      "bathing": "Tắm định kỳ.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Chải răng, vệ sinh tai thường xuyên."
+    },
+    "health": {
+      "commonIssues": "Phì đại cơ tim, rối loạn tiêu hóa, bệnh thận.",
+      "checkups": "Kiểm tra sức khỏe định kỳ."
+    },
+    "personality": {
+      "description": "Tình cảm, hiền lành, thân thiện, vui tươi, thông minh."
+    }
+  },
+  {
+    "name": "Mèo Anh lông ngắn",
+    "imageUrl": "assets/images/cats/british_shorthair.png",
+    "weight": "4 - 8 kg",
+    "height": "30 - 36 cm",
+    "lifespan": "12 - 15 năm",
+    "fur": "Ngắn, dày",
+    "appearance": {
+      "longFur": "Đen, đỏ, kem, trắng, xanh xám, shaded, mướp, mai rùa.",
+      "body": "Thân hình cường tráng, cơ bắp, mặt tròn, má mũm mĩm."
+    },
+    "grooming": {
+      "brushing": "Chải lông định kỳ.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Chải răng, vệ sinh tai thường xuyên."
+    },
+    "health": {
+      "commonIssues": "Nhìn chung khỏe mạnh, theo dõi các rối loạn sức khỏe tiềm ẩn.",
+      "checkups": "Kiểm tra sức khỏe định kỳ."
+    },
+    "personality": {
+      "description": "Hiền lành, dễ gần, thân thiện, giàu tình cảm, thông minh."
+    }
+  },
+  {
+    "name": "Mèo Miến Điện",
+    "imageUrl": "assets/images/cats/burmese.png",
+    "weight": "3.6 - 5.4 kg (đực), 3.2 - 4.1 kg (cái)",
+    "height": "20 - 25 cm",
+    "lifespan": "10 - 12 năm",
+    "fur": "Ngắn, bóng mượt",
+    "appearance": {
+      "longFur": "Xanh dương, sô-cô-la, xám, sable, đồng, bạc, tử đinh hương.",
+      "body": "Thân hình cơ bắp, mặt tròn, mắt hạnh nhân to."
+    },
+    "grooming": {
+      "brushing": "Chải lông hàng tuần.",
+      "bathing": "Tắm mỗi tháng một lần.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Chải răng, vệ sinh tai thường xuyên."
+    },
+    "health": {
+      "commonIssues": "Đái tháo đường, viêm đa cơ hạ kali máu.",
+      "checkups": "Khám sức khỏe định kỳ, đặc biệt là sàng lọc đái tháo đường."
+    },
+    "personality": {
+      "description": "Năng động, hòa đồng, thân thiện, vui tươi, thông minh."
+    }
+  },
+  {
+    "name": "Mèo Burmilla",
+    "imageUrl": "assets/images/cats/burmilla.png",
+    "origin": "Vương quốc Anh",
+    "weight": "3 - 6 kg",
+    "height": "25 - 30 cm",
+    "lifespan": "10 - 15 năm",
+    "fur": "Ngắn hoặc dài trung bình, bóng mờ",
+    "appearance": {
+      "longFur": "Màu bạc nền, ngọn lông có màu, mắt viền tối màu.",
+      "body": "Thân hình vạm vỡ, chân dài, đuôi dày, đầu hình chêm, tai lớn, mắt to."
+    },
+    "grooming": {
+      "brushing": "Ít cần chải lông, ngay cả với lông dài.",
+      "nails": "Cắt tỉa móng thường xuyên."
+    },
+    "health": {
+      "commonIssues": "Nhìn chung khỏe mạnh, cần theo dõi sức khỏe định kỳ.",
+      "checkups": "Kiểm tra sức khỏe định kỳ."
+    },
+    "personality": {
+      "description": "Dễ gần, tình cảm, năng động, thân thiện."
+    }
+  },
+  {
+    "name": "Mèo Chinchilla",
+    "imageUrl": "assets/images/cats/chinchilla.png",
+    "weight": "3 - 7 kg",
+    "height": "23 - 25 cm",
+    "lifespan": "12 - 15 năm",
+    "fur": "Dài, bồng bềnh",
+    "appearance": {
+      "longFur": "Trắng, mắt xanh lá cây hình quả hạnh.",
+      "body": "Chân to khỏe, đuôi ngắn rậm."
+    },
+    "grooming": {
+      "brushing": "Chải lông hàng ngày.",
+      "bathing": "Tắm rửa thường xuyên.",
+      "nails": "Cắt móng thường xuyên.",
+      "other": "Đánh răng, vệ sinh tai mắt thường xuyên."
+    },
+    "health": {
+      "commonIssues": "Bệnh thận đa nang, vấn đề về lông da.",
+      "checkups": "Khám thú y định kỳ."
+    },
+    "personality": {
+      "description": "Điềm tĩnh, nhẹ nhàng, tình cảm, bám chủ, thân thiện, thông minh, ngọt ngào."
+    }
+  },
+  {
+    "name": "Mèo Cornish Rex",
+    "imageUrl": "assets/images/cats/cornish_rex.png",
+    "weight": "2 - 5 kg",
+    "height": "20 - 30 cm",
+    "lifespan": "15 - 20 năm",
+    "fur": "Ngắn, xoăn",
+    "appearance": {
+      "longFur": "Nhiều màu lông và kiểu lông khác nhau (một màu, mai rùa, hai màu, mướp).",
+      "body": "Thân hình thon thả, chân dài mảnh mai, đuôi dài, đầu vừa, mắt to."
+    },
+    "grooming": {
+      "brushing": "Chải lông thường xuyên.",
+      "bathing": "Tắm rửa thường xuyên.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Đánh răng thường xuyên."
+    },
+    "health": {
+      "commonIssues": "Rối loạn da và lông, vấn đề hô hấp (hen suyễn, viêm phế quản), phì đại cơ tim, trật khớp xương bánh chè.",
+      "checkups": "Khám sàng lọc định kỳ, tiêm phòng đúng lịch."
+    },
+    "personality": {
+      "description": "Nhẹ nhàng, tình cảm, hợp tác, thân thiện."
+    }
+  },
+  {
+    "name": "Mèo Devon Rex",
+    "imageUrl": "assets/images/cats/devon_rex.png",
+    "weight": "2.5 - 4 kg",
+    "height": "25 - 30 cm",
+    "lifespan": "9 - 15 năm",
+    "fur": "Ngắn, xoăn, mềm mượt",
+    "appearance": {
+      "longFur": "Mai rùa, đám mây, hai màu, mướp.",
+      "body": "Thân hình thon thả, chân dài, đuôi dài, mặt tam giác, tai to, mắt to."
+    },
+    "grooming": {
+      "brushing": "Chải lông thường xuyên.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "bathing": "Tắm rửa thường xuyên.",
+      "other": "Vệ sinh răng miệng thường xuyên."
+    },
+    "health": {
+      "commonIssues": "Hô hấp (hen suyễn, viêm phế quản), bệnh tim (phì đại cơ tim), bệnh ngoài da, vấn đề răng miệng.",
+      "checkups": "Khám thú y định kỳ."
+    },
+    "personality": {
+      "description": "Vui tươi, tình cảm, năng động, thông minh, tò mò."
+    }
+  },
+  {
+    "name": "Mèo Moggie",
+    "imageUrl": "assets/images/cats/moggie.png",
+    "weight": "6.3 - 6.8 kg",
+    "height": "38 - 51 cm",
+    "lifespan": "12 - 20 năm",
+    "fur": "Ngắn, trung bình, hoặc dài; đa dạng màu sắc và kiểu lông (hai màu, mướp, pointed, calico).",
+    "appearance": {
+      "longFur": "Đa dạng màu sắc (trắng, đen, xám, nâu, cam) và kiểu lông.",
+      "body": "Nhiều kích cỡ, mắt vàng, xanh lục, hoặc xanh lam."
+    },
+    "grooming": {
+      "brushing": "Chải lông hàng tuần.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Loại bỏ búi lông trong đường tiêu hóa."
+    },
+    "health": {
+      "commonIssues": "Ung thư, béo phì, bệnh thận, bệnh tim, bệnh bạch cầu mèo.",
+      "checkups": "Khám sức khỏe định kỳ, tiêm phòng đúng lịch."
+    },
+    "personality": {
+      "description": "Đa dạng, từ nhút nhát đến hướng ngoại, từ thích chơi đùa đến thờ ơ, hòa nhập tốt nếu được xã hội hóa sớm."
+    }
+  },
+  {
+    "name": "Mèo Ba Tư lông ngắn (Exotic)",
+    "imageUrl": "assets/images/cats/exotic_shorthair.png",
+    "weight": "4.5 - 6.8 kg",
+    "height": "25 - 30 cm",
+    "lifespan": "8 - 15 năm",
+    "fur": "Ngắn, mềm, dày rậm",
+    "appearance": {
+      "longFur": "Trắng, bạc, đen, vàng, hai màu, khói, Himalaya; mướp, đồng nhất, pointed, mai rùa.",
+      "body": "Thân hình chắc nịch, đầu tròn rộng, mắt to tròn (vàng, xanh lục, xanh lam), mõm ngắn, tai nhỏ, chân ngắn, đuôi rậm."
+    },
+    "grooming": {
+      "brushing": "Chải lông 1-2 lần/tuần, thường xuyên hơn khi rụng lông.",
+      "bathing": "Tắm khi rụng lông theo mùa.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Lau mặt thường xuyên, kiểm tra tai hàng tuần."
+    },
+    "health": {
+      "commonIssues": "Hô hấp, cơ tim phì đại, thận đa nang (PKD), vấn đề về mắt.",
+      "checkups": "Khám sức khỏe định kỳ, xét nghiệm ADN cho PKD."
+    },
+    "personality": {
+      "description": "Đáng yêu, ấm áp, vui tươi, tình cảm, hướng gia đình, năng động, thích chơi đồ chơi và âu yếm."
+    }
+  },
+  {
+    "name": "Mèo cộc đuôi Nhật Bản (Japanese Bobtail)",
+    "imageUrl": "assets/images/cats/japanese_bobtail.png",
+    "weight": "3.6 - 5.4 kg",
+    "height": "30 - 35 cm",
+    "lifespan": "9 - 15 năm",
+    "fur": "Ngắn hoặc dài, mềm mượt",
+    "appearance": {
+      "longFur": "Đen, kem, trắng, sô-cô-la, tử đinh hương, đỏ; hai màu, đồng nhất, tam thể, mướp, calico.",
+      "body": "Thân hình trung bình, cơ bắp, chân sau dài hơn chân trước, đầu tam giác, mắt to (có thể khác màu), tai nhọn, đuôi ngắn (pom-pom)."
+    },
+    "grooming": {
+      "brushing": "Chải lông thường xuyên.",
+      "nails": "Cắt tỉa móng 2-3 tuần/lần.",
+      "other": "Vệ sinh răng miệng thường xuyên."
+    },
+    "health": {
+      "commonIssues": "Khỏe mạnh, ít bệnh di truyền.",
+      "checkups": "Khám thú y định kỳ."
+    },
+    "personality": {
+      "description": "Ngọt ngào, thông minh, tinh nghịch, ham chơi, thích học trò, thích nước, thích tập thể dục."
+    }
+  },
+  {
+    "name": "Mèo Korat",
+    "imageUrl": "assets/images/cats/korat.png",
+    "weight": "2.7 - 4.5 kg",
+    "height": "20 - 25 cm",
+    "lifespan": "15 - 20 năm",
+    "fur": "Ngắn, mềm, màu xanh xám có ngọn bạc",
+    "appearance": {
+      "longFur": "Xanh xám có ngọn bạc, bóng mượt.",
+      "body": "Khuôn mặt hình trái tim, tai lớn, mắt xanh lục bảo."
+    },
+    "grooming": {
+      "brushing": "Chải lông hàng tuần.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Vệ sinh tai, chăm sóc răng miệng."
+    },
+    "health": {
+      "commonIssues": "Gangliosidosis, vấn đề răng miệng, cần kiểm soát cân nặng.",
+      "checkups": "Khám thú y định kỳ."
+    },
+    "personality": {
+      "description": "Điềm tĩnh, kín đáo, thích chơi tương tác, thông minh."
+    }
+  },
+  {
+    "name": "Mèo Maine Coon",
+    "imageUrl": "assets/images/cats/maine_coon.png",
+    "weight": "5.8 - 8.2 kg (có thể lên đến 11.3 kg)",
+    "height": "41 cm chiều cao, 102 cm chiều dài",
+    "lifespan": "Lên đến 15 năm",
+    "fur": "Dài, bồng bềnh",
+    "appearance": {
+      "longFur": "Trắng, đen, xanh lam, kem; hai màu, ba màu, shaded, khói.",
+      "body": "To lớn, cơ bắp, quai hàm rõ nét, lông tai/đuôi mọc thành búi, búi lông ngực."
+    },
+    "grooming": {
+      "brushing": "Chải lông thường xuyên.",
+      "bathing": "Tắm định kỳ.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Chải răng, vệ sinh tai thường xuyên."
+    },
+    "health": {
+      "commonIssues": "Phì đại cơ tim, teo cơ cột sống.",
+      "checkups": "Kiểm tra sức khỏe định kỳ, theo dõi các triệu chứng bất thường."
+    },
+    "personality": {
+      "description": "Năng động, hòa đồng, thân thiện, thích chơi đùa và phiêu lưu, thông minh."
+    }
+  },
+  {
+    "name": "Mèo Manx",
+    "imageUrl": "assets/images/cats/manx.png",
+    "weight": "3.6 - 5.4 kg",
+    "height": "25 - 30 cm",
+    "lifespan": "10 - 14 năm",
+    "fur": "Hai lớp, ngắn hoặc dài",
+    "appearance": {
+      "longFur": "Nhiều màu sắc và vân (vằn, đơn sắc, tam thể, tuxedo).",
+      "body": "Thân hình chắc khỏe, cơ bắp, không đuôi (rumpies) hoặc đuôi cộc (stumpies), chân sau dài hơn chân trước, đầu tròn, má đầy đặn, mắt to tròn."
+    },
+    "grooming": {
+      "brushing": "Hàng tuần (lông ngắn), thường xuyên hơn (lông dài).",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Vệ sinh tai, chăm sóc răng miệng."
+    },
+    "health": {
+      "commonIssues": "Hội chứng Manx, vấn đề khớp, bệnh răng miệng.",
+      "checkups": "Kiểm tra sức khỏe thường xuyên."
+    },
+    "personality": {
+      "description": "Hiếu động, năng động, thông minh, trung thành, thích chơi trò chơi."
+    }
+  },
+  {
+    "name": "Mèo Na Uy rừng (Norwegian Forest Cat)",
+    "imageUrl": "assets/images/cats/norwegian_forest_cat.png",
+    "weight": "3.6 - 8.2 kg",
+    "height": "23 - 30 cm",
+    "lifespan": "12 - 16 năm",
+    "fur": "Hai lớp, dày, chống nước",
+    "appearance": {
+      "longFur": "Nhiều màu sắc và kiểu lông khác nhau.",
+      "body": "Cơ bắp, vững chắc, chân sau dài hơn chân trước, đầu hình tam giác, mắt hình quả hạnh, tai có búi lông."
+    },
+    "grooming": {
+      "brushing": "2-3 lần/tuần, đặc biệt mùa rụng lông.",
+      "bathing": "Tắm định kỳ.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Vệ sinh tai, đánh răng định kỳ."
+    },
+    "health": {
+      "commonIssues": "HCM, GSD IV, loạn sản xương hông, béo phì, vấn đề răng miệng.",
+      "checkups": "Kiểm tra sức khỏe định kỳ, chế độ ăn lành mạnh."
+    },
+    "personality": {
+      "description": "Thông minh, thân thiện, tình cảm, hòa đồng, thích khám phá, bản năng săn mồi, độc lập, thích gần gũi chủ nhân."
+    }
+  },
+  {
+    "name": "Mèo Ocicat",
+    "imageUrl": "assets/images/cats/ocicat.png",
+    "weight": "4 - 7 kg (đực), 2.7 - 5.4 kg (cái)",
+    "height": "23 - 28 cm",
+    "lifespan": "12 - 18 năm",
+    "fur": "Ngắn, bóng mượt như satin",
+    "appearance": {
+      "longFur": "Nâu vàng, sô-cô-la, quế, xanh lam, tím hoa oải hương, nâu vàng nhạt, đốm đen.",
+      "body": "Cơ bắp, chắc khỏe, mắt hạnh nhân (vàng, đồng, xanh lam, xanh lục), tai có búi lông."
+    },
+    "grooming": {
+      "brushing": "Chải lông hàng tuần.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Vệ sinh tai, chăm sóc răng miệng."
+    },
+    "health": {
+      "commonIssues": "Phì đại cơ tim (HCM), bệnh nha chu, bệnh thận, béo phì.",
+      "checkups": "Khám thú y định kỳ."
+    },
+    "personality": {
+      "description": "Hiền lành, năng động, thích chơi đùa, thông minh, bản năng săn mồi."
+    }
+  },
+  {
+    "name": "Mèo lông ngắn Phương Đông (Oriental Shorthair)",
+    "imageUrl": "assets/images/cats/oriental_shorthair.png",
+    "weight": "2.5 - 5.5 kg",
+    "height": "20 - 25 cm",
+    "lifespan": "12 - 15 năm",
+    "fur": "Ngắn, bóng mượt",
+    "appearance": {
+      "longFur": "Đa dạng màu sắc và hoa văn (một màu, khói, tabby, bicolor).",
+      "body": "Thân hình mảnh mai, thon dài, chân dài, đầu hình nêm, tai to."
+    },
+    "grooming": {
+      "brushing": "Chải lông định kỳ.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Vệ sinh tai, chăm sóc răng miệng."
+    },
+    "health": {
+      "commonIssues": "Tương tự mèo Xiêm (các vấn đề về hô hấp, tim mạch).",
+      "checkups": "Kiểm tra sức khỏe định kỳ."
+    },
+    "personality": {
+      "description": "Hiếu kỳ, tự tin, năng động, ngọt ngào, thông minh, hòa đồng, thích giao tiếp."
+    }
+  },
+  {
+    "name": "Mèo Ba Tư",
+    "imageUrl": "assets/images/cats/persian.png",
+    "weight": "3,5 - 7 kg",
+    "height": "25 - 30 cm",
+    "lifespan": "10 - 17 năm",
+    "fur": "Dài, dày",
+    "appearance": {
+      "face": "Khuôn mặt nhăn nhó, má phúng phính, mũi hếch.",
+      "longFur": "Bộ lông dài, sang trọng với nhiều màu sắc đa dạng.",
+      "body": "Vóc dáng trung bình, thân hình cứng cáp."
+    },
+    "grooming": {
+      "brushing": "Bộ lông dài đòi hỏi việc chải chuốt thường xuyên.",
+      "other": "Cần vệ sinh mắt, tai, đánh răng và cắt tỉa móng."
+    },
+    "health": {
+      "genetic": "Dễ mắc các bệnh di truyền đặc thù của giống.",
+      "common": "Nguy cơ mắc các bệnh thông thường ở mèo, bệnh về khớp, lông, da và mắt.",
+      "checkups": "Cần kiểm tra sức khỏe định kỳ."
+    },
+    "personality": {
+      "gentle": "Hiền lành, tình cảm và quấn chủ.",
+      "affectionate": "Thích được vuốt ve và ôm ấp.",
+      "friendly": "Hòa đồng với trẻ em và các vật nuôi khác.",
+      "calm": "Điềm tĩnh và thích sự yên bình."
+    }
+  },
+  {
+    "name": "Mèo Ragdoll",
+    "imageUrl": "assets/images/cats/ragdoll.png",
+    "weight": "4,5 - 9 kg",
+    "height": "23 - 28 cm",
+    "lifespan": "13 - 18 năm",
+    "fur": "Dài trung bình, dày",
+    "appearance": {
+      "longFur": "Bộ lông dài, mềm mượt, màu sắc đa dạng (sô-cô-la, tím lilac, kem, nâu đậm, xanh dương, nâu vàng và đỏ).",
+      "body": "Thân hình to lớn, cơ bắp chắc chắn, mắt xanh dương đặc trưng."
+    },
+    "grooming": {
+      "brushing": "Dễ chăm sóc lông, chỉ cần chải lông 2 lần/tuần.",
+      "nails": "Cần cắt tỉa móng thường xuyên."
+    },
+    "health": {
+      "obesity": "Dễ bị béo phì, cần kiểm soát lượng thức ăn và tăng cường vận động.",
+      "urinaryStones": "Có nguy cơ mắc sỏi bàng quang và bệnh cơ tim phì đại (HCM).",
+      "checkups": "Cần theo dõi và kiểm tra sức khỏe thường xuyên."
+    },
+    "personality": {
+      "description": "Dịu dàng, tình cảm, thân thiện, là người bạn đồng hành tuyệt vời."
+    }
+  },
+  {
+    "name": "Mèo Nga Russian Blue",
+    "imageUrl": "assets/images/cats/russian_blue.png",
+    "weight": "Lên đến 5.5 kg",
+    "height": "Lên đến 60 cm",
+    "lifespan": "Lên đến 20 năm",
+    "fur": "Ngắn, mượt, dày, màu xanh",
+    "appearance": {
+      "longFur": "Xanh mượt",
+      "body": "Thon gọn, săn chắc, mắt xanh lục"
+    },
+    "grooming": {
+      "brushing": "Chải lông hàng tuần",
+      "bathing": "Mỗi 4-6 tuần hoặc khi cần",
+      "nails": "Cắt tỉa móng đều đặn",
+      "other": "Làm sạch lông quanh mắt và tai"
+    },
+    "health": {
+      "commonIssues": "Bệnh thận, béo phì, tiểu đường, cường giáp",
+      "checkups": "Khám định kỳ"
+    },
+    "personality": {
+      "description": "Hiếu kỳ, thông minh, thân thiện, độc lập"
+    }
+  },
+  {
+    "name": "Mèo Tai Cụp Scotland (Scottish Fold)",
+    "imageUrl": "assets/images/cats/scottish_fold.png",
+    "weight": "2.5 - 6 kg",
+    "height": "20 - 25 cm",
+    "lifespan": "12 - 15 năm",
+    "fur": "Ngắn hoặc dài, dày, mềm mại",
+    "appearance": {
+      "longFur": "Đa dạng màu sắc và hoa văn.",
+      "body": "Thân hình tròn trịa, đầu tròn, tai cụp, mắt to tròn."
+    },
+    "grooming": {
+      "brushing": "Chải lông thường xuyên, đặc biệt là lông dài.",
+      "nails": "Cắt tỉa móng định kỳ.",
+      "other": "Vệ sinh tai, chăm sóc răng miệng."
+    },
+    "health": {
+      "commonIssues": "Bệnh đa nang thận (PKD), bệnh cơ tim phì đại (HCM), viêm xương khớp do di truyền.",
+      "checkups": "Kiểm tra sức khỏe định kỳ."
+    },
+    "personality": {
+      "description": "Ngọt ngào, tình cảm, thích bầu bạn, hòa nhã, không thích ở một mình."
+    }
+  },
+  {
+    "name": "Mèo Xiêm (Siamese)",
+    "imageUrl": "assets/images/cats/siamese.png",
+    "weight": "3.6 - 5.4 kg",
+    "height": "20 - 25 cm",
+    "lifespan": "15 - 20 năm",
+    "fur": "Ngắn, dày, bóng mượt",
+    "appearance": {
+      "longFur": "Kem, màu point (mặt, tai, chân, đuôi sẫm màu hơn).",
+      "body": "Thân hình mảnh mai, duyên dáng, cơ bắp."
+    },
+    "grooming": {
+      "brushing": "Chải lông thường xuyên.",
+      "bathing": "Tắm mỗi tháng một lần.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Vệ sinh răng miệng, tai."
+    },
+    "health": {
+      "commonIssues": "Bệnh tim, bệnh thận, gangliosidosis, nhiễm trùng đường hô hấp, hội chứng rối loạn tăng cảm xúc.",
+      "checkups": "Khám sức khỏe hàng năm."
+    },
+    "personality": {
+      "description": "Vui tươi, hiếu kỳ, tình cảm, thông minh, dễ huấn luyện."
+    }
+  },
+  {
+    "name": "Mèo Siberian",
+    "imageUrl": "assets/images/cats/siberian.png",
+    "weight": "5.4 - 6.8 kg",
+    "height": "25 - 30 cm",
+    "lifespan": "13 - 15 năm",
+    "fur": "Dài, bồng bềnh, ba lớp, không thấm nước",
+    "appearance": {
+      "longFur": "Vằn vện, mai rùa, shaded, cloudy; đen, trắng, kem, hung đỏ, xanh lam, đỏ.",
+      "body": "Khỏe mạnh, cơ bắp, bàn chân to, đuôi dài, ngực rộng, mặt tròn, má phúng phính."
+    },
+    "grooming": {
+      "brushing": "Chải lông thường xuyên.",
+      "bathing": "Tắm mỗi tháng một lần.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Vệ sinh răng miệng."
+    },
+    "health": {
+      "commonIssues": "Ít bệnh di truyền, thích nghi tốt với khí hậu khắc nghiệt.",
+      "checkups": "Kiểm tra sức khỏe định kỳ."
+    },
+    "personality": {
+      "description": "Thân thiện, tình cảm, kiên nhẫn, dễ huấn luyện, năng động, thích chơi đùa."
+    }
+  },
+  {
+    "name": "Mèo Singapura",
+    "imageUrl": "assets/images/cats/singapura.png",
+    "weight": "1.8 - 3.6 kg",
+    "height": "18 - 20 cm",
+    "lifespan": "12 - 13 năm",
+    "fur": "Ngắn, mượt, màu sepia agouti",
+    "appearance": {
+      "longFur": "Sepia agouti (nâu nhạt), có các mảng màu sẫm hơn ở lưng, đuôi, chân.",
+      "body": "Nhỏ nhắn, cơ bắp săn chắc, đầu tròn, mắt to hình quả hạnh, tai to, đuôi thon dài."
+    },
+    "grooming": {
+      "brushing": "Chải lông hàng tuần.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Vệ sinh tai, chăm sóc răng miệng."
+    },
+    "health": {
+      "commonIssues": "Thiếu hụt enzyme Pyruvate Kinase (PKD).",
+      "checkups": "Kiểm tra sức khỏe định kỳ, xét nghiệm di truyền cho PKD."
+    },
+    "personality": {
+      "description": "Hiếu động, tinh nghịch, thông minh, tình cảm, thích chơi đùa."
+    }
+  },
+  {
+    "name": "Mèo Snowshoe",
+    "imageUrl": "assets/images/cats/snowshoe.png",
+    "weight": "3 - 5.5 kg",
+    "height": "23 - 28 cm",
+    "lifespan": "12 - 15 năm",
+    "fur": "Ngắn đến trung bình, mượt mà",
+    "appearance": {
+      "longFur": "Nâu đen, xám xanh đậm, tím tử đinh hương, sô cô la; bàn chân trắng, chữ 'V' trắng ngược trên mặt.",
+      "body": "Thân hình cân đối, mắt xanh hình quả hạnh."
+    },
+    "grooming": {
+      "brushing": "Chải lông hàng tuần.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Vệ sinh tai, chăm sóc răng miệng."
+    },
+    "health": {
+      "commonIssues": "Béo phì, vấn đề răng miệng, bệnh cơ tim phì đại (HCM).",
+      "checkups": "Kiểm tra sức khỏe định kỳ."
+    },
+    "personality": {
+      "description": "Hiếu động, năng động, thông minh, thích chơi đùa."
+    }
+  },
+  {
+    "name": "Mèo Somali",
+    "imageUrl": "assets/images/cats/somali.png",
+    "weight": "2.7 - 5.4 kg",
+    "height": "18 - 28 cm",
+    "lifespan": "12 - 16 năm",
+    "fur": "Dài, mềm mại, vân đốm",
+    "appearance": {
+      "longFur": "Nâu đỏ, đỏ, xanh dương, vàng nhạt; đuôi rậm, sọc tối màu dọc sống lưng, chữ 'M' trên trán.",
+      "body": "Săn chắc, cơ bắp, mắt hạnh nhân (xanh lá cây, hổ phách, vàng)."
+    },
+    "grooming": {
+      "brushing": "2-3 lần/tuần, thường xuyên hơn vào mùa rụng lông.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Vệ sinh tai, chăm sóc răng miệng."
+    },
+    "health": {
+      "commonIssues": "Viêm nướu, bệnh lắng đọng amyloid, teo võng mạc tiến triển, béo phì.",
+      "checkups": "Kiểm tra sức khỏe định kỳ."
+    },
+    "personality": {
+      "description": "Năng động, thích chơi đùa, thông minh, tình cảm."
+    }
+  },
+  {
+    "name": "Mèo Sphynx",
+    "imageUrl": "assets/images/cats/sphynx.png",
+    "weight": "2.7 - 5.4 kg",
+    "height": "20 - 25 cm",
+    "lifespan": "12 - 15 năm",
+    "fur": "Không có lông, da mềm mại như da lộn",
+    "appearance": {
+      "longFur": "Da có nhiều màu sắc và vân (hồng, đen, xám, trắng, hai màu, mai rùa, tam thể, vằn).",
+      "body": "Không lông, da nhăn nheo, tai lớn, mắt hạnh nhân, cơ bắp săn chắc."
+    },
+    "grooming": {
+      "bathing": "Tắm hàng tuần.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Vệ sinh tai, mắt, chăm sóc răng miệng."
+    },
+    "health": {
+      "commonIssues": "Bệnh cơ tim phì đại (HCM), nhiễm trùng đường hô hấp, bệnh da (cháy nắng, nhiễm nấm), bệnh răng miệng, béo phì.",
+      "checkups": "Kiểm tra sức khỏe định kỳ."
+    },
+    "personality": {
+      "description": "Năng động, thích chơi đùa, tình cảm, hòa đồng."
+    }
+  },
+  {
+    "name": "Mèo Tiffanie",
+    "imageUrl": "assets/images/cats/tiffanie.png",
+    "weight": "3.5 - 5.5 kg",
+    "height": "25 - 30 cm",
+    "lifespan": "14 - 16 năm",
+    "fur": "Dài trung bình, mềm mại, bóng mượt",
+    "appearance": {
+      "longFur": "Đen, nâu, xanh lam, sô cô la, tử đinh hương, màu ngọn lông hoặc bóng mờ, viền mắt và môi.",
+      "body": "Thân hình cân đối, mắt xanh lục."
+    },
+    "grooming": {
+      "brushing": "Chải lông thường xuyên.",
+      "nails": "Cắt tỉa móng định kỳ.",
+      "other": "Vệ sinh tai, chăm sóc răng miệng."
+    },
+    "health": {
+      "commonIssues": "Nhìn chung khỏe mạnh, có thể có các vấn đề di truyền từ mèo Miến Điện hoặc Ba Tư.",
+      "checkups": "Kiểm tra sức khỏe định kỳ."
+    },
+    "personality": {
+      "description": "Thông minh, tình cảm, hòa đồng, dễ huấn luyện, thích chơi đùa, phù hợp với nhiều gia đình."
+    }
+  },
+  {
+    "name": "Mèo Tonkinese (Mèo Bắc Kỳ)",
+    "imageUrl": "assets/images/cats/tonkinese.png",
+    "weight": "3.6 - 5.4 kg",
+    "height": "18 - 25 cm",
+    "lifespan": "12 - 16 năm",
+    "fur": "Ngắn, dày, óng ả",
+    "appearance": {
+      "longFur": "Nâu, sô-cô-la, kem, quế, xanh dương, tử đinh hương, đỏ; lông sẫm màu ở mặt, tai, đuôi, chân.",
+      "body": "Thân hình trung bình, lực lưỡng, mắt hạnh nhân (xanh lam, vàng lục, vàng kim)."
+    },
+    "grooming": {
+      "bathing": "Tắm mỗi tháng một lần.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Vệ sinh tai, mặt, răng miệng."
+    },
+    "health": {
+      "commonIssues": "Bệnh dại, viêm mũi khí quản do virus, calicivirus.",
+      "checkups": "Khám sức khỏe hàng năm, tiêm phòng đầy đủ."
+    },
+    "personality": {
+      "description": "Thân thiện, hướng ngoại, thích chơi đùa, hòa đồng."
+    }
+  },
+  {
+    "name": "Mèo Van Thổ Nhĩ Kỳ (Turkish Van)",
+    "imageUrl": "assets/images/cats/turkish_van.png",
+    "weight": "3 - 9 kg",
+    "height": "23 - 28 cm",
+    "lifespan": "12 - 17 năm",
+    "fur": "Dài vừa, mềm, không thấm nước",
+    "appearance": {
+      "longFur": "Trắng chủ đạo, các mảng màu (hạt dẻ, kem, đen, xanh, mai rùa) trên đầu và đuôi.",
+      "body": "Cơ bắp, ngực rộng, đuôi rậm, mắt (xanh dương, hổ phách, mỗi mắt một màu)."
+    },
+    "grooming": {
+      "brushing": "Chải lông hàng tuần, thường xuyên hơn vào mùa rụng lông.",
+      "nails": "Cắt tỉa móng thường xuyên.",
+      "other": "Vệ sinh tai, chăm sóc răng miệng."
+    },
+    "health": {
+      "commonIssues": "Bệnh cơ tim phì đại (HCM), điếc (đặc biệt ở mèo mắt xanh dương), nhiễm trùng đường tiết niệu (UTI).",
+      "checkups": "Kiểm tra sức khỏe định kỳ, kiểm tra thính lực (đặc biệt mèo con)."
+    },
+    "personality": {
+      "description": "Năng động, thích chơi đùa, thông minh."
+    }
+  }
+]
