@@ -1,16 +1,11 @@
-// import 'package:firebase_core/firebase_core.dart';
-// import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
-import 'package:cat_care/login.dart';
-
-
+import 'login.dart';
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -42,12 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-
-    // Sau 3 giây tự động chuyển sang màn hình chính
     Future.delayed(Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Login()),
+        MaterialPageRoute(builder: (context) => LoginScereen()),
       );
     });
   }
@@ -55,49 +48,30 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: Color(0xFF224D55),
-          ),
-
-          // Các sọc dọc mờ hơn
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: List.generate(
-              4, // Số sọc
-              (index) => Opacity(
-                opacity: 0.6, // Điều chỉnh độ mờ
-                child: Container(
-                  width: 20, // Độ rộng của mỗi sọc
-                  height: double.infinity,
-                  color: Color(0xFF11606F), // Màu xanh nhạt hơn
-                ),
-              ),
-            ),
-          ),
-
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+      backgroundColor: Color(0XFFFAFCEE),
+      body: Padding(
+        padding:EdgeInsets.all(16),
+        child: Column(
+          children: [
+            SizedBox(height: 50,),
+            Row(
               children: [
-                Image.asset('assets/images/logo.png', width: 150),
-                const SizedBox(height: 20),
-                const Text(
-                  'Cat Care',
-                  style: TextStyle(
-                    color: Color(0xffFBDECC),
-                    fontSize: 48,
+                Text('Chào mừng bạn \nđến với',
+                  style:TextStyle(
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
-                  ),
+                    color: Colors.black,
+                  )
                 ),
+                SizedBox(width: 8,),
+                Image.asset("assets/images/meo.png")
               ],
             ),
-          ),
-        ],
-      ),
+            Image.asset('assets/images/logo.png')
+          ],
+        )
+      )
+      
     );
   }
 }
