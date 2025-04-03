@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'viewmodels/product/product_viewmodel.dart';
 import 'views/auth/login_screen.dart';
-import 'viewmodels/auth_viewmodel.dart';
+import '/viewmodels/auth/login_viewmodel.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
