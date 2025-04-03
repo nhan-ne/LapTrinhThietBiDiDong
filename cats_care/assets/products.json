@@ -1,0 +1,48 @@
+[
+  {
+    "name": "Royal Canin",
+    "describe": "Hạt cao cấp cho mèo trưởng thành",
+    "image": "assets/images/products/royal_canin.png"
+  },
+  {
+    "name": "Whiskas",
+    "describe": "Thức ăn ướt vị cá ngừ",
+    "image": "assets/images/products/whiskas.png"
+  },
+  {
+    "name": "Me-O",
+    "describe": "Hạt cho mèo vị hải sản",
+    "image": "assets/images/products/meo.png"
+  },
+  {
+    "name": "Reflex",
+    "describe": "Hạt cho mèo vị gà nướng",
+    "image": "assets/images/products/reflex.png"
+  },
+  {
+    "name": "Cat Rang",
+    "describe": "Hạt dinh dưỡng cho mèo đủ lứa tuổi",
+    "image": "assets/images/products/cat_rang.png"
+  },
+  {
+    "name": "Cat On",
+    "describe": "Hạt giảm rụng lông cho mèo lông dài",
+    "image": "assets/images/products/cat_on.png"
+  },
+  {
+    "name": "Acana",
+    "describe": "Hạt cao cấp vị cá hồi và thịt bò",
+    "image": "assets/images/products/acana.png"
+  },
+  {
+    "name": "Nutrience",
+    "describe": "Hạt giúp giảm cân cho mèo thừa cân",
+    "image": "assets/images/products/nutrience.png"
+  },
+  {
+    "name": "Feline Natural",
+    "describe": "Hạt tự nhiên không chứa ngũ cốc",
+    "image": "assets/images/products/feline_natural.png"
+  }
+]
+  
