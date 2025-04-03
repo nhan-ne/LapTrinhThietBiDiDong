@@ -1,12 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
-
 import 'package:flutter/material.dart';
-import 'login.dart';
+import 'package:provider/provider.dart';
+
+import 'viewmodels/product/product_viewmodel.dart';
+import 'views/auth/login_screen.dart';
+import 'viewmodels/auth_viewmodel.dart';
 
 void main() async {
-   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -14,64 +17,75 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AuthViewModel()),
+        ChangeNotifierProvider(create: (context) => ProductViewModel()),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+        ),
+        home: const SplashScreen(),
       ),
-      home: const MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, });
-  
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoginScereen()),
+        MaterialPageRoute(builder: (context) =>  LoginScreen()), // Đã sửa lỗi tên
       );
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFFFAFCEE),
+      backgroundColor: const Color(0XFFFAFCEE),
       body: Padding(
-        padding:EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 50,),
+            const SizedBox(height: 50),
             Row(
               children: [
-                Text('Chào mừng bạn \nđến với',
-                  style:TextStyle(
+                const Text(
+                  'Chào mừng bạn \nđến với',
+                  style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
-                  )
+                  ),
                 ),
-                SizedBox(width: 8,),
-                Image.asset("assets/images/meo.png")
+                const SizedBox(width: 8),
+                Image.asset("assets/images/meo.png", height: 50),
               ],
             ),
-            Image.asset('assets/images/logo.png')
+            Expanded(
+              child: Center(
+                child: Image.asset('assets/images/logo.png', height: 150),
+              ),
+            ),
+            const SizedBox(height: 30),
           ],
-        )
-      )
-      
+        ),
+      ),
     );
   }
 }
