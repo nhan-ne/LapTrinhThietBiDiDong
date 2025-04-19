@@ -1,17 +1,16 @@
+import 'package:cat_care/views/product/product_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
-import '../../info_cat.dart';
-import '../product/product_list.dart';
-import '../../info_account.dart';
+import '../../viewmodels/auth/auth_view_model.dart';
+import 'profile.dart';
 import '../../cat_breeds_screen.dart';
 
 class HomePage extends StatefulWidget {
-  final User? user;
+  const HomePage({super.key});
 
-  HomePage({Key? key, required this.user}) : super(key: key);
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -23,8 +22,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _screens = [
-      HomeScreen(user: widget.user),
-      InfoAccount(user: widget.user),
+      HomeScreen(),
+      InfoAccount(),
 
     ];
   }
@@ -43,82 +42,32 @@ class _HomePageState extends State<HomePage> {
         index: _selectedIndex,
         children: _screens,
       ),
-      bottomNavigationBar: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 10,
-                  offset: Offset(0, -5),
-                ),
-              ],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: BottomNavigationBar(
-                currentIndex: _selectedIndex,
-                onTap: _onItemTapped,
-                type: BottomNavigationBarType.fixed,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                selectedItemColor: Color(0xff10A37F),
-                unselectedItemColor: Colors.grey[400],
-                items: [
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                    label: "Home",
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.notifications),
-                    label: "Notification",
-                  ),
-                  BottomNavigationBarItem(
-                    icon: SizedBox.shrink(), // khoảng trống cho nút +
-                    label: "",
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.chat),
-                    label: "Chat",
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.person),
-                    label: "Profile",
-                  ),
-                ],
-              ),
-            ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        selectedItemColor: Color(0xff7FDDE5),
+        unselectedItemColor: Color(0xffB8B8B8),
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: "Trang chủ",
           ),
-          Positioned(
-            top: -5,
-            left: MediaQuery.of(context).size.width / 2 - 30,
-            child: FloatingActionButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CatInfoForm())
-                );
-              },
-              backgroundColor: const Color(0xff10A37F), // Màu nền nút
-              elevation: 0, // Độ nổi mặc định
-              highlightElevation: 10, // Độ nổi khi nhấn
-              splashColor: Colors.white.withOpacity(0.3), // Màu lan tỏa khi nhấn
-              shape: CircleBorder(
-                side: BorderSide(
-                  color: Colors.white, // Màu viền
-                  width: 2, // Độ dày viền
-                ),
-              ),
-              child: Icon(
-                Icons.add,
-                size: 30, // Kích thước biểu tượng lớn hơn
-                color: Colors.white, // Màu biểu tượng
-              ),
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            label: "Lịch",
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: "Profile",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: "Cài đặt",
+          ),
+          
         ],
       ),
     );
@@ -126,78 +75,150 @@ class _HomePageState extends State<HomePage> {
 }
 
 class HomeScreen extends StatelessWidget {
-  final User? user;
-  const HomeScreen({super.key, required this.user});
+  
+  const HomeScreen({super.key});
+  
+  static List<Map<String, String>> newsList = [
+    {
+      "title": "10 điều cần biết dành cho người mới nuôi mèo",
+      "image": "assets/images/news/news1.png",
+    },
+    {
+      "title": "Những điều thú vị về loài mèo",
+      "image": "assets/images/news/news1.png",
+    },
+    {
+      "title": "Mẹo chải lông mèo",
+      "image": "assets/images/news/news1.png",
+    },
+  ];
+
+  Widget _buildNewsItem(BuildContext context, String title, String image) {
+  final screenWidth = MediaQuery.of(context).size.width;
+
+  return Container(
+    width: screenWidth * 0.4, // Width is 40% of the screen width
+    margin: EdgeInsets.only(right: screenWidth * 0.025), // Margin is 2.5% of the screen width
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(screenWidth * 0.025), // Border radius is 2.5% of the screen width
+          child: Image.asset(
+            image,
+            width: screenWidth * 0.4, // Image width matches the container width
+            height: screenWidth * 0.25, // Height is 25% of the screen width
+            fit: BoxFit.cover,
+          ),
+        ),
+        SizedBox(height: screenWidth * 0.02), // Spacing is 2% of the screen width
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: screenWidth * 0.035, // Font size is 3.5% of the screen width
+            fontWeight: FontWeight.w500,
+            color: Colors.black87,
+          ),
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ],
+    ),
+  );
+}
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 50),
-          _buildTitle('Kỉ niệm'),
-          Center(
-            child: Image.asset(
-              'assets/images/kiniem.png',
-              height: 200,
-            ),
-          ),
-          const SizedBox(height: 20),
-          _buildTitle('Dịch Vụ'),
-          const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildComponentButton(context, 'Giống mèo', Icons.pets, CatBreedsScreen()),
-              _buildComponentButton(context, 'Thú y', Icons.local_hospital, ThuYScreen()),
-              _buildComponentButton(context, 'Khách sạn mèo', Icons.hotel, KhachSanMeoScreen()),
-              _buildComponentButton(context, 'Sản phẩm', Icons.shopping_bag, ProductScreen()),
-            ],
-          ),
-          const SizedBox(height: 10),
-          _buildTitle('Tin tức'),
-          const SizedBox(height: 10),
-          Container(
-            width: double.infinity,
-            height: 150,
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
+    final authViewModel = Provider.of<AuthViewModel>(context);
+    final screenHeight = MediaQuery.of(context).size.height;
+    // final screenWidth = MediaQuery.of(context).size.width;
+
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(
-                    'assets/images/tintuc.png',
-                    height: 100,
-                    width: 120,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    'Kiếm tiền tỉ mỗi năm nhờ nuôi giống mèo nhà "khổng lồ"',
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                    maxLines: 4,
+                Text(
+                  "Hi, ${authViewModel.user?.displayName ?? ''}",
+                  style: const TextStyle(
                     overflow: TextOverflow.ellipsis,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
+                const Spacer(),
+                IconButton(
+                  icon: const Icon(Icons.notifications),
+                  onPressed: () {},
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: NetworkImage(authViewModel.user?.photoURL ?? ''),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                )
               ],
             ),
-          ),
-        ],
+            SizedBox(height: screenHeight * 0.02), 
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Tìm kiếm',
+                prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+            ),
+            SizedBox(height: screenHeight * 0.02),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                "assets/images/anh.png",
+                width: double.infinity,
+                height: screenHeight * 0.25,
+                fit: BoxFit.cover,
+              ),
+            ),
+            SizedBox(height: screenHeight * 0.02),
+            _buildTitle('Dịch vụ'),
+            SizedBox(height: screenHeight * 0.01), 
+            SizedBox(
+              height: screenHeight * 0.13, // 
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildComponentButton(context, "Giống mèo", "assets/images/icon/giong_meo.png", CatBreedsScreen()),
+                  _buildComponentButton(context, "Thú y", "assets/images/icon/thu_y.png", ThuYScreen()),
+                  _buildComponentButton(context, "Sản phẩm", "assets/images/icon/san_pham.png", ProductScreen()),
+                  _buildComponentButton(context, "Khách sạn mèo", "assets/images/icon/hotel.png", KhachSanMeoScreen()),
+                ],
+              ),
+            ),
+            SizedBox(height: screenHeight * 0.02),
+            _buildTitle('Tin tức'),
+            SizedBox(height: screenHeight * 0.01), 
+            SizedBox(
+              height: screenHeight * 0.2,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: newsList.length,
+                itemBuilder: (context, index) {
+                  final news = newsList[index];
+                  return _buildNewsItem(context, news['title']!, news['image']!);
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -214,10 +235,12 @@ Widget _buildTitle(String text) {
   );
 }
 
-Widget _buildComponentButton(BuildContext context, String title, IconData icon, Widget destination) {
-  return Container(
-    width: 75,
-    height: 120,
+Widget _buildComponentButton(BuildContext context, String title, String imagePath, Widget destination) {
+  final screenWidth = MediaQuery.of(context).size.width;
+
+  return SizedBox(
+    width: screenWidth * 0.2,
+    height: screenWidth * 0.3,
     child: InkWell(
       onTap: () {
         Navigator.push(
@@ -229,19 +252,21 @@ Widget _buildComponentButton(BuildContext context, String title, IconData icon, 
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            height: 75,
-            width: 75,
+            height: screenWidth * 0.15,
+            width: screenWidth * 0.15,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50),
-              gradient: const LinearGradient(
-                colors: [Color(0xFFFFC107), Color(0xFFFF9800)],
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
+              borderRadius: BorderRadius.circular(screenWidth * 0.075),
+              color: const Color(0xff99E4EA),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(screenWidth * 0.025),
+              child: Image.asset(
+                imagePath,
+                fit: BoxFit.contain,
               ),
             ),
-            child: Icon(icon, color: Colors.white, size: 24),
           ),
-          const SizedBox(height: 5),
+          SizedBox(height: screenWidth * 0.04), // Khoảng cách giữa hình ảnh và tiêu đề
           Text(
             title,
             textAlign: TextAlign.center,

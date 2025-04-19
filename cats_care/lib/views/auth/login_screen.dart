@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:cat_care/views/home/home_page.dart';
 
-import '../../viewmodels/auth/login_viewmodel.dart';
+import '../../viewmodels/auth/auth_view_model.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -19,7 +19,7 @@ class LoginScreen extends StatelessWidget {
           child: Column (
           mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.asset('assets/images/logo.png', width: 150),
+              Image.asset('assets/images/logo.png', width: 230),
               SizedBox(height: 10,),
               Text(
               'Đăng nhập',
@@ -49,7 +49,7 @@ class LoginScreen extends StatelessWidget {
                 height: 62,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Color(0xff10A37F) ,
+                  color: Color(0xff7FDDE5) ,
                   borderRadius:BorderRadius.circular(8),
                 ),
                 child: ElevatedButton(
@@ -61,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => HomePage(user: FirebaseAuth.instance.currentUser),
+                          builder: (context) => HomePage(),
                         ),
                       );
                     },
@@ -233,7 +233,7 @@ class OTPScreen extends StatelessWidget {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => HomePage(user: FirebaseAuth.instance.currentUser),
+                          builder: (context) => HomePage(),
                         ),
                       );
                     } catch (e) {
