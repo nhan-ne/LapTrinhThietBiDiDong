@@ -2,9 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'viewmodels/product/product_viewmodel.dart';
 import 'views/auth/login_screen.dart';
-import '/viewmodels/auth/login_viewmodel.dart';
+import 'viewmodels/product/product_view_model.dart';
+import 'viewmodels/auth/auth_view_model.dart';
+import 'viewmodels/product/cart_view_model.dart';
+import 'viewmodels/delivery/location_view_model.dart';
+import 'viewmodels/delivery/delivery_view_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +24,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => AuthViewModel()),
         ChangeNotifierProvider(create: (context) => ProductViewModel()),
+        ChangeNotifierProvider(create: (context) => CartViewModel()),
+        ChangeNotifierProvider(create: (context) => DeliveryViewModel()),
+        ChangeNotifierProvider(create: (context) => LocationViewModel()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -42,27 +48,18 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) =>  LoginScreen()), // Đã sửa lỗi tên
-      );
-    });
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0XFFFAFCEE),
+      backgroundColor: const Color(0XFFE5F8FA),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 50),
+            const SizedBox(height: 71),
             Row(
               children: [
                 const Text(
@@ -74,15 +71,46 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                 ),
                 const SizedBox(width: 8),
-                Image.asset("assets/images/meo.png", height: 50),
+                Image.asset("assets/images/meo.png", height: 110),
               ],
             ),
-            Expanded(
-              child: Center(
-                child: Image.asset('assets/images/logo.png', height: 150),
+            Container(
+              width: 360,
+              height: 360,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/logo.png"),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-            const SizedBox(height: 30),
+            Spacer(),
+             InkWell(
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  );
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  width: 285,
+                  decoration: BoxDecoration(
+                    color: Color(0xff7FDDE5),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Text(
+                    'Bắt đầu',
+                    style: TextStyle(
+                      fontSize: 20, 
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            const SizedBox(height: 70),
           ],
         ),
       ),
