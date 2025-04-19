@@ -2,47 +2,56 @@
   {
     "name": "Royal Canin",
     "describe": "Hạt cao cấp cho mèo trưởng thành",
-    "image": "assets/images/products/royal_canin.png"
+    "image": "assets/images/products/royal_canin.png",
+    "price": "250.000 VND"
   },
   {
     "name": "Whiskas",
     "describe": "Thức ăn ướt vị cá ngừ",
-    "image": "assets/images/products/whiskas.png"
+    "image": "assets/images/products/whiskas.png",
+    "price": "250.000 VND"
   },
   {
     "name": "Me-O",
     "describe": "Hạt cho mèo vị hải sản",
-    "image": "assets/images/products/meo.png"
+    "image": "assets/images/products/meo.png",
+    "price": "250.000 VND"
   },
   {
     "name": "Reflex",
     "describe": "Hạt cho mèo vị gà nướng",
-    "image": "assets/images/products/reflex.png"
+    "image": "assets/images/products/reflex.png",
+    "price": "250.000 VND"
   },
   {
     "name": "Cat Rang",
     "describe": "Hạt dinh dưỡng cho mèo đủ lứa tuổi",
-    "image": "assets/images/products/cat_rang.png"
+    "image": "assets/images/products/cat_rang.png",
+    "price": "250.000 VND"
   },
   {
     "name": "Cat On",
     "describe": "Hạt giảm rụng lông cho mèo lông dài",
-    "image": "assets/images/products/cat_on.png"
+    "image": "assets/images/products/cat_on.png",
+    "price": "250.000 VND"
   },
   {
     "name": "Acana",
     "describe": "Hạt cao cấp vị cá hồi và thịt bò",
-    "image": "assets/images/products/acana.png"
+    "image": "assets/images/products/acana.png",
+    "price": "250.000 VND"
   },
   {
     "name": "Nutrience",
     "describe": "Hạt giúp giảm cân cho mèo thừa cân",
-    "image": "assets/images/products/nutrience.png"
+    "image": "assets/images/products/nutrience.png",
+    "price": "250.000 VND"
   },
   {
     "name": "Feline Natural",
     "describe": "Hạt tự nhiên không chứa ngũ cốc",
-    "image": "assets/images/products/feline_natural.png"
+    "image": "assets/images/products/feline_natural.png",
+    "price": "250.000 VND"
   }
 ]
   
