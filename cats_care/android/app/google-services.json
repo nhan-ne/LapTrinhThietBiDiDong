@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "561803794511",
+    "project_id": "steadfast-karma-430919-q2",
+    "storage_bucket": "steadfast-karma-430919-q2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561803794511:android:621876a51db6d60c81f23a",
+        "android_client_info": {
+          "package_name": "com.example.cat_care"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "561803794511-qejhutkk7vdekelbrl9huo8pc7p3urpv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cat_care",
+            "certificate_hash": "0c484c1cbcd968776bd033195b51de8c240fe13a"
+          }
+        },
+        {
+          "client_id": "561803794511-f0uudr2n1215fmh8gvrsdbn4iavnug9d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-1Y_LawyzD7NC6MiMhuQpqzjw9l1fmfs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "561803794511-f0uudr2n1215fmh8gvrsdbn4iavnug9d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
