@@ -30,6 +30,12 @@ class _AddressListScreenState extends State<AddressListScreen> {
     return Scaffold(
       backgroundColor: const Color(0xffE5F8FA),
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white), // Biểu tượng mũi tên quay lại
+          onPressed: () {
+            Navigator.pop(context); // Quay lại màn hình trước đó
+          },
+        ),
         title: const Text(
           'Danh sách địa chỉ',
           style: TextStyle(

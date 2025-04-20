@@ -130,8 +130,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                       ),
                                       IconButton(
                                         onPressed: () {
-                                          var cartProvider = Provider.of<CartViewModel>(context, listen: false);
-                                          cartProvider.addToCart(product);
+                                          var cartViewModel = Provider.of<CartViewModel>(context, listen: false);
+                                          cartViewModel.addToCart(product);
                                           ScaffoldMessenger.of(context).showSnackBar(
                                             SnackBar(content: Text('Đã thêm vào giỏ hàng!')),
                                           );

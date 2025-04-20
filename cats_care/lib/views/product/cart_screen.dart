@@ -1,18 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../viewmodels/product/cart_view_model.dart';
+import 'payment_screen.dart';
 
 class ShoppingCartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var cartProvider = Provider.of<CartViewModel>(context);
+    var cartViewModel = Provider.of<CartViewModel>(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Giỏ hàng'),
-        backgroundColor: Colors.white
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white), // Biểu tượng mũi tên quay lại
+          onPressed: () {
+            Navigator.pop(context); // Quay lại màn hình trước đó
+          },
+        ),
+        title: const Text(
+          'Giỏ hàng',
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: const Color(0xff7FDDE5),
       ),
-      body: cartProvider.cartItems.isEmpty
+      body: cartViewModel.cartItems.isEmpty
     ? Center(
         child: Text(
           'Giỏ hàng của bạn đang trống',
@@ -22,17 +35,17 @@ class ShoppingCartScreen extends StatelessWidget {
     : Column(
         children: [
           Expanded(
-            child: ListView.separated(
+            child: ListView.builder(
               padding: EdgeInsets.all(16),
-              itemCount: cartProvider.cartItems.length,
-              separatorBuilder: (context, index) => Divider(),
+              itemCount: cartViewModel.cartItems.length,
               itemBuilder: (context, index) {
-                var product = cartProvider.cartItems[index];
+                var product = cartViewModel.cartItems[index];
+                final total = cartViewModel.totalPerProduct[product.name] ?? 0;
 
                 return Card(
                   margin: EdgeInsets.only(bottom: 12),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(8),
                   ),
                   child: ListTile(
                     leading: Image.asset(
@@ -45,7 +58,7 @@ class ShoppingCartScreen extends StatelessWidget {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text(
-                      '${product.price} VNĐ',
+                      '${total.toStringAsFixed(0)} VND',
                       style: TextStyle(color: Colors.teal),
                     ),
                     trailing: Row(
@@ -54,7 +67,7 @@ class ShoppingCartScreen extends StatelessWidget {
                         IconButton(
                           icon: Icon(Icons.remove, color: Colors.red),
                           onPressed: () {
-                            cartProvider.decreaseQuantity(product);
+                            cartViewModel.decreaseQuantity(product);
                           },
                         ),
                         Text(
@@ -64,7 +77,7 @@ class ShoppingCartScreen extends StatelessWidget {
                         IconButton(
                           icon: Icon(Icons.add, color: Colors.green),
                           onPressed: () {
-                            cartProvider.addToCart(product);
+                            cartViewModel.addToCart(product);
                           },
                         ),
                         IconButton(
@@ -82,7 +95,7 @@ class ShoppingCartScreen extends StatelessWidget {
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      cartProvider.removeFromCart(product);
+                                      cartViewModel.removeFromCart(product);
                                       Navigator.pop(context);
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(content: Text('Đã xóa khỏi giỏ hàng!')),
@@ -105,8 +118,10 @@ class ShoppingCartScreen extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.teal.shade50,
-              border: Border(top: BorderSide(color: Colors.teal, width: 1)),
+              color: Color(0xffE5F8FA),
+              border: Border(
+                top: BorderSide(color: Color(0xff7FDDE5), width: 1)
+              ),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,8 +131,30 @@ class ShoppingCartScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '${cartProvider.cartItems.fold<int>(0, (sum, item) => sum + (item.price * item.quantity).toInt())} VNĐ',
+                  '${cartViewModel.totalPrice.toStringAsFixed(0)} VNĐ',
                   style: TextStyle(fontSize: 18, color: Colors.teal, fontWeight: FontWeight.bold),
+                ),
+                TextButton(
+                  onPressed: () {
+                    // Navigate to payment screen
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PaymentScreen(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Thanh toán',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  style: TextButton.styleFrom(
+                    backgroundColor: Color(0xff7FDDE5),
+                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
                 ),
               ],
             ),

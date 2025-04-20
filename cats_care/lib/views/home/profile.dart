@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '/viewmodels/auth/auth_view_model.dart';
 import '/views/delivery/address_list_screen.dart';
@@ -50,22 +51,43 @@ class InfoAccount extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                 // _buildIkwell('assets/images/icon/info1.png', 'Thông tin cá nhân'),
+                 _buildIkwell(context,'assets/images/icon/info1.svg', 'Thông tin cá nhân', PersonalInfoScreen()),
                   SizedBox(height: 16),
-                  _buildIkwell(context,'assets/images/icon/info2.png', 'Thông tin giao hàng', AddressListScreen()),
+                  _buildIkwell(context,'assets/images/icon/info2.svg', 'Thông tin giao hàng', AddressListScreen()),
                   SizedBox(height: 16),
-                 // _buildIkwell('assets/images/icon/info3.png', 'Thông tin thú cưng'),
+                 _buildIkwell(context,'assets/images/icon/info3.svg', 'Thông tin thú cưng', PetInfoScreen()),
+                  SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: InkWell(
+                      onTap: () => authViewModel.signOut(context),
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(
+                            'assets/images/icon/info4.svg',
+                            width: 24,
+                            height: 24,
+                          ),
+                          const SizedBox(width: 16),
+                          Text(
+                            'Đăng xuất',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),         
+                          ),
+                          Spacer(),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: 16,
+                            color: Color(0xff7FDDE5)
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
-            ),
-            Spacer(),
-            ElevatedButton(
-              onPressed: () => authViewModel.signOut(context),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-              ),
-              child: const Text('Đăng xuất'),
             ),
           ],
         ),
@@ -73,7 +95,7 @@ class InfoAccount extends StatelessWidget {
     );
   }
 }
- Widget _buildIkwell( BuildContext context, String imagePath, String title, Widget destination) {
+ Widget _buildIkwell( BuildContext context, String svgPath, String title, Widget destination) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: InkWell(
@@ -87,8 +109,8 @@ class InfoAccount extends StatelessWidget {
         },
         child: Row(
           children: [
-            Image.asset(
-              imagePath,
+            SvgPicture.asset(
+              svgPath,
               width: 24,
               height: 24,
             ),
@@ -104,10 +126,36 @@ class InfoAccount extends StatelessWidget {
             Icon(
               Icons.arrow_forward_ios,
               size: 16,
-              color: Colors.blue,
+              color: Color(0xff7FDDE5),
             ),
           ],
         ),
       ),
     );
+  }
+  class PersonalInfoScreen extends StatelessWidget {
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Thông tin cá nhân'),
+        ),
+        body: Center(
+          child: Text('Thông tin cá nhân'),
+        ),
+      );
+    }
+  }
+  class PetInfoScreen extends StatelessWidget {
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Thông tin thú cưng'),
+        ),
+        body: Center(
+          child: Text('Thông tin thú cưng'),
+        ),
+      );
+    }
   }

@@ -11,6 +11,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewModel>(context);
+    final TextEditingController phoneController = TextEditingController();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -33,10 +34,9 @@ class LoginScreen extends StatelessWidget {
               
               TextField(
                 keyboardType: TextInputType.phone,
-                //controller: phoneController,
+                controller: phoneController,
                 decoration: InputDecoration(
                   label: Text("Số điện thoại",
-                    
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -54,32 +54,21 @@ class LoginScreen extends StatelessWidget {
                 ),
                 child: ElevatedButton(
                 onPressed: () async {
-                  await FirebaseAuth.instance.verifyPhoneNumber(
-                    //phoneNumber: '+84${phoneController.text}',
-                    verificationCompleted: (PhoneAuthCredential credential) async {
-                      await FirebaseAuth.instance.signInWithCredential(credential);
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
-                        ),
-                      );
-                    },
-                    verificationFailed: (FirebaseAuthException e) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Xác thực thất bại: ${e.message}')),
-                      );
-                    },
-                    codeSent: (String verificationId, int? resendToken) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => OTPScreen(verificationId: verificationId),
-                        ),
-                      );
-                    },
-                    codeAutoRetrievalTimeout: (String verificationId) {},
-                  );
+                  if (phoneController.text.isEmpty || phoneController.text.length < 9) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Vui lòng nhập số điện thoại hợp lệ')),
+                    );
+                    return;
+                  }
+
+                  // Chuyển đổi số điện thoại
+                  String formattedPhone = phoneController.text;
+                  if (formattedPhone.startsWith('0')) {
+                    formattedPhone = '+84${formattedPhone.substring(1)}';
+                  }
+
+                  // Gửi mã OTP qua AuthViewModel
+                  await authViewModel.signInWithPhoneNumber(context, formattedPhone);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.transparent,
