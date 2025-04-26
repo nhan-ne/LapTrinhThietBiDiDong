@@ -13,9 +13,10 @@ class LoginScreen extends StatelessWidget {
     final authViewModel = Provider.of<AuthViewModel>(context);
     final TextEditingController phoneController = TextEditingController();
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
-      body: Center(
-        child: Padding(
+      body: SafeArea(
+        child: SingleChildScrollView(
           padding:EdgeInsets.all(16),
           child: Column (
           mainAxisAlignment: MainAxisAlignment.start,
@@ -40,7 +41,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(color: Color(0xff10A37F)),  // Viền màu xanh
+                    borderSide: BorderSide(color: Color(0xff10A37F)),
                   ),
                 ),
               ),

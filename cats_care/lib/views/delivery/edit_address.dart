@@ -43,6 +43,12 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
     return Scaffold(
       backgroundColor: const Color(0xffE5F8FA),
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: const Text(
           'Chỉnh sửa địa chỉ',
           style: TextStyle(
@@ -300,13 +306,50 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                   ),
                   child: TextButton(
                     onPressed: () async {
-                      _deliveryViewModel.deleteUserAddress(widget.address.id);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Địa chỉ đã được xóa'),
-                        ),
+                      final confirm = await showDialog<bool>(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text('Xóa địa chỉchỉ'),
+                            content: const Text('Bạn có chắc chắn muốn xóa địa chỉ này không?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context, false); // Không xoá
+                                },
+                                child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context, true); // Đồng ý xoá
+                                },
+                                child: const Text('Delete'),
+                              ),
+                            ],
+                          );
+                        },
                       );
-                      Navigator.pop(context, true);
+                     if (confirm == true) {
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (_) => const Center(child: CircularProgressIndicator()),
+                      );
+
+                      try {
+                        await _deliveryViewModel.deleteUserAddress(widget.address.id);
+                        Navigator.of(context, rootNavigator: true).pop();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Địa chỉ đã được xóa')),
+                        );
+                        Navigator.pop(context, true);
+                      } catch (e) {
+                        Navigator.of(context, rootNavigator: true).pop();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Xóa địa chỉ thất bạibại: $e')),
+                        );
+                      }
+                    }
                     },
                     child: const Text(
                       'Xoá địa chỉ',

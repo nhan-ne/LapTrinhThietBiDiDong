@@ -11,8 +11,9 @@ class ProductScreen extends StatefulWidget {
   @override
   State<ProductScreen> createState() => _ProductScreenState();
 }
-
 class _ProductScreenState extends State<ProductScreen> {
+  TextEditingController _searchController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -45,6 +46,10 @@ class _ProductScreenState extends State<ProductScreen> {
               children: [
                 Expanded(
                   child: TextField(
+                    controller: _searchController,
+                    onChanged: (value) {
+                      productViewModel.searchProducts(value);
+                    },
                     decoration: InputDecoration(
                       hintText: 'Tìm kiếm sản phẩm...',
                       prefixIcon: Icon(Icons.search, color: Colors.grey),
@@ -121,7 +126,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        '${product.price.toStringAsFixed(0)} VNĐ', // Sửa lỗi hiển thị giá
+                                        '${product.price.toStringAsFixed(0)} đ', 
                                         style: TextStyle(
                                           fontSize: 14,
                                           color: Colors.black,
@@ -132,8 +137,18 @@ class _ProductScreenState extends State<ProductScreen> {
                                         onPressed: () {
                                           var cartViewModel = Provider.of<CartViewModel>(context, listen: false);
                                           cartViewModel.addToCart(product);
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(content: Text('Đã thêm vào giỏ hàng!')),
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                              title: const Text('Thông báo'),
+                                              content: const Text('Bạn đã thêm sản phẩm vào giỏ hàng'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () => Navigator.of(context).pop(),
+                                                  child: const Text('Đóng'),
+                                                ),
+                                              ],
+                                            ),
                                           );
                                         },
                                         icon: Icon(Icons.add_shopping_cart),

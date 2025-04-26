@@ -4,14 +4,20 @@ import 'package:provider/provider.dart';
 
 import 'views/auth/login_screen.dart';
 import 'viewmodels/product/product_view_model.dart';
-import 'viewmodels/auth/auth_view_model.dart';
 import 'viewmodels/product/cart_view_model.dart';
+import 'viewmodels/auth/auth_view_model.dart';
 import 'viewmodels/delivery/location_view_model.dart';
 import 'viewmodels/delivery/delivery_view_model.dart';
+
+import 'viewmodels/cat/cat_list_view_model.dart';
+import 'viewmodels/cat/cat_information_view_model.dart';
+//import 'viewmodels/cat_list/cat_list_view_model.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  
   runApp(const MyApp());
 }
 
@@ -23,10 +29,14 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AuthViewModel()),
-        ChangeNotifierProvider(create: (context) => ProductViewModel()),
+        ChangeNotifierProvider(create: (context) => ProductViewModel()),    
         ChangeNotifierProvider(create: (context) => CartViewModel()),
         ChangeNotifierProvider(create: (context) => DeliveryViewModel()),
         ChangeNotifierProvider(create: (context) => LocationViewModel()),
+        ChangeNotifierProvider(create: (context) => AuthViewModel()),
+        ChangeNotifierProvider(create: (context) => CatListViewModel()),
+        ChangeNotifierProvider(create: (_) => AddCatViewModel()),
+        // ChangeNotifierProvider(create: (context) => CatCalendarViewModel()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

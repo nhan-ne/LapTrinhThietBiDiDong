@@ -4,8 +4,10 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'cat_breed_detail_screen.dart';
 
 class CatBreedsScreen extends StatefulWidget {
+  const CatBreedsScreen ({super.key});
+  
   @override
-  _CatBreedsScreenState createState() => _CatBreedsScreenState();
+  State<CatBreedsScreen> createState() => _CatBreedsScreenState();
 }
 
 class _CatBreedsScreenState extends State<CatBreedsScreen> {
@@ -64,79 +66,89 @@ class _CatBreedsScreenState extends State<CatBreedsScreen> {
         elevation: 0,
         centerTitle: false,
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
+      body: Padding(
+        padding: EdgeInsets.all( 16),
+        child:Column(
+          children: [
+            TextField(
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'Search',
                 prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
               ),
               onChanged: _onSearchChanged,
             ),
-          ),
-          Expanded(
-            child: FutureBuilder<List<dynamic>>(
-              future: _loadCatBreeds(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 8,
-                      mainAxisSpacing: 8,
-                      childAspectRatio: 157 / 200,
-                    ),
-                    itemCount: _filteredCatBreeds.length,
-                    itemBuilder: (context, index) {
-                      final catBreed = _filteredCatBreeds[index];
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CatBreedDetailScreen(catBreed: catBreed),
-                            ),
-                          );
-                        },
-                        child: Card(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Container(
-                                width: 170,
-                                height: 190,
-                                child: Image.asset(
-                                  catBreed['imageUrl'],
-                                  fit: BoxFit.contain,
-                                ),
+            SizedBox(height: 20,),
+            
+            Expanded(
+              child: FutureBuilder<List<dynamic>>(
+                future: _loadCatBreeds(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 8,
+                        mainAxisSpacing: 8,
+                        childAspectRatio: 0.67,
+                      ),
+                      itemCount: _filteredCatBreeds.length,
+                      itemBuilder: (context, index) {
+                        final catBreed = _filteredCatBreeds[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CatBreedDetailScreen(catBreed: catBreed),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  catBreed['name'],
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ],
+                            );
+                          },
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                        ),
-                      );
-                    },
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Đã xảy ra lỗi'));
-                } else {
-                  return Center(child: CircularProgressIndicator());
-                }
-              },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.asset(
+                                    catBreed['imageUrl']!,
+                                    height: 190,
+                                    width: 170,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    catBreed['name'],
+                                    textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Đã xảy ra lỗi'));
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                },
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
+      )
     );
   }
 

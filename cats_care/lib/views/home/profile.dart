@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '/viewmodels/auth/auth_view_model.dart';
 import '/views/delivery/address_list_screen.dart';
+import '/views/cat/cat_information_screen.dart';
 
 class InfoAccount extends StatelessWidget {
   const InfoAccount({super.key});
@@ -55,7 +56,7 @@ class InfoAccount extends StatelessWidget {
                   SizedBox(height: 16),
                   _buildIkwell(context,'assets/images/icon/info2.svg', 'Thông tin giao hàng', AddressListScreen()),
                   SizedBox(height: 16),
-                 _buildIkwell(context,'assets/images/icon/info3.svg', 'Thông tin thú cưng', PetInfoScreen()),
+                 _buildIkwell(context,'assets/images/icon/info3.svg', 'Thông tin thú cưng', AddCatScreen()),
                   SizedBox(height: 16),
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 8),
@@ -142,19 +143,6 @@ class InfoAccount extends StatelessWidget {
         ),
         body: Center(
           child: Text('Thông tin cá nhân'),
-        ),
-      );
-    }
-  }
-  class PetInfoScreen extends StatelessWidget {
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Thông tin thú cưng'),
-        ),
-        body: Center(
-          child: Text('Thông tin thú cưng'),
         ),
       );
     }

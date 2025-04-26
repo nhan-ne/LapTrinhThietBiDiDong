@@ -3,7 +3,7 @@ class ProductModel {
   final String describe;
   final String image;
   final double price;
-  int quantity;  
+  int quantity;
 
   ProductModel({
     required this.name,
@@ -13,22 +13,25 @@ class ProductModel {
     this.quantity = 1, // Mặc định số lượng là 1
   });
 
-  // Phương thức factory từ JSON, đảm bảo price là double
+  // Phương thức factory từ JSON
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      name: json['name'],
-      describe: json['describe'],
-      image: json['image'],
-      price: _parsePrice(json['price']), // Gọi hàm xử lý giá
+      name: json['name'] as String,
+      describe: json['describe'] as String,
+      image: json['image'] as String,
+      price: (json['price'] as num).toDouble(), // Chuyển đổi int hoặc double thành double
       quantity: json['quantity'] ?? 1,
     );
   }
 
-  // Hàm xử lý giá từ chuỗi JSON
-  static double _parsePrice(String? price) {
-    if (price == null) return 0.0;
-    // Loại bỏ các ký tự không phải số và dấu chấm
-    String cleanedPrice = price.replaceAll(RegExp(r'[^\d]'), '');
-    return double.tryParse(cleanedPrice) ?? 0.0;
+  // Phương thức chuyển đổi sang JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'describe': describe,
+      'image': image,
+      'price': price,
+      'quantity': quantity,
+    };
   }
 }

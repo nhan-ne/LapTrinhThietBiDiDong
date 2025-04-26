@@ -31,9 +31,9 @@ class _AddressListScreenState extends State<AddressListScreen> {
       backgroundColor: const Color(0xffE5F8FA),
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white), // Biểu tượng mũi tên quay lại
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            Navigator.pop(context); // Quay lại màn hình trước đó
+            Navigator.pop(context);
           },
         ),
         title: const Text(
@@ -125,14 +125,14 @@ class _AddressListScreenState extends State<AddressListScreen> {
                                           fontSize: 16,
                                         ),
                                       ),
-                                      const SizedBox(width: 12),
+                                      const SizedBox(width: 8),
                                       Text(
                                         address.phone,
                                         style: TextStyle(color: Colors.grey[700]),
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 12),
+                                  const SizedBox(height: 8),
                                   Text(
                                     address.address,
                                     style: const TextStyle(
@@ -140,7 +140,7 @@ class _AddressListScreenState extends State<AddressListScreen> {
                                       color: Color(0xff595959),
                                     ),
                                   ),
-                                  const SizedBox(height: 12),
+                                  const SizedBox(height: 8),
                                   if (address.note.isNotEmpty)
                                     Text(
                                       'Ghi chú: ${address.note}',
@@ -149,7 +149,7 @@ class _AddressListScreenState extends State<AddressListScreen> {
                                         color: Color(0xff595959),
                                       ),
                                     ),
-                                  const SizedBox(height: 12),
+                                  const SizedBox(height: 8),
                                   Text(
                                     'Loại địa chỉ: ${address.addressType}',
                                     style: const TextStyle(
@@ -157,7 +157,7 @@ class _AddressListScreenState extends State<AddressListScreen> {
                                       color: Color(0xff595959),
                                     ),
                                   ),
-                                  const SizedBox(height: 12),
+                                  const SizedBox(height: 8),
                                   if (address.isDefault) 
                                     Container(
                                       padding: const EdgeInsets.all(8),
@@ -188,38 +188,36 @@ class _AddressListScreenState extends State<AddressListScreen> {
                 ),
               )
             ),
-            Container(
-              width: double.infinity,
-              height: 50,
-              decoration: BoxDecoration(
-                color: Color(0xff7FDDE5),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: TextButton(
-                onPressed: () async {
-                  final result = await Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const AddAddressScreen()),
-                  );
-                  if (result == true) {
-                    // Làm mới danh sách địa chỉ sau khi thêm mới
-                    setState(() {
-                      _loadAddresses();
-                    });
-                  }
-                },
-                child: const Text(
-                  'Thêm địa chỉ mới',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
           ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        margin: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Color(0xff7FDDE5),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: TextButton(
+          onPressed: () async {
+            final result = await Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AddAddressScreen()),
+            );
+            if (result == true) {
+              // Làm mới danh sách địa chỉ sau khi thêm mới
+              setState(() {
+                _loadAddresses();
+              });
+            }
+          },
+          child: const Text(
+            'Thêm địa chỉ mới',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: Colors.white,
+            ),
+          ),
         ),
       ),
     );

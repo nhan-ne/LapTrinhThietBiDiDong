@@ -5,7 +5,7 @@ class UserAddress {
   final String address;
   final String note;
   final String addressType;
-  final bool isDefault;
+  bool isDefault;
 
   UserAddress({
     required this.id,

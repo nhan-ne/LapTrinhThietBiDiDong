@@ -56,17 +56,14 @@ class _HomePageState extends State<HomePage> {
             label: "Trang chủ",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: "Lịch",
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: "Profile",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Cài đặt",
+            icon: Icon(Icons.calendar_today),
+            label: "Lịch",
           ),
+          
           
         ],
       ),
@@ -134,90 +131,92 @@ class HomeScreen extends StatelessWidget {
     // final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Text(
-                  "Hi, ${authViewModel.user?.displayName ?? ''}",
-                  style: const TextStyle(
-                    overflow: TextOverflow.ellipsis,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Spacer(),
-                IconButton(
-                  icon: const Icon(Icons.notifications),
-                  onPressed: () {},
-                ),
-                const SizedBox(width: 8),
-                Container(
-                  width: 32,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: NetworkImage(authViewModel.user?.photoURL ?? ''),
-                      fit: BoxFit.cover,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "Hi, ${authViewModel.user?.displayName ?? ''}",
+                    style: const TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                )
-              ],
-            ),
-            SizedBox(height: screenHeight * 0.02), 
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Tìm kiếm',
-                prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                ),
-              ),
-            ),
-            SizedBox(height: screenHeight * 0.02),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                "assets/images/anh.png",
-                width: double.infinity,
-                height: screenHeight * 0.25,
-                fit: BoxFit.cover,
-              ),
-            ),
-            SizedBox(height: screenHeight * 0.02),
-            _buildTitle('Dịch vụ'),
-            SizedBox(height: screenHeight * 0.01), 
-            SizedBox(
-              height: screenHeight * 0.13, // 
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _buildComponentButton(context, "Giống mèo", "assets/images/icon/giong_meo.png", CatBreedsScreen()),
-                  _buildComponentButton(context, "Thú y", "assets/images/icon/thu_y.png", ThuYScreen()),
-                  _buildComponentButton(context, "Sản phẩm", "assets/images/icon/san_pham.png", ProductScreen()),
-                  _buildComponentButton(context, "Khách sạn mèo", "assets/images/icon/hotel.png", KhachSanMeoScreen()),
+                  const Spacer(),
+                  IconButton(
+                    icon: const Icon(Icons.notifications),
+                    onPressed: () {},
+                  ),
+                  const SizedBox(width: 8),
+                  Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: NetworkImage(authViewModel.user?.photoURL ?? ''),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  )
                 ],
               ),
-            ),
-            SizedBox(height: screenHeight * 0.02),
-            _buildTitle('Tin tức'),
-            SizedBox(height: screenHeight * 0.01), 
-            SizedBox(
-              height: screenHeight * 0.2,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: newsList.length,
-                itemBuilder: (context, index) {
-                  final news = newsList[index];
-                  return _buildNewsItem(context, news['title']!, news['image']!);
-                },
+              SizedBox(height: screenHeight * 0.02), 
+              TextField(
+                decoration: InputDecoration(
+                  hintText: 'Tìm kiếm',
+                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
               ),
-            ),
-          ],
+              SizedBox(height: screenHeight * 0.02),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset(
+                  "assets/images/anh.png",
+                  width: double.infinity,
+                  height: screenHeight * 0.25,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              SizedBox(height: screenHeight * 0.02),
+              _buildTitle('Dịch vụ'),
+              SizedBox(height: screenHeight * 0.01), 
+              SizedBox(
+                height: screenHeight * 0.13, // 
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _buildComponentButton(context, "Giống mèo", "assets/images/icon/giong_meo.png", CatBreedsScreen()),
+                    _buildComponentButton(context, "Thú y", "assets/images/icon/thu_y.png", ThuYScreen()),
+                    _buildComponentButton(context, "Sản phẩm", "assets/images/icon/san_pham.png", ProductScreen()),
+                    _buildComponentButton(context, "Khách sạn mèo", "assets/images/icon/hotel.png", KhachSanMeoScreen()),
+                  ],
+                ),
+              ),
+              SizedBox(height: screenHeight * 0.02),
+              _buildTitle('Tin tức'),
+              SizedBox(height: screenHeight * 0.01), 
+              SizedBox(
+                height: screenHeight * 0.2,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: newsList.length,
+                  itemBuilder: (context, index) {
+                    final news = newsList[index];
+                    return _buildNewsItem(context, news['title']!, news['image']!);
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

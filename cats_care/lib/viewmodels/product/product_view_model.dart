@@ -19,4 +19,13 @@ class ProductViewModel extends ChangeNotifier {
       print('Error loading products: $e');
     }
   }
+  void searchProducts(String query) {
+    if (query.isEmpty) {
+      loadProducts();
+    } else {
+      _products = _products.where((product) => product.name.toLowerCase().contains(query.toLowerCase())).toList();
+    }
+    notifyListeners();
+  }
+  
 }
