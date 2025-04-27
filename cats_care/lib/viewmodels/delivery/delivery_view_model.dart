@@ -155,6 +155,7 @@ class DeliveryViewModel extends ChangeNotifier {
 
       await _firestore.collection('users').doc(id).delete();
       notifyListeners();
+      print('Địa chỉ đã được xóa thành công!');
     } catch (e) {
       print('Lỗi khi xóa địa chỉ: $e');
       throw Exception('Không thể xóa địa chỉ');

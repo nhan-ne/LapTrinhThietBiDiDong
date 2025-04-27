@@ -38,13 +38,12 @@ class AuthViewModel extends ChangeNotifier {
       // Đăng nhập vào Firebase
       UserCredential userCredential = await _auth.signInWithCredential(credential);
 
+      _user = userCredential.user;
+      
       // Lấy uid của người dùng
       final String? uid = _user?.uid;
       print("UID của người dùng: $uid");
 
-
-
-      _user = userCredential.user;
       _errorMessage = null;
       Future.delayed(Duration(seconds: 2), () {
         Navigator.push(
