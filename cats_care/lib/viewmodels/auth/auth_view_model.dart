@@ -93,7 +93,7 @@ class AuthViewModel extends ChangeNotifier {
 
         // Chuyển hướng đến HomePage sau 2 giây
         Future.delayed(Duration(seconds: 2), () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => HomePage()),
           );

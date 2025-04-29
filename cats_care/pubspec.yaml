@@ -78,7 +78,7 @@ flutter:
 
   assets:
     - assets/images/icon/
-    - assets/images/news/
+    - assets/images/new/
 
     - assets/images/meo.png
     - assets/images/logo.png

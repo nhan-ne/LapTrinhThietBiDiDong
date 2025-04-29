@@ -1,7 +1,6 @@
 import 'package:cat_care/views/product/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../viewmodels/auth/auth_view_model.dart';
 import 'profile.dart';
@@ -75,19 +74,19 @@ class HomeScreen extends StatelessWidget {
   static List<Map<String, String>> newsList = [
     {
       "title": "10 điều cần biết dành cho người mới nuôi mèo",
-      "svgPath": "assets/images/news/new1.svg",
+      "image": "assets/images/new/news1.png",
     },
     {
       "title": "Những điều thú vị về loài mèo",
-      "svgPath": "assets/images/news/new2.svg",
+      "image": "assets/images/new/news2.png",
     },
     {
       "title": "Mẹo chải lông mèo",
-      "svgPath": "assets/images/news/new3.svg",
+      "image": "assets/images/new/news3.png",
     },
   ];
 
-  Widget _buildNewsItem(BuildContext context, String title, String svgPath) {
+  Widget _buildNewsItem(BuildContext context, String title, String imagePath) {
     return Container(
       width: 150, 
       margin: const EdgeInsets.only(right: 10), 
@@ -96,8 +95,8 @@ class HomeScreen extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: SvgPicture.asset(
-              svgPath,
+            child: Image.asset(
+              imagePath,
               width: 150, 
               height: 100, 
               fit: BoxFit.cover,
@@ -146,17 +145,20 @@ class HomeScreen extends StatelessWidget {
                     onPressed: () {},
                   ),
                   const SizedBox(width: 8),
-                  Container(
-                    width: 32,
-                    height: 32,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: NetworkImage(authViewModel.user?.photoURL ?? ''),
-                        fit: BoxFit.cover,
-                      ),
+                  IconButton(
+                    icon: CircleAvatar(
+                      radius: 16,
+                      backgroundImage: NetworkImage(authViewModel.user?.photoURL ?? ''),
                     ),
-                  )
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => InfoAccount(), 
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
               const SizedBox(height: 16), 

@@ -14,6 +14,15 @@ class InfoAccount extends StatelessWidget {
     final authViewModel = Provider.of<AuthViewModel>(context);
 
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        backgroundColor: Color(0xffE5F8FA),
+      ),
       backgroundColor: Color(0xffE5F8FA),
       body: Padding(
         padding: const EdgeInsets.all(16),
