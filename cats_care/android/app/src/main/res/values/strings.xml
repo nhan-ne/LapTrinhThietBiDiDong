@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cat Care</string>
+    <string name="app_description">This is a sample Flutter application.</string>
+    <string name="app_version">1.0.0</string>
+    <string name="app_author">Your Name</string>
+    <string name="facebook_app_id">1370566885069495</string>
+    <string name="fb_login_protocol_scheme">fb1370566885069495</string>
+    <string name="facebook_client_token">93f95614f4789f095952d25cc113ada2</string>
+</resources>

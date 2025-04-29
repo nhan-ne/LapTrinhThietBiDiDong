@@ -1,6 +1,7 @@
 import 'package:cat_care/views/product/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../viewmodels/auth/auth_view_model.dart';
 import 'profile.dart';
@@ -24,7 +25,6 @@ class _HomePageState extends State<HomePage> {
     _screens = [
       HomeScreen(),
       InfoAccount(),
-
     ];
   }
 
@@ -48,9 +48,9 @@ class _HomePageState extends State<HomePage> {
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        selectedItemColor: Color(0xff7FDDE5),
-        unselectedItemColor: Color(0xffB8B8B8),
-        items: [
+        selectedItemColor: const Color(0xff7FDDE5),
+        unselectedItemColor: const Color(0xffB8B8B8),
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "Trang chủ",
@@ -63,8 +63,6 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.calendar_today),
             label: "Lịch",
           ),
-          
-          
         ],
       ),
     );
@@ -72,63 +70,58 @@ class _HomePageState extends State<HomePage> {
 }
 
 class HomeScreen extends StatelessWidget {
-  
   const HomeScreen({super.key});
-  
+
   static List<Map<String, String>> newsList = [
     {
       "title": "10 điều cần biết dành cho người mới nuôi mèo",
-      "image": "assets/images/news/news1.png",
+      "svgPath": "assets/images/news/new1.svg",
     },
     {
       "title": "Những điều thú vị về loài mèo",
-      "image": "assets/images/news/news1.png",
+      "svgPath": "assets/images/news/new2.svg",
     },
     {
       "title": "Mẹo chải lông mèo",
-      "image": "assets/images/news/news1.png",
+      "svgPath": "assets/images/news/new3.svg",
     },
   ];
 
-  Widget _buildNewsItem(BuildContext context, String title, String image) {
-  final screenWidth = MediaQuery.of(context).size.width;
-
-  return Container(
-    width: screenWidth * 0.4, // Width is 40% of the screen width
-    margin: EdgeInsets.only(right: screenWidth * 0.025), // Margin is 2.5% of the screen width
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(screenWidth * 0.025), // Border radius is 2.5% of the screen width
-          child: Image.asset(
-            image,
-            width: screenWidth * 0.4, // Image width matches the container width
-            height: screenWidth * 0.25, // Height is 25% of the screen width
-            fit: BoxFit.cover,
+  Widget _buildNewsItem(BuildContext context, String title, String svgPath) {
+    return Container(
+      width: 150, 
+      margin: const EdgeInsets.only(right: 10), 
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: SvgPicture.asset(
+              svgPath,
+              width: 150, 
+              height: 100, 
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        SizedBox(height: screenWidth * 0.02), // Spacing is 2% of the screen width
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: screenWidth * 0.035, // Font size is 3.5% of the screen width
-            fontWeight: FontWeight.w500,
-            color: Colors.black87,
+          const SizedBox(height: 8),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 14, 
+              fontWeight: FontWeight.w500,
+              color: Colors.black87,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-      ],
-    ),
-  );
-}
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewModel>(context);
-    final screenHeight = MediaQuery.of(context).size.height;
-    // final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: SafeArea(
@@ -166,7 +159,7 @@ class HomeScreen extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(height: screenHeight * 0.02), 
+              const SizedBox(height: 16), 
               TextField(
                 decoration: InputDecoration(
                   hintText: 'Tìm kiếm',
@@ -176,21 +169,21 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: screenHeight * 0.02),
+              const SizedBox(height: 16), 
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.asset(
                   "assets/images/anh.png",
                   width: double.infinity,
-                  height: screenHeight * 0.25,
+                  height: 200, 
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(height: screenHeight * 0.02),
+              const SizedBox(height: 16), 
               _buildTitle('Dịch vụ'),
-              SizedBox(height: screenHeight * 0.01), 
+              const SizedBox(height: 8),
               SizedBox(
-                height: screenHeight * 0.13, // 
+                height: 110,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -201,11 +194,11 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: screenHeight * 0.02),
+              const SizedBox(height: 16),
               _buildTitle('Tin tức'),
-              SizedBox(height: screenHeight * 0.01), 
+              const SizedBox(height: 8),
               SizedBox(
-                height: screenHeight * 0.2,
+                height: 150,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: newsList.length,
@@ -235,11 +228,9 @@ Widget _buildTitle(String text) {
 }
 
 Widget _buildComponentButton(BuildContext context, String title, String imagePath, Widget destination) {
-  final screenWidth = MediaQuery.of(context).size.width;
-
   return SizedBox(
-    width: screenWidth * 0.2,
-    height: screenWidth * 0.3,
+    width: 80,
+    height: 120,
     child: InkWell(
       onTap: () {
         Navigator.push(
@@ -251,21 +242,21 @@ Widget _buildComponentButton(BuildContext context, String title, String imagePat
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            height: screenWidth * 0.15,
-            width: screenWidth * 0.15,
+            height: 60,
+            width: 60,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(screenWidth * 0.075),
+              borderRadius: BorderRadius.circular(30),
               color: const Color(0xff99E4EA),
             ),
             child: Padding(
-              padding: EdgeInsets.all(screenWidth * 0.025),
+              padding: const EdgeInsets.all(5),
               child: Image.asset(
                 imagePath,
                 fit: BoxFit.contain,
               ),
             ),
           ),
-          SizedBox(height: screenWidth * 0.04), // Khoảng cách giữa hình ảnh và tiêu đề
+          const SizedBox(height: 10),
           Text(
             title,
             textAlign: TextAlign.center,

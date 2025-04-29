@@ -45,3 +45,8 @@ android {
 flutter {
     source = "../.."
 }
+
+dependencies {
+    implementation("com.facebook.android:facebook-android-sdk:[4,5)")
+    implementation("com.google.android.gms:play-services-auth:20.2.0")
+}

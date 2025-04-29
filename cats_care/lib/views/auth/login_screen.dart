@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:flutter/material.dart';
 import 'package:cat_care/views/home/home_page.dart';
@@ -53,35 +54,31 @@ class LoginScreen extends StatelessWidget {
                   color: Color(0xff7FDDE5) ,
                   borderRadius:BorderRadius.circular(8),
                 ),
-                child: ElevatedButton(
-                onPressed: () async {
-                  if (phoneController.text.isEmpty || phoneController.text.length < 9) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Vui lòng nhập số điện thoại hợp lệ')),
-                    );
-                    return;
-                  }
+                child: TextButton(
+                  onPressed: () async {
+                    // if (phoneController.text.isEmpty || phoneController.text.length < 9) {
+                    //   ScaffoldMessenger.of(context).showSnackBar(
+                    //     SnackBar(content: Text('Vui lòng nhập số điện thoại hợp lệ')),
+                    //   );
+                    //   return;
+                    // }
 
-                  // Chuyển đổi số điện thoại
-                  String formattedPhone = phoneController.text;
-                  if (formattedPhone.startsWith('0')) {
-                    formattedPhone = '+84${formattedPhone.substring(1)}';
-                  }
+                    // // Chuyển đổi số điện thoại
+                    // String formattedPhone = phoneController.text;
+                    // if (formattedPhone.startsWith('0')) {
+                    //   formattedPhone = '+84${formattedPhone.substring(1)}';
+                    // }
 
-                  // Gửi mã OTP qua AuthViewModel
-                  await authViewModel.signInWithPhoneNumber(context, formattedPhone);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                ),
-                child: Text('Tiếp tục',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
+                    // // Gửi mã OTP qua AuthViewModel
+                    // await authViewModel.signInWithPhoneNumber(context, formattedPhone);
+                  },
+                  child: Text('Tiếp tục',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-              ),
               ),
               SizedBox(height: 16,),
               Text('HOẶC',
@@ -91,29 +88,19 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16,),
-              Container(
-                alignment:Alignment.centerLeft,
-                padding: EdgeInsets.symmetric(horizontal: 8),
-                height: 60,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius:BorderRadius.circular(8),
-                  border: Border.all(color: Color(0xff10A37F)) 
-                ),
-                child: ElevatedButton.icon(
-                  icon: Image.asset('assets/images/icon/google.png'),
-                  label: Text('Tiếp tục với google',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Color(0xff616161),
-                    ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: SvgPicture.asset('assets/images/icon/google.svg'),
+                    onPressed: () => authViewModel.signInWithGoogle(context),
                   ),
-                  onPressed: () => authViewModel.signInWithGoogle(context),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      shadowColor: Colors.transparent,
+                  SizedBox(width: 16,),
+                  IconButton(
+                    icon: SvgPicture.asset('assets/images/icon/facebook.svg'),
+                    onPressed: () => authViewModel.signInWithFacebook(context),
                   ),
-                )
+                ],
               ),
               SizedBox(height: 20),
 
