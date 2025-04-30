@@ -1,8 +1,10 @@
+import 'package:cat_care/models/oder_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../viewmodels/product/cart_view_model.dart';
-import '../../viewmodels/delivery/delivery_view_model.dart';
-import '../../models/users_model.dart';
+import '/viewmodels/cart/cart_view_model.dart';
+import '/viewmodels/delivery/delivery_view_model.dart';
+import '/models/users_model.dart';
+import '/viewmodels/cart/oder_view_model.dart';
 
 class PaymentScreen extends StatefulWidget {
   @override
@@ -57,9 +59,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   final addresses = snapshot.data!;
 
                   if (selectedAddressId == null && addresses.isNotEmpty) {
-                        selectedAddressId = addresses.firstWhere((a) => a.isDefault, orElse: () => addresses.first).id;
-                      }
-
+                    selectedAddressId = addresses[0].id;
+                  }
                   return DropdownButton<String>(
                         value: selectedAddressId,
                         isExpanded: true,
@@ -136,7 +137,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         color: Colors.grey, fontSize: 14),
                                   ),
                                   Text(
-                                    '${total.toStringAsFixed(0)} đ',
+                                    '${total}',
                                     style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -173,7 +174,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    '${cartViewModel.totalPrice.toStringAsFixed(0)} đ',
+                    '${cartViewModel.formattedTotalPrice}',
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -238,8 +239,50 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: TextButton(
-                onPressed: () {
-                  // Xử lý logic thanh toán
+                onPressed: () async {
+                  if (selectedAddressId == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Vui lòng chọn địa chỉ giao hàng!')),
+                    );
+                    return;
+                  }
+
+                  final addresses = await _futureAddresses;
+
+                  // Tìm địa chỉ được chọn dựa trên selectedAddressId
+                  final selectedAddress = addresses.firstWhere(
+                    (address) => address.id == selectedAddressId,
+                    orElse: () => throw Exception('Không tìm thấy địa chỉ được chọn'),
+                  );
+
+                  final orderId = DateTime.now().millisecondsSinceEpoch.toString();
+                  final order = OrderModel(
+                    orderId: orderId,
+                    products: List.from(cartViewModel.cartItems), // Sao chép danh sách sản phẩm
+                    totalPrice: cartViewModel.formattedTotalPrice,
+                    paymentMethod: cartViewModel.paymentMethod,
+                    address: selectedAddress.address,
+                    orderDate: DateTime.now(),
+                  );
+
+                  try {
+                    // Lưu đơn hàng lên Firestore
+                    await Provider.of<OrderViewModel>(context, listen: false).saveOrderToFirestore(order);
+
+                    cartViewModel.clearCart();
+
+                    // Hiển thị thông báo thành công
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Đặt hàng thành công!')),
+                    );
+
+                    // Điều hướng về màn hình chính hoặc lịch sử đặt hàng
+                    Navigator.pop(context);
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Lỗi khi đặt hàng: $e')),
+                    );
+                  }
                 },
                 child: const Text(
                   'Xác nhận thanh toán',

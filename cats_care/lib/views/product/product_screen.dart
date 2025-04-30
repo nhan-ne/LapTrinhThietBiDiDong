@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../viewmodels/product/product_view_model.dart';
-import '../../viewmodels/product/cart_view_model.dart';
-import 'cart_screen.dart';
+import '../../viewmodels/cart/cart_view_model.dart';
+import '../cart/cart_screen.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
@@ -126,7 +126,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        '${product.price.toStringAsFixed(0)} đ', 
+                                        '${product.formattedPrice}', 
                                         style: TextStyle(
                                           fontSize: 14,
                                           color: Colors.black,

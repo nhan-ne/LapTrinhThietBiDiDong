@@ -1,3 +1,4 @@
+import 'package:cat_care/views/cart/order_history_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -61,9 +62,9 @@ class InfoAccount extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                 _buildIkwell(context,'assets/images/icon/info1.svg', 'Thông tin cá nhân', PersonalInfoScreen()),
+                  _buildIkwell(context,'assets/images/icon/info1.svg', 'Thông tin giao hàng', OrderHistoryScreen()),
                   SizedBox(height: 16),
-                  _buildIkwell(context,'assets/images/icon/info2.svg', 'Thông tin giao hàng', AddressListScreen()),
+                  _buildIkwell(context,'assets/images/icon/info2.svg', 'Địa chỉ của tôi', AddressListScreen()),
                   SizedBox(height: 16),
                  _buildIkwell(context,'assets/images/icon/info3.svg', 'Thông tin thú cưng', AddCatScreen()),
                   SizedBox(height: 16),
@@ -142,17 +143,4 @@ class InfoAccount extends StatelessWidget {
         ),
       ),
     );
-  }
-  class PersonalInfoScreen extends StatelessWidget {
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Thông tin cá nhân'),
-        ),
-        body: Center(
-          child: Text('Thông tin cá nhân'),
-        ),
-      );
-    }
   }

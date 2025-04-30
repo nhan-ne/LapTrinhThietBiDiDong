@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../viewmodels/product/cart_view_model.dart';
+import '../../viewmodels/cart/cart_view_model.dart';
 import 'payment_screen.dart';
 
 class ShoppingCartScreen extends StatelessWidget {
@@ -58,7 +58,7 @@ class ShoppingCartScreen extends StatelessWidget {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text(
-                      '${total.toStringAsFixed(0)} VND',
+                      '${total}',
                       style: TextStyle(color: Colors.teal),
                     ),
                     trailing: Row(
@@ -131,7 +131,7 @@ class ShoppingCartScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '${cartViewModel.totalPrice.toStringAsFixed(0)} VNĐ',
+                  '${cartViewModel.formattedTotalPrice}',
                   style: TextStyle(fontSize: 18, color: Colors.teal, fontWeight: FontWeight.bold),
                 ),
                 TextButton(

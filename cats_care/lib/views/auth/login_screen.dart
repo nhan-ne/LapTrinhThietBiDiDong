@@ -84,7 +84,8 @@ class LoginScreen extends StatelessWidget {
               Text('HOẶC',
                 style: TextStyle(
                   fontSize: 18,
-                  color: Color(0xff616161)
+                  color: Color(0xff616161),
+                  decoration: TextDecoration.underline,
                 ),
               ),
               SizedBox(height: 16,),
@@ -92,12 +93,20 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                    icon: SvgPicture.asset('assets/images/icon/google.svg'),
+                    icon: SvgPicture.asset(
+                      'assets/images/icon/google.svg',
+                      width: 40,
+                      height:40,
+                    ),
                     onPressed: () => authViewModel.signInWithGoogle(context),
                   ),
-                  SizedBox(width: 16,),
+                  SizedBox(width: 0,),
                   IconButton(
-                    icon: SvgPicture.asset('assets/images/icon/facebook.svg'),
+                    icon: SvgPicture.asset(
+                      'assets/images/icon/facebook.svg',
+                      width: 40,
+                      height: 40,
+                    ),
                     onPressed: () => authViewModel.signInWithFacebook(context),
                   ),
                 ],

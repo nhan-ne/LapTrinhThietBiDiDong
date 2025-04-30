@@ -4,10 +4,11 @@ import 'package:provider/provider.dart';
 
 import 'views/auth/login_screen.dart';
 import 'viewmodels/product/product_view_model.dart';
-import 'viewmodels/product/cart_view_model.dart';
 import 'viewmodels/auth/auth_view_model.dart';
+import 'viewmodels/cart/cart_view_model.dart';
 import 'viewmodels/delivery/location_view_model.dart';
 import 'viewmodels/delivery/delivery_view_model.dart';
+import 'viewmodels/cart/oder_view_model.dart';
 
 import 'viewmodels/cat/cat_list_view_model.dart';
 import 'viewmodels/cat/cat_information_view_model.dart';
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => CartViewModel()),
         ChangeNotifierProvider(create: (context) => DeliveryViewModel()),
         ChangeNotifierProvider(create: (context) => LocationViewModel()),
-        ChangeNotifierProvider(create: (context) => AuthViewModel()),
+        ChangeNotifierProvider(create: (context) => OrderViewModel()),
+  
         ChangeNotifierProvider(create: (context) => CatListViewModel()),
         ChangeNotifierProvider(create: (_) => AddCatViewModel()),
         // ChangeNotifierProvider(create: (context) => CatCalendarViewModel()),

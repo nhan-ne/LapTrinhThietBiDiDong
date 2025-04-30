@@ -133,16 +133,16 @@ class DeliveryViewModel extends ChangeNotifier {
     }
   }
 
-  // lấy địa chỉ mặc địnhđịnh
-  Future<UserAddress?> getDefaultAddress() async {
-    try {
-      final List<UserAddress> addresses = await getUserAddresses();
-      return addresses.isNotEmpty ? addresses.first : null;
-    } catch (e) {
-      print('Lỗi khi lấy địa chỉ mặc định: $e');
-      return null;
-    }
-  }
+  // // lấy địa chỉ mặc định
+  // Future<UserAddress?> getDefaultAddress() async {
+  //   try {
+  //     final List<UserAddress> addresses = await getUserAddresses();
+  //     return addresses.isNotEmpty ? addresses.first : null;
+  //   } catch (e) {
+  //     print('Lỗi khi lấy địa chỉ mặc định: $e');
+  //     return null;
+  //   }
+  // }
 
   // Xóa địa chỉ người dùng
   Future<void> deleteUserAddress(String id) async {

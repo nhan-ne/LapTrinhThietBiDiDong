@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '/models/product_model.dart';
+import 'package:intl/intl.dart';
 
 class CartViewModel extends ChangeNotifier {
   final List<ProductModel> _cartItems = [];
@@ -29,7 +30,6 @@ class CartViewModel extends ChangeNotifier {
         quantity: 0,
       ),
     );
-
     if (existingProduct.quantity > 0) {
       existingProduct.quantity++;
     } else {
@@ -54,8 +54,11 @@ class CartViewModel extends ChangeNotifier {
 
     if (existingProduct.quantity > 1) {
       existingProduct.quantity--;
-      notifyListeners();
+      
+    } else {
+      _cartItems.remove(existingProduct);
     }
+    notifyListeners();
   }
 
   // Xóa sản phẩm khỏi giỏ hàng
@@ -64,23 +67,26 @@ class CartViewModel extends ChangeNotifier {
     notifyListeners();
   }
   
-  // Xóa tất cả sản phẩm trong giỏ hàng
   void clearCart() {
     if (_cartItems.isNotEmpty) {
       _cartItems.clear();
-      _paymentMethod = 'cash'; // Đặt lại phương thức thanh toán
+      _paymentMethod = 'cash';
       notifyListeners();
     }
   }
-  // Tính tổng giá trị giỏ hàng
-  double get totalPrice {
-    return _cartItems.fold(0, (sum, item) => sum + (item.price * item.quantity));
+  
+  String get formattedTotalPrice {
+    final total = _cartItems.fold(0.0, (sum, item) => sum + (item.price * item.quantity));
+    final formatter = NumberFormat("#,###", "vi_VN");
+    return "${formatter.format(total)} đ";
   }
 
   // Tính tổng cộng giá trị của mỗi loại sản phẩm
-  Map<String, double> get totalPerProduct {
+  Map<String, String> get totalPerProduct {
+    final formatter = NumberFormat("#,###", "vi_VN");
     return _cartItems.asMap().map((index, item) {
-      return MapEntry(item.name, item.price * item.quantity);
+      final formattedPrice = formatter.format(item.price * item.quantity);
+      return MapEntry(item.name, "$formattedPrice đ");
     });
   }
 }

@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 class ProductModel {
   final String name;
   final String describe;
@@ -13,7 +14,10 @@ class ProductModel {
     this.quantity = 1, // Mặc định số lượng là 1
   });
 
-  // Phương thức factory từ JSON
+  String get formattedPrice {
+    final formatter = NumberFormat("#,###", "vi_VN"); // Định dạng theo chuẩn Việt Nam
+    return "${formatter.format(price)} đ"; // Thêm đơn vị "đ"
+  }
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
       name: json['name'] as String,
