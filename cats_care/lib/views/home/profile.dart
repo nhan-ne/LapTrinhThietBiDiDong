@@ -56,7 +56,7 @@ class InfoAccount extends StatelessWidget {
                   SizedBox(height: 16),
                   _buildIkwell(context,'assets/images/icon/info2.svg', 'Thông tin giao hàng', AddressListScreen()),
                   SizedBox(height: 16),
-                 _buildIkwell(context,'assets/images/icon/info3.svg', 'Thông tin thú cưng', AddCatScreen()),
+                 _buildIkwell(context,'assets/images/icon/info3.svg', 'Thông tin thú cưng', CatListScreen()),
                   SizedBox(height: 16),
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 8),
