@@ -1,14 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'cat_information_screen.dart';
-import '/models/cat_information.dart';
-import '/viewmodels/cat/cat_list_view_model.dart';
+import '../../models/cat_information_model.dart';
+import '../../viewmodels/information/cat_list_view_model.dart';
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
-// ignore: unused_import
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-// import '/View/cat_calendar_screen.dart';
+import 'cat_information_screen.dart';
 
 class CatListScreen extends StatefulWidget {
   @override
@@ -22,7 +19,6 @@ class _CatListScreenState extends State<CatListScreen> {
   List<TextEditingController> _weightControllers = [];
   DateTime? _selectedDate;
   XFile? _pickedImage;
-  String? _newImageUrl;
 
   @override
   void initState() {
@@ -45,11 +41,9 @@ class _CatListScreenState extends State<CatListScreen> {
         TextEditingController(text: _selectedCat!.weight?.toString() ?? '')
       ];
       _selectedDate = _selectedCat!.dateOfBirth;
-      _newImageUrl = _selectedCat!.imageUrl;
     } else {
       _weightControllers = [TextEditingController()];
       _selectedDate = null;
-      _newImageUrl = null;
     }
     _pickedImage = null;
   }
@@ -60,15 +54,6 @@ class _CatListScreenState extends State<CatListScreen> {
       appBar: AppBar(
         title: Text('Danh sách Mèo'),
         actions: [
-          IconButton(
-            icon: Icon(Icons.calendar_today), // Calendar icon
-            onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => CatCalendarScreen()),
-              // );
-            },
-          ),
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
@@ -167,22 +152,10 @@ class _CatListScreenState extends State<CatListScreen> {
                   ),
                   child: _pickedImage != null
                       ? Image.file(File(_pickedImage!.path), fit: BoxFit.cover)
-                      : _newImageUrl != null
-                      ? Image.network(
-                    _newImageUrl!,
+                      : _selectedCat!.imagePath != null
+                      ? Image.file(
+                    File(_selectedCat!.imagePath!),
                     fit: BoxFit.cover,
-                    loadingBuilder: (BuildContext context, Widget child,
-                        ImageChunkEvent? loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes!
-                              : null,
-                        ),
-                      );
-                    },
                     errorBuilder: (context, object, stackTrace) =>
                         Center(child: Icon(Icons.error_outline)),
                   )
@@ -241,8 +214,8 @@ class _CatListScreenState extends State<CatListScreen> {
                       _showDeleteConfirmationDialog(
                           context, viewModel, _selectedCatIndex);
                     },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red),
+                    style:
+                    ElevatedButton.styleFrom(backgroundColor: Colors.red),
                     child: Text('Xóa', style: TextStyle(color: Colors.white)),
                   ),
                 ],
@@ -284,18 +257,18 @@ class _CatListScreenState extends State<CatListScreen> {
 
     final newWeight = double.tryParse(_weightControllers[0].text);
     final newDateOfBirth = _selectedDate;
+    String? newImagePath = _selectedCat!.imagePath;
 
-    String? newImageUrl = _newImageUrl;
     if (_pickedImage != null) {
-      newImageUrl = await viewModel.uploadImage(_pickedImage!);
+      newImagePath = _pickedImage!.path;
     }
 
-    if (newWeight != null || newDateOfBirth != null || newImageUrl != null) {
+    if (newWeight != null || newDateOfBirth != null || newImagePath != null) {
       await viewModel.updateCat(
-          _selectedCat!.id!, newWeight, newDateOfBirth, newImageUrl);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Thông tin mèo đã được cập nhật')),
-      );
+          _selectedCat!.id!, newWeight, newDateOfBirth, newImagePath);
+
+      print('Thông tin mèo đã được cập nhật');
+      print('Ảnh đã được lưu tại: $newImagePath');
     }
   }
 

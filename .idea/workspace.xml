@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="40abb8d2-5056-48b0-b290-1ea7cc6aac0c" name="Changes" comment="update">
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/cat_breeds.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/abyssinian.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/abyssinian.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/american_shorthair.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/american_shorthair.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/bali.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/bali.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/bengal.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/bengal.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/birman.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/birman.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/british_shorthair.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/british_shorthair.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/burmese.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/burmese.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/burmilla.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/burmilla.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/chinchilla.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/chinchilla.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/cornish_rex.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/cornish_rex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/devon_rex.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/devon_rex.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/exotic_shorthair.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/exotic_shorthair.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/japanese_bobtail.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/japanese_bobtail.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/korat.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/korat.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/maine_coon.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/maine_coon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/manx.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/manx.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/moggie.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/moggie.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/norwegian_forest_cat.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/norwegian_forest_cat.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/ocicat.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/ocicat.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/oriental_shorthair.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/oriental_shorthair.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/persian.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/persian.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/ragdoll.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/ragdoll.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/russian_blue.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/russian_blue.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/scottish_fold.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/scottish_fold.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/siamese.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/siamese.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/siberian.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/siberian.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/singapura.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/singapura.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/snowshoe.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/snowshoe.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/somali.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/somali.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/sphynx.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/sphynx.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/tiffanie.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/tiffanie.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/tonkinese.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/tonkinese.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/cats/turkish_van.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/cats/turkish_van.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/veterinary logos/animal_doctors_logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/veterinary logos/animal_doctors_logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/veterinary logos/petpro_logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/veterinary logos/petpro_logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/images/veterinary logos/saigon_vet_logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/images/veterinary logos/saigon_vet_logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/assets/products.json" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/assets/products.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/lib/cat_breed_detail_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/lib/cat_breeds_screen.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/lib/models/cat_information.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/lib/viewmodels/cat/cat_information_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/lib/viewmodels/cat/cat_information_view_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/lib/viewmodels/cat/cat_list_view_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/lib/viewmodels/cat/cat_list_view_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/lib/views/add_pet.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/lib/views/cat/cat_information_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/lib/views/cat/cat_information_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/lib/views/cat/cat_list_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/lib/views/cat/cat_list_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/lib/views/home/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/lib/views/home/home_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/lib/views/home/profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/lib/views/home/profile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cats_care/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cats_care/pubspec.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;NguyenPhuCuong0102&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/nhan-ne/LapTrinhThietBiDiDong.git&quot;,
+    &quot;accountId&quot;: &quot;b5876748-a860-4277-84ef-4656adead4ca&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2wbr7k6jounkZbyeWECVW7YJDvK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Downloads/LapTrinhThietBiDiDong-main",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Downloads" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="40abb8d2-5056-48b0-b290-1ea7cc6aac0c" name="Changes" comment="" />
+      <created>1746320948731</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1746320948731</updated>
+    </task>
+    <task id="LOCAL-00001" summary="update">
+      <option name="closed" value="true" />
+      <created>1746321176680</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1746321176680</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
+  </component>
+</project>

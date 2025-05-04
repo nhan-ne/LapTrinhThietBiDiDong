@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '/viewmodels/cat/cat_information_view_model.dart';
-import '/viewmodels/cat/cat_list_view_model.dart'; // Import CatListViewModel
+import '../../viewmodels/information/cat_information_view_model.dart';
+import '../../viewmodels/information/cat_list_view_model.dart';
 import 'cat_list_screen.dart'; // Import CatListScreen
 
 class AddCatScreen extends StatefulWidget {
@@ -15,33 +15,33 @@ class _AddCatScreenState extends State<AddCatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => AddCatViewModel(),
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          title: const Text(
-            'Thông tin thú cưng',
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-            ),
-          ),
-          backgroundColor: const Color(0xff7FDDE5),
+    // ignore: unused_local_variable
+    final viewModel = Provider.of<AddCatViewModel>(context); // <-- Lấy ViewModel từ Provider
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-        body: SingleChildScrollView(
-          padding: EdgeInsets.all(16.0),
-          child: Consumer<AddCatViewModel>(
-            builder: (context, viewModel, _) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Form(
+        title: const Text(
+          'Thông tin thú cưng',
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: const Color(0xff7FDDE5),
+      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16.0),
+        child: Consumer<AddCatViewModel>(
+          builder: (context, viewModel, _) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Form(
                     key:_formKey,
                     child: Column(
                       children: [
@@ -49,12 +49,12 @@ class _AddCatScreenState extends State<AddCatScreen> {
                         TextFormField(
                           controller: viewModel.nameController,
                           decoration: InputDecoration(
-                            hintText: 'VD: Bim',
-                            hintStyle: TextStyle(color: Color(0xff9C9C9C), fontSize: 14, fontWeight: FontWeight.w500),
-                            border:OutlineInputBorder()
+                              hintText: 'VD: Bim',
+                              hintStyle: TextStyle(color: Color(0xff9C9C9C), fontSize: 14, fontWeight: FontWeight.w500),
+                              border:OutlineInputBorder()
                           ),
                           style: TextStyle(
-                            color: Colors.black, 
+                            color: Colors.black,
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                           ),
@@ -77,10 +77,10 @@ class _AddCatScreenState extends State<AddCatScreen> {
                                       border: OutlineInputBorder(),
                                     ),
                                     style: TextStyle(
-                                      color: Colors.black, 
+                                      color: Colors.black,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500,
-                                    ),                                   
+                                    ),
                                     validator: (value) => value!.isEmpty ? 'Vui lòng nhập giống' : null,
                                   ),
                                 ],
@@ -93,21 +93,21 @@ class _AddCatScreenState extends State<AddCatScreen> {
                                 children: [
                                   _buildTitle("GIỚI TINH"),
                                   DropdownButtonFormField<String>(
-                                    value: viewModel.selectedGender,
-                                    items: <String>['Đực', 'Cái']
-                                        .map<DropdownMenuItem<String>>((String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
-                                    onChanged: viewModel.selectGender,
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                    ),
-                                    hint: Text('Chọn ',
-                                      style: TextStyle(color: Color(0xff9C9C9C), fontSize: 14, fontWeight: FontWeight.w500),
-                                    )
+                                      value: viewModel.selectedGender,
+                                      items: <String>['Đực', 'Cái']
+                                          .map<DropdownMenuItem<String>>((String value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Text(value),
+                                        );
+                                      }).toList(),
+                                      onChanged: viewModel.selectGender,
+                                      decoration: InputDecoration(
+                                        border: OutlineInputBorder(),
+                                      ),
+                                      hint: Text('Chọn ',
+                                        style: TextStyle(color: Color(0xff9C9C9C), fontSize: 14, fontWeight: FontWeight.w500),
+                                      )
                                   ),
                                 ],
                               ),
@@ -120,9 +120,9 @@ class _AddCatScreenState extends State<AddCatScreen> {
                           onTap: () => viewModel.selectDate(context),
                           child: InputDecorator(
                             decoration: InputDecoration(
-                              hintText: 'Chọn ngày sinh',
-                              hintStyle: TextStyle(color: Color(0xff9C9C9C), fontSize: 14, fontWeight: FontWeight.w500),
-                              border: OutlineInputBorder()
+                                hintText: 'Chọn ngày sinh',
+                                hintStyle: TextStyle(color: Color(0xff9C9C9C), fontSize: 14, fontWeight: FontWeight.w500),
+                                border: OutlineInputBorder()
                             ),
                             child: Text(
                               viewModel.selectedDate == null
@@ -130,7 +130,7 @@ class _AddCatScreenState extends State<AddCatScreen> {
                                   : '${viewModel.selectedDate!.day}/${viewModel.selectedDate!.month}/${viewModel.selectedDate!.year}',
                               style: TextStyle(
                                 color: viewModel.selectedDate == null
-                                    ? Color(0xff9C9C9C) 
+                                    ? Color(0xff9C9C9C)
                                     : Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -149,7 +149,7 @@ class _AddCatScreenState extends State<AddCatScreen> {
                             border: OutlineInputBorder(),
                           ),
                           style: TextStyle(
-                            color: Colors.black, 
+                            color: Colors.black,
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                           ),
@@ -164,7 +164,7 @@ class _AddCatScreenState extends State<AddCatScreen> {
                               onTap: viewModel.pickImage,
                               child: Container(
                                 height: 120,
-                                width: 140, 
+                                width: 140,
                                 decoration: BoxDecoration(
                                   border: Border.all(color: Colors.grey),
                                   borderRadius: BorderRadius.circular(6),
@@ -179,45 +179,43 @@ class _AddCatScreenState extends State<AddCatScreen> {
                         )
                       ],
                     )
-                  ),
-                ],
-              );
-            },
-          ),
+                ),
+              ],
+            );
+          },
         ),
-        bottomNavigationBar: Container(
-          margin: const EdgeInsets.all(16),
-          width: double.infinity,
-          height: 50,
-          decoration: BoxDecoration(
-            color: const Color(0xff7FDDE5),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: TextButton(
-            onPressed: () async {
-              if (_formKey.currentState?.validate() ?? true) {
-                final viewModel = Provider.of<AddCatViewModel>(context, listen: false);
-                await viewModel.saveCat();
-                // Check if the cat list is now non-empty
-                final catListViewModel =
-                Provider.of<CatListViewModel>(context,
-                    listen: false);
-                if (catListViewModel.cats.isNotEmpty) {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => CatListScreen()),
-                  );
-                }
+      ),
+      bottomNavigationBar: Container(
+        margin: const EdgeInsets.all(16),
+        width: double.infinity,
+        height: 50,
+        decoration: BoxDecoration(
+          color: const Color(0xff7FDDE5),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: TextButton(
+          onPressed: () async {
+            if (_formKey.currentState?.validate() ?? true) {
+              final viewModel = Provider.of<AddCatViewModel>(context, listen: false);
+              await viewModel.saveCat();
+              // Check if the cat list is now non-empty
+              final catListViewModel =
+              Provider.of<CatListViewModel>(context,
+                  listen: false);
+              if (catListViewModel.cats.isNotEmpty) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CatListScreen()),
+                );
               }
-            },
-            child: Text('Lưu',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Colors.white,
-              ),
-            ),
+            }
+          },
+          child: Text('Lưu',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: Colors.white,),
           ),
         ),
       ),

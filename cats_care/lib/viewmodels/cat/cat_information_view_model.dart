@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import '/models/cat_information.dart'; // Import model Cat
+import '/models/cat_information_model.dart';
+import 'package:path_provider/path_provider.dart';
+// ignore: unused_import
+import 'package:path/path.dart' as path;
 
 class AddCatViewModel extends ChangeNotifier {
   TextEditingController nameController = TextEditingController();
@@ -12,10 +14,10 @@ class AddCatViewModel extends ChangeNotifier {
   DateTime? selectedDate;
   String? selectedGender;
   XFile? pickedImage;
-  String? imageUrl; // URL của ảnh sau khi tải lên
+  String? imagePath; // Lưu đường dẫn cục bộ của ảnh
+  File? _oldImageFile; // Thêm biến này để lưu trữ ảnh cũ
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final firebase_storage.FirebaseStorage _storage = firebase_storage.FirebaseStorage.instance;
   final ImagePicker _picker = ImagePicker();
 
   Future<void> selectDate(BuildContext context) async {
@@ -27,7 +29,7 @@ class AddCatViewModel extends ChangeNotifier {
     );
     if (picked != null && picked != selectedDate) {
       selectedDate = picked;
-      notifyListeners(); // Báo cho View biết trạng thái đã thay đổi
+      notifyListeners();
     }
   }
 
@@ -37,46 +39,64 @@ class AddCatViewModel extends ChangeNotifier {
   }
 
   Future<void> pickImage() async {
-    pickedImage = await _picker.pickImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      // Xóa ảnh cũ nếu có
+      if (_oldImageFile != null && _oldImageFile!.existsSync()) {
+        _oldImageFile!.deleteSync();
+      }
+      pickedImage = image;
+      _oldImageFile = File(image.path); // Lưu trữ ảnh mới để xóa sau này
       notifyListeners();
     }
   }
 
-  Future<void> uploadImage() async {
-    if (pickedImage == null) return;
-    try {
-      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-      firebase_storage.Reference ref = _storage.ref().child('cats/$fileName');
-      await ref.putFile(File(pickedImage!.path));
-      imageUrl = await ref.getDownloadURL();
-      notifyListeners();
-    } catch (e) {
-      print('Lỗi tải ảnh lên: $e');
-      // Xử lý lỗi tại đây (ví dụ: hiển thị thông báo cho người dùng)
-    }
+  // Hàm lưu ảnh vào thư mục ứng dụng
+  Future<String?> _saveImageToDocuments(XFile? pickedFile) async {
+    if (pickedFile == null) return null;
+
+    final file = File(pickedFile.path);
+    final appDir = await getApplicationDocumentsDirectory();
+    final fileName = 'cat_image_${DateTime.now().millisecondsSinceEpoch}.png';
+    final savedImage = await file.copy('${appDir.path}/$fileName');
+    return savedImage.path;
   }
 
   Future<void> saveCat() async {
-    await uploadImage(); // Tải ảnh lên trước khi lưu thông tin
-
-    Cat newCat = Cat(
-      name: nameController.text,
-      breed: breedController.text,
-      dateOfBirth: selectedDate,
-      gender: selectedGender,
-      weight: double.tryParse(weightController.text),
-      imageUrl: imageUrl,
-    );
-
-    try {
-      await _firestore.collection('cats').add(newCat.toMap());
-      // Sau khi lưu thành công, bạn có thể thực hiện các hành động khác,
-      // ví dụ: hiển thị thông báo thành công, chuyển về màn hình danh sách mèo, v.v.
-      print('Thông tin mèo đã được lưu thành công!');
-    } catch (e) {
-      print('Lỗi khi lưu thông tin mèo: $e');
-      // Xử lý lỗi tại đây
+    if (pickedImage == null) {
+      print('Không thể lưu thông tin mèo do không có ảnh.');
+      return;
     }
+
+    imagePath = await _saveImageToDocuments(pickedImage);
+
+    if (imagePath != null) {
+      Cat newCat = Cat(
+        name: nameController.text,
+        breed: breedController.text,
+        dateOfBirth: selectedDate,
+        gender: selectedGender,
+        weight: double.tryParse(weightController.text),
+        imagePath: imagePath,
+      );
+
+      try {
+        await _firestore.collection('cats').add(newCat.toMap());
+        print('Thông tin mèo đã được lưu thành công!');
+      } catch (e) {
+        print('Lỗi khi lưu thông tin mèo: $e');
+      }
+    }
+  }
+
+  void clearData() {
+    nameController.clear();
+    breedController.clear();
+    weightController.clear();
+    selectedDate = null;
+    selectedGender = null;
+    pickedImage = null;
+    imagePath = null;
+    notifyListeners();
   }
 }

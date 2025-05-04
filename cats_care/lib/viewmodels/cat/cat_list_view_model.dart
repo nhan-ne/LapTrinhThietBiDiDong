@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import '/models/cat_information.dart';
+import '../../models/cat_information_model.dart';
 
 class CatListViewModel extends ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final firebase_storage.FirebaseStorage _storage =
-      firebase_storage.FirebaseStorage.instance;
   List<Cat> cats = [];
 
   CatListViewModel() {
-    _listenToCats();
+    loadCats(); // Gọi loadCats khi khởi tạo ViewModel
   }
 
-  void _listenToCats() {
+  Future<void> loadCats() async {
     _firestore.collection('cats').snapshots().listen((snapshot) {
       cats.clear();
       for (final doc in snapshot.docs) {
@@ -37,22 +34,8 @@ class CatListViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<String?> uploadImage(XFile pickedFile) async {
-    try {
-      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-      firebase_storage.Reference ref =
-      _storage.ref().child('cats/$fileName');
-      await ref.putFile(File(pickedFile.path));
-      String imageUrl = await ref.getDownloadURL();
-      return imageUrl;
-    } catch (e) {
-      print('Lỗi tải ảnh lên: $e');
-      return null;
-    }
-  }
-
   Future<void> updateCat(String catId, double? newWeight,
-      DateTime? newDateOfBirth, String? newImageUrl) async {
+      DateTime? newDateOfBirth, String? newImagePath) async { // Đổi tên tham số
     try {
       Map<String, dynamic> updateData = {};
       if (newWeight != null) {
@@ -61,8 +44,8 @@ class CatListViewModel extends ChangeNotifier {
       if (newDateOfBirth != null) {
         updateData['dateOfBirth'] = newDateOfBirth;
       }
-      if (newImageUrl != null) {
-        updateData['imageUrl'] = newImageUrl;
+      if (newImagePath != null) {
+        updateData['imagePath'] = newImagePath; // Cập nhật trường
       }
 
       if (updateData.isNotEmpty) {

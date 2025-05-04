@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Bunbo Pet",
+    "address": " 207A Nơ Trang Long, Phường 12, Bình Thạnh, TP HCM.",
+    "phone": " 0908 241 436",
+    "services": "Lưu trú dài ngày, spa",
+    "image": "assets/images/cat hotels/bunbo.png"
+  },
+  {
+    "name": "Kimi Pet - Chi nhánh Ba Đình (Kim Mã)",
+    "address": "46 Kim Mã, Ba Đình, Hà Nội",
+    "phone": " 091 883 38 92",
+    "services": "Grooming, Khách sạn thú cưng, Cửa hàng, Đào tạo Grooming",
+    "image": "assets/images/cat hotels/kimi.png"
+  },
+  {
+    "name": "Kimi Pet - Chi nhánh Đống Đa (Xã Đàn)",
+    "address": "34/360 Xã Đàn, Đống Đa, Hà Nội",
+    "phone": " 091 883 38 92",
+    "services": "Grooming, Khách sạn thú cưng, Cửa hàng, Đào tạo Grooming",
+    "image": "assets/images/cat hotels/kimi.png"
+  },
+  {
+    "name": "Kimi Pet - Chi nhánh Quận 1 (Trần Khánh Dư)",
+    "address": "77 Trần Khánh Dư, Phường Tân Định, Quận 1, TP. Hồ Chí Minh",
+    "phone": " 091 883 38 92",
+    "services": "Grooming, Khách sạn thú cưng, Cửa hàng",
+    "image": "assets/images/cat hotels/kimi.png"
+  },
+  {
+    "name": "Hotel MEO",
+    "address": "269 Nguyễn Trãi, P. Nguyễn Cư Trinh, Q.1, TP. HCM\n",
+    "phone": " 096 49 49 903",
+    "services": "Lưu trú dài ngày, spa",
+    "image": "assets/images/cat hotels/meo.png"
+  },
+  {
+    "name": "Mèo Ú Hotel - Chi nhánh Quận 10",
+    "address": "177/8 đường 3/2, phường 11, Quận 10, TP. Hồ Chí Minh",
+    "phone": " 0838 081 808",
+    "services": "Khách sạn mèo, Spa & Grooming, Chăm sóc sức khỏe, Cửa hàng, Đào tạo và chăm sóc thú cưng, Phân phối con giống",
+    "image": "assets/images/cat hotels/meo_u_2.png"
+  },
+  {
+    "name": "Mèo Ú Hotel - Chi nhánh Gò Vấp",
+    "address": "319/19 Lê Đức Thọ, phường 9, Quận Gò Vấp, TP. Hồ Chí Minh",
+    "phone": " 0937 760 944",
+    "services": "Khách sạn mèo, Spa & Grooming, Chăm sóc sức khỏe, Cửa hàng, Đào tạo và chăm sóc thú cưng, Phân phối con giống",
+    "image": "assets/images/cat hotels/meo_u_2.png"
+    }
+  ]

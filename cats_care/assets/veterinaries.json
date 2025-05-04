@@ -1,0 +1,114 @@
+[
+  {
+    "name": "Bệnh viện thú y PETPRO",
+    "address": "550 Lũy Bán Bích, P. Hòa Thạnh, Q. Tân Phú, TP.HCM.",
+    "phone": "028 38612977",
+    "hours": "24/7",
+    "image": "assets/images/veterinary logos/petpro_logo.png"
+  },
+  {
+    "name": "Animal Doctors International",
+    "address": "226 Nguyễn Văn Hưởng, Thảo Điền, Quận 2, TP.HCM",
+    "phone": "1900 633 093",
+    "hours": "09:00 - 19:00 (7 ngày)",
+    "image": "assets/images/veterinary logos/animal_doctors_logo.png"
+  },
+  {
+    "name": "Phòng khám thú y Saigon Veterinary Clinic",
+    "address": "21 đường 14-Quang Trung, phường 8, Gò Vấp, TP.HCM",
+    "phone": "0862736470",
+    "hours": "12:00 - 17:00 (8h - 21h)",
+    "image": "assets/images/veterinary logos/saigon_vet_logo.png"
+  },
+  {
+    "name": "Phòng khám thú y ViVet",
+    "address": "Số 98 phố Nguyễn Khiêm Ích (khu 31 ha), thị trấn Trâu Quỳ, huyện Gia Lâm, Hà Nội",
+    "phone": "028 3838 1474",
+    "hours": "7:00-18:00 (7 ngày) ",
+    "image": "assets/images/veterinary logos/vi_vet.png"
+  },
+  {
+    "name": "Bệnh viện thú y Petcare",
+    "address": "124A Xuân Thủy, Phường  Thảo Điền, Quận 2, HCM",
+    "phone": " 0917 941 246",
+    "hours": "24/7",
+    "image": "assets/images/veterinary logos/pet_care.png"
+  },
+  {
+    "name": "Phòng khám thú y PetZone",
+    "address": "U48-U50-U52-U54 Nguyễn Hữu Hào, Phường 8, Quận 4, HCM",
+    "phone": " 077 556 1127",
+    "hours": "24/7",
+    "image": "assets/images/veterinary logos/pet_zone.png"
+  },
+  {
+    "name": "Phòng khám thú y 651",
+    "address": "51 Điện Biên Phủ, Phường 1, Quận 3, TP.HCM",
+    "phone": " 0989 961 015",
+    "hours": "Thứ 2 – Chủ nhật: 8:00 – 19:00",
+    "image": "assets/images/veterinary logos/561.png"
+  },
+  {
+    "name": "Phòng khám thú y K9",
+    "address": "Số 71 Trần Hưng Đạo, Phường 6, Quận 5, TP.HCM",
+    "phone": " (028) 38 612977 – 0913 949 041",
+    "hours": "24/7 (Ngày lễ có thể thay đổi)",
+    "image": "assets/images/veterinary logos/k9.png"
+  },
+  {
+    "name": "Phòng khám thú y Procare",
+    "address": "98B-98C Phan Đăng Lưu, Phường 3, Quận Phú Nhuận, TP.HCM",
+    "phone": " (028) 3551 1002",
+    "hours": "2Sáng: 8:00 – 12:00\nChiều: 14:00 – 19:00",
+    "image": "assets/images/veterinary logos/procare.png"
+  },
+  {
+    "name": "Phòng khám Thú Y Tini Vet",
+    "address": "124 Lê Tuấn Mậu, Phường 13, Quận 6, Ho Chi Minh City",
+    "phone": " 032 637 6522",
+    "hours": "24/7 (Ngày lễ có thể thay đổi)",
+    "image": "assets/images/veterinary logos/tini_vet.png"
+  },
+  {
+    "name": "Phòng khám thú y Việt Hùng",
+    "address": "425 Lê Thanh Nghị, TP Hải Dương",
+    "phone": " 0363136268",
+    "hours": "24/7 (Ngày lễ có thể thay đổi)",
+    "image": "assets/images/veterinary logos/viet_hung.png"
+  },
+  {
+    "name": "Phòng khám thú y Bingo - Bingo Veterinary Clinic",
+    "address": "331 Nguyễn Văn Tăng, Long Thạnh Mỹ, TP Thủ Đức, Ho Chi Minh",
+    "phone": " 090 789 66 07",
+    "hours": "24/7 (Ngày lễ có thể thay đổi)",
+    "image": "assets/images/veterinary logos/bingo.png"
+  },
+  {
+    "name": "Phòng khám Thú y Sài Gòn",
+    "address": "366 Nguyễn Văn Khối, phường 9, Gò Vấp, Ho Chi Minh",
+    "phone": " 028 6273 6471",
+    "hours": "24/7 (Ngày lễ có thể thay đổi)",
+    "image": "assets/images/veterinary logos/saigon.png"
+  },
+  {
+    "name": "Phòng Khám Thú Y Hòa Tiến - Huy Toàn Pet Clinic",
+    "address": "DT 605, Dương Sơn, Hòa Tiến, Hòa Vang, TP. Đà Nẵng",
+    "phone": " 097 455 49 22",
+    "hours": "24/7 (Ngày lễ có thể thay đổi)",
+    "image": "assets/images/veterinary logos/hoa_tien.png"
+  },
+  {
+    "name": "Phòng Khám Thú Y Dr. VET - BÌNH CHÁNH",
+    "address": "1391 Quốc Lộ 50- Phong Phú- Bình Chánh- Hồ Chí Minh",
+    "phone": " 090 767 51 23",
+    "hours": "24/7 (Ngày lễ có thể thay đổi)",
+    "image": "assets/images/veterinary logos/dr_vet.png"
+  },
+  {
+    "name": "Phòng Khám Thú Y Pet One",
+    "address": " 327 đường Tân Hương, phường Tân Quý, Quận Tân Phú",
+    "phone": " 0964402602",
+    "hours": "08:00 - 20:00",
+    "image": "assets/images/veterinary logos/hoa_tien.png"
+  }
+]

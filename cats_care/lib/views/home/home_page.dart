@@ -1,10 +1,12 @@
 import 'package:cat_care/views/product/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../viewmodels/auth/auth_view_model.dart';
+import '../catbreeds/cat_breeds_screen.dart';
+import '../cathotel/cat_hotel_home_screen.dart';
+import '../veterinary/veterinary_home_screen.dart';
+import 'cat_calendar_screen.dart';
 import 'profile.dart';
-import '../../cat_breeds_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,7 +25,9 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _screens = [
       HomeScreen(),
+      CatCalendarScreen(),
       InfoAccount(),
+
     ];
   }
 
@@ -47,21 +51,23 @@ class _HomePageState extends State<HomePage> {
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        selectedItemColor: const Color(0xff7FDDE5),
-        unselectedItemColor: const Color(0xffB8B8B8),
-        items: const [
+        selectedItemColor: Color(0xff7FDDE5),
+        unselectedItemColor: Color(0xffB8B8B8),
+        items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "Trang chủ",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today),
             label: "Lịch",
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: "Profile",
+          ),
+          
+          
         ],
       ),
     );
@@ -69,58 +75,63 @@ class _HomePageState extends State<HomePage> {
 }
 
 class HomeScreen extends StatelessWidget {
+  
   const HomeScreen({super.key});
-
+  
   static List<Map<String, String>> newsList = [
     {
       "title": "10 điều cần biết dành cho người mới nuôi mèo",
-      "image": "assets/images/new/news1.png",
+      "image": "assets/images/news/news1.png",
     },
     {
       "title": "Những điều thú vị về loài mèo",
-      "image": "assets/images/new/news2.png",
+      "image": "assets/images/news/news1.png",
     },
     {
       "title": "Mẹo chải lông mèo",
-      "image": "assets/images/new/news3.png",
+      "image": "assets/images/news/news1.png",
     },
   ];
 
-  Widget _buildNewsItem(BuildContext context, String title, String imagePath) {
-    return Container(
-      width: 150, 
-      margin: const EdgeInsets.only(right: 10), 
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.asset(
-              imagePath,
-              width: 150, 
-              height: 100, 
-              fit: BoxFit.cover,
-            ),
+  Widget _buildNewsItem(BuildContext context, String title, String image) {
+  final screenWidth = MediaQuery.of(context).size.width;
+
+  return Container(
+    width: screenWidth * 0.4, // Width is 40% of the screen width
+    margin: EdgeInsets.only(right: screenWidth * 0.025), // Margin is 2.5% of the screen width
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(screenWidth * 0.025), // Border radius is 2.5% of the screen width
+          child: Image.asset(
+            image,
+            width: screenWidth * 0.4, // Image width matches the container width
+            height: screenWidth * 0.25, // Height is 25% of the screen width
+            fit: BoxFit.cover,
           ),
-          const SizedBox(height: 8),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 14, 
-              fontWeight: FontWeight.w500,
-              color: Colors.black87,
-            ),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+        ),
+        SizedBox(height: screenWidth * 0.02), // Spacing is 2% of the screen width
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: screenWidth * 0.035, // Font size is 3.5% of the screen width
+            fontWeight: FontWeight.w500,
+            color: Colors.black87,
           ),
-        ],
-      ),
-    );
-  }
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ],
+    ),
+  );
+}
 
   @override
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewModel>(context);
+    final screenHeight = MediaQuery.of(context).size.height;
+    // final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: SafeArea(
@@ -145,23 +156,20 @@ class HomeScreen extends StatelessWidget {
                     onPressed: () {},
                   ),
                   const SizedBox(width: 8),
-                  IconButton(
-                    icon: CircleAvatar(
-                      radius: 16,
-                      backgroundImage: NetworkImage(authViewModel.user?.photoURL ?? ''),
+                  Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: NetworkImage(authViewModel.user?.photoURL ?? ''),
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => InfoAccount(), 
-                        ),
-                      );
-                    },
-                  ),
+                  )
                 ],
               ),
-              const SizedBox(height: 16), 
+              SizedBox(height: screenHeight * 0.02), 
               TextField(
                 decoration: InputDecoration(
                   hintText: 'Tìm kiếm',
@@ -171,36 +179,36 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 16), 
+              SizedBox(height: screenHeight * 0.02),
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.asset(
                   "assets/images/anh.png",
                   width: double.infinity,
-                  height: 200, 
+                  height: screenHeight * 0.25,
                   fit: BoxFit.cover,
                 ),
               ),
-              const SizedBox(height: 16), 
+              SizedBox(height: screenHeight * 0.02),
               _buildTitle('Dịch vụ'),
-              const SizedBox(height: 8),
+              SizedBox(height: screenHeight * 0.01), 
               SizedBox(
-                height: 110,
+                height: screenHeight * 0.13, // 
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     _buildComponentButton(context, "Giống mèo", "assets/images/icon/giong_meo.png", CatBreedsScreen()),
-                    _buildComponentButton(context, "Thú y", "assets/images/icon/thu_y.png", ThuYScreen()),
+                    _buildComponentButton(context, "Thú y", "assets/images/icon/thu_y.png", VeterinaryHomePage()),
                     _buildComponentButton(context, "Sản phẩm", "assets/images/icon/san_pham.png", ProductScreen()),
-                    _buildComponentButton(context, "Khách sạn mèo", "assets/images/icon/hotel.png", KhachSanMeoScreen()),
+                    _buildComponentButton(context, "Khách sạn mèo", "assets/images/icon/hotel.png", CatHotelHomePage()),
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: screenHeight * 0.02),
               _buildTitle('Tin tức'),
-              const SizedBox(height: 8),
+              SizedBox(height: screenHeight * 0.01), 
               SizedBox(
-                height: 150,
+                height: screenHeight * 0.2,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: newsList.length,
@@ -230,9 +238,11 @@ Widget _buildTitle(String text) {
 }
 
 Widget _buildComponentButton(BuildContext context, String title, String imagePath, Widget destination) {
+  final screenWidth = MediaQuery.of(context).size.width;
+
   return SizedBox(
-    width: 80,
-    height: 120,
+    width: screenWidth * 0.2,
+    height: screenWidth * 0.3,
     child: InkWell(
       onTap: () {
         Navigator.push(
@@ -244,21 +254,21 @@ Widget _buildComponentButton(BuildContext context, String title, String imagePat
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            height: 60,
-            width: 60,
+            height: screenWidth * 0.15,
+            width: screenWidth * 0.15,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(screenWidth * 0.075),
               color: const Color(0xff99E4EA),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(5),
+              padding: EdgeInsets.all(screenWidth * 0.025),
               child: Image.asset(
                 imagePath,
                 fit: BoxFit.contain,
               ),
             ),
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: screenWidth * 0.04), // Khoảng cách giữa hình ảnh và tiêu đề
           Text(
             title,
             textAlign: TextAlign.center,

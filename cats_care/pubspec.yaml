@@ -35,17 +35,15 @@ dependencies:
   firebase_auth: ^5.5.1
   cloud_firestore: ^5.6.5
   firebase_storage: ^12.4.4
-  
   google_sign_in: ^6.3.0
   flutter_facebook_auth: ^7.1.1
-  
-
   image_picker: ^1.0.7
-  
   provider: ^6.0.5
-
   geolocator: ^9.0.2
   geocoding: ^2.0.5
+  diacritic: ^0.1.6
+  table_calendar: ^3.1.3
+  path_provider: ^2.1.5
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -77,17 +75,20 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/icon/
-    - assets/images/new/
-
-    - assets/images/meo.png
-    - assets/images/logo.png
-    - assets/images/anh.png
-
     - assets/
-
-    - assets/images/cats/
-    - assets/images/products/
+      - assets/catbreeds.json
+      - assets/cathotels.json
+      - assets/products.json
+      - assets/veterinaries.json
+      - assets/images/icon/
+      - assets/images/news/
+      - assets/images/meo.png
+      - assets/images/logo.png
+      - assets/images/anh.png
+      - assets/images/cats/
+      - assets/images/products/
+      - assets/images/veterinary logos/
+      - assets/images/cat hotels/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

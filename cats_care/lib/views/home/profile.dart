@@ -1,4 +1,3 @@
-import 'package:cat_care/views/cart/order_history_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,15 +14,6 @@ class InfoAccount extends StatelessWidget {
     final authViewModel = Provider.of<AuthViewModel>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        backgroundColor: Color(0xffE5F8FA),
-      ),
       backgroundColor: Color(0xffE5F8FA),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -62,9 +52,9 @@ class InfoAccount extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildIkwell(context,'assets/images/icon/info1.svg', 'Thông tin giao hàng', OrderHistoryScreen()),
+                 _buildIkwell(context,'assets/images/icon/info1.svg', 'Thông tin cá nhân', PersonalInfoScreen()),
                   SizedBox(height: 16),
-                  _buildIkwell(context,'assets/images/icon/info2.svg', 'Địa chỉ của tôi', AddressListScreen()),
+                  _buildIkwell(context,'assets/images/icon/info2.svg', 'Thông tin giao hàng', AddressListScreen()),
                   SizedBox(height: 16),
                  _buildIkwell(context,'assets/images/icon/info3.svg', 'Thông tin thú cưng', AddCatScreen()),
                   SizedBox(height: 16),
@@ -143,4 +133,17 @@ class InfoAccount extends StatelessWidget {
         ),
       ),
     );
+  }
+  class PersonalInfoScreen extends StatelessWidget {
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Thông tin cá nhân'),
+        ),
+        body: Center(
+          child: Text('Thông tin cá nhân'),
+        ),
+      );
+    }
   }
