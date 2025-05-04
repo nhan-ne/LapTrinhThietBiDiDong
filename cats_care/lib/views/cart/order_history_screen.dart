@@ -80,12 +80,13 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                         final order = orders[index];
                         final orderData = order.data() as Map<String, dynamic>;
                         final products = orderData['products'] as List<dynamic>; // Lấy danh sách sản phẩm
+                        
+                        if (products.isEmpty) {
+                          return const Text('Không có sản phẩm nào.');
+                        }
+
                         final productData = products.first as Map<String, dynamic>;
                         final bool isExpanded = _expandedStates[index] ?? false;
-
-                        final double price = double.tryParse(productData['price'].toString()) ?? 0;
-                        final int quantity = int.tryParse(productData['quantity'].toString()) ?? 0;
-                        final double totalPricePerProduct = price * quantity; 
 
                         return GestureDetector(
                           onTap: () {
@@ -106,7 +107,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [  
                                 // Hien thi san pham dau tien
-                                buildProductItem(productData),                                                       
+                                buildProductItem(productData),  
+
                                 if (!isExpanded && products.length > 1)
                                   TextButton(
                                     onPressed: () {
@@ -142,7 +144,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                                   ),
                                 SizedBox(height: 8),
                                 // Hien thi tong so tien
-                                buildTotalPrice(formatCurrency(totalPricePerProduct)),
+                                buildTotalPrice(orderData['totalPrice'] ?? '0'),
                               ],
                             ),
                           ),

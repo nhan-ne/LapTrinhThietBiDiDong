@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../cat/cat_list_screen.dart';
+import '/views/information/cat_list_screen.dart';
 import '/viewmodels/auth/auth_view_model.dart';
 import '/views/delivery/address_list_screen.dart';
+import '/views/cart/order_history_screen.dart';
 
 class InfoAccount extends StatelessWidget {
   const InfoAccount({super.key});
@@ -52,9 +53,9 @@ class InfoAccount extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                 _buildIkwell(context,'assets/images/icon/info1.svg', 'Thông tin cá nhân', PersonalInfoScreen()),
+                 _buildIkwell(context,'assets/images/icon/info1.svg', 'Thông tin đơn hàng', OrderHistoryScreen()),
                   SizedBox(height: 16),
-                  _buildIkwell(context,'assets/images/icon/info2.svg', 'Thông tin giao hàng', AddressListScreen()),
+                  _buildIkwell(context,'assets/images/icon/info2.svg', 'Thông tin địa chỉ', AddressListScreen()),
                   SizedBox(height: 16),
                  _buildIkwell(context,'assets/images/icon/info3.svg', 'Thông tin thú cưng', CatListScreen()),
                   SizedBox(height: 16),
@@ -133,17 +134,4 @@ class InfoAccount extends StatelessWidget {
         ),
       ),
     );
-  }
-  class PersonalInfoScreen extends StatelessWidget {
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Thông tin cá nhân'),
-        ),
-        body: Center(
-          child: Text('Thông tin cá nhân'),
-        ),
-      );
-    }
   }

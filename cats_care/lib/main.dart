@@ -10,8 +10,8 @@ import 'viewmodels/delivery/location_view_model.dart';
 import 'viewmodels/delivery/delivery_view_model.dart';
 import 'viewmodels/cart/oder_view_model.dart';
 
-import 'viewmodels/cat/cat_list_view_model.dart';
-import 'viewmodels/cat/cat_information_view_model.dart';
+import 'viewmodels/information/cat_list_view_model.dart';
+import 'viewmodels/information/cat_information_view_model.dart';
 //import 'viewmodels/cat_list/cat_list_view_model.dart';
 
 

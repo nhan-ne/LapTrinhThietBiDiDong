@@ -195,7 +195,6 @@ class _AddCatScreenState extends State<AddCatScreen> {
         child: TextButton(
           onPressed: () async {
             if (_formKey.currentState?.validate() ?? true) {
-              final viewModel = Provider.of<AddCatViewModel>(context, listen: false);
               await viewModel.saveCat();
               // Check if the cat list is now non-empty
               final catListViewModel =

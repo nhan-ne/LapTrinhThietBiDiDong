@@ -76,19 +76,19 @@ flutter:
 
   assets:
     - assets/
-      - assets/catbreeds.json
-      - assets/cathotels.json
-      - assets/products.json
-      - assets/veterinaries.json
-      - assets/images/icon/
-      - assets/images/news/
-      - assets/images/meo.png
-      - assets/images/logo.png
-      - assets/images/anh.png
-      - assets/images/cats/
-      - assets/images/products/
-      - assets/images/veterinary logos/
-      - assets/images/cat hotels/
+    - assets/catbreeds.json
+    - assets/cathotels.json
+    - assets/products.json
+    - assets/veterinaries.json
+    - assets/images/icon/
+    - assets/images/news/
+    - assets/images/meo.png
+    - assets/images/logo.png
+    - assets/images/anh.png
+    - assets/images/cats/
+    - assets/images/products/
+    - assets/images/veterinary logos/
+    - assets/images/cat hotels/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
