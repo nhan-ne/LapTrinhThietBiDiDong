@@ -11,7 +11,18 @@ class CatBreedDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(catBreed['name']),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(catBreed['name'],
+          style: const TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+          )
+        ),
         backgroundColor: const Color(0xff7FDDE5),
         foregroundColor: Colors.black,
         elevation: 0,

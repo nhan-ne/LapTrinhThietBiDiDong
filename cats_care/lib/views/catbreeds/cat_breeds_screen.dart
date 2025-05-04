@@ -35,7 +35,18 @@ class _CatBreedsScreenState extends State<CatBreedsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('GIỐNG MÈO'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text('GIỐNG MÈO',
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+          ),
+        ),
         backgroundColor: const Color(0xff7FDDE5),
         foregroundColor: Colors.black,
         elevation: 0,

@@ -85,11 +85,11 @@ class HomeScreen extends StatelessWidget {
     },
     {
       "title": "Những điều thú vị về loài mèo",
-      "image": "assets/images/news/news1.png",
+      "image": "assets/images/news/news2.png",
     },
     {
       "title": "Mẹo chải lông mèo",
-      "image": "assets/images/news/news1.png",
+      "image": "assets/images/news/news3.png",
     },
   ];
 

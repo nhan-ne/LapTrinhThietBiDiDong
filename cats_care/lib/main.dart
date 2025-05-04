@@ -12,6 +12,7 @@ import 'viewmodels/cart/oder_view_model.dart';
 
 import 'viewmodels/information/cat_list_view_model.dart';
 import 'viewmodels/information/cat_information_view_model.dart';
+import 'viewmodels/catbreeds/cat_breeds_view_model.dart';
 //import 'viewmodels/cat_list/cat_list_view_model.dart';
 
 
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => DeliveryViewModel()),
         ChangeNotifierProvider(create: (context) => LocationViewModel()),
         ChangeNotifierProvider(create: (context) => OrderViewModel()),
+        ChangeNotifierProvider(create: (context) => CatBreedsViewModel()),
   
         ChangeNotifierProvider(create: (context) => CatListViewModel()),
         ChangeNotifierProvider(create: (_) => AddCatViewModel()),

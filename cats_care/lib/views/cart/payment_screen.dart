@@ -276,7 +276,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       const SnackBar(content: Text('Đặt hàng thành công!')),
                     );
 
-                    // Điều hướng về màn hình chính hoặc lịch sử đặt hàng
                     Navigator.pop(context);
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(
