@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../cat/cat_list_screen.dart';
 import '/viewmodels/auth/auth_view_model.dart';
 import '/views/delivery/address_list_screen.dart';
-import '/views/cat/cat_information_screen.dart';
 
 class InfoAccount extends StatelessWidget {
   const InfoAccount({super.key});
