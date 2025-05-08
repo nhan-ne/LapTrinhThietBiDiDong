@@ -8,7 +8,7 @@ class Cat {
   String? gender;
   double? weight;
   String? imagePath;
-  String? uid; // Add this line
+  String? uid;
 
   Cat({
     this.id,
@@ -18,7 +18,7 @@ class Cat {
     this.gender,
     this.weight,
     this.imagePath,
-    this.uid, // Add this line
+    this.uid,
   });
 
   Map<String, dynamic> toMap() {
@@ -29,7 +29,7 @@ class Cat {
       'gender': gender,
       'weight': weight,
       'imagePath': imagePath,
-      'uid': uid,   // Add this line
+      'uid': uid,   
     };
   }
 
