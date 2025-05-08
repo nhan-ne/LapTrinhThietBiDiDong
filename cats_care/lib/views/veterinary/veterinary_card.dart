@@ -6,7 +6,7 @@ class VeterinaryCard extends StatelessWidget {
   final String phone;
   final String hours;
   final String image;
-  final VoidCallback onBookAppointment; // Callback cho nút đặt lịch
+  final VoidCallback onBookAppointment;
 
   VeterinaryCard({
     required this.name,
@@ -14,7 +14,7 @@ class VeterinaryCard extends StatelessWidget {
     required this.phone,
     required this.hours,
     required this.image,
-    required this.onBookAppointment, // Thêm vào constructor
+    required this.onBookAppointment,
   });
 
   @override
@@ -65,11 +65,11 @@ class VeterinaryCard extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-            Spacer(), // Đẩy nút xuống cuối
+            Spacer(),
             Center(
               child: ElevatedButton(
-                onPressed: onBookAppointment, // Gọi callback khi nút được nhấn
-                child: Text('ĐẶT LỊCH KHÁM'),
+                onPressed: onBookAppointment,
+                child: Text('Đặt lịch khám'),
               ),
             ),
           ],

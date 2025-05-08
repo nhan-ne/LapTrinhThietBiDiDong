@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+// ignore: unused_import
+import '../booking/booking_info_screen.dart';
 import '/views/information/cat_list_screen.dart';
 import '/viewmodels/auth/auth_view_model.dart';
 import '/views/delivery/address_list_screen.dart';
@@ -53,12 +55,14 @@ class InfoAccount extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                 _buildIkwell(context,'assets/images/icon/info1.svg', 'Thông tin đơn hàng', OrderHistoryScreen()),
+                  _buildIkwell(context,'assets/images/icon/info1.svg', 'Thông tin đơn hàng', OrderHistoryScreen()),
                   SizedBox(height: 16),
                   _buildIkwell(context,'assets/images/icon/info2.svg', 'Thông tin địa chỉ', AddressListScreen()),
                   SizedBox(height: 16),
-                 _buildIkwell(context,'assets/images/icon/info3.svg', 'Thông tin thú cưng', CatListScreen()),
+                  _buildIkwell(context,'assets/images/icon/info3.svg', 'Thông tin thú cưng', CatListScreen()),
                   SizedBox(height: 16),
+                  _buildIkwell(context, 'assets/images/icon/booking_info.svg', 'Thông tin đặt lịch', BookingInfoScreen()),
+                  const SizedBox(height: 16),
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     child: InkWell(

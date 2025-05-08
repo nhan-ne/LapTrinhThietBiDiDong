@@ -3,7 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import '/models/cat_information_model.dart';
-import 'package:path_provider/path_provider.dart'; // Import path_provider
+import 'package:path_provider/path_provider.dart';
+// ignore: unused_import
+import 'package:firebase_auth/firebase_auth.dart';
 // ignore: unused_import
 import 'package:path/path.dart' as path;
 
@@ -19,6 +21,23 @@ class AddCatViewModel extends ChangeNotifier {
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final ImagePicker _picker = ImagePicker();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<List<Cat>> getCats() async {
+    final User? user = _auth.currentUser;
+    final String? uid = user?.uid;
+
+    if (uid != null) {
+      final snapshot = await _firestore
+          .collection('cats')
+          .where('uid', isEqualTo: uid)
+          .get();
+
+      return snapshot.docs.map((doc) => Cat.fromMap(doc.data() as Map<String, dynamic>, doc.id)).toList();
+    } else {
+      return [];
+    }
+  }
 
   Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -69,8 +88,10 @@ class AddCatViewModel extends ChangeNotifier {
     }
 
     imagePath = await _saveImageToDocuments(pickedImage);
+    final User? user = _auth.currentUser;
+    final String? uid = user?.uid;
 
-    if (imagePath != null) {
+    if (imagePath != null && uid != null) {
       Cat newCat = Cat(
         name: nameController.text,
         breed: breedController.text,
@@ -78,6 +99,7 @@ class AddCatViewModel extends ChangeNotifier {
         gender: selectedGender,
         weight: double.tryParse(weightController.text),
         imagePath: imagePath,
+        uid: uid,
       );
 
       try {

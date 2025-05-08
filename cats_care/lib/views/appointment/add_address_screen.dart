@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import '../../viewmodels/appointment/appointment_view_model.dart';
 import 'package:intl/intl.dart';
 
+import '../veterinary/veterinary_home_screen.dart';
+
 class AddAppointmentScreen extends StatefulWidget {
   final String? veterinaryName;
 
@@ -59,15 +61,25 @@ class _AddAppointmentScreenState extends State<AddAppointmentScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'ĐẶT LỊCH KHÁM',
-          style: TextStyle(fontWeight: FontWeight.bold), // Bold title
+          'Đặt lịch khám',
+          style: TextStyle(fontSize: 24,color: Colors.white),
         ),
-        backgroundColor: const Color(0xff7FDDE5), // White AppBar
-        foregroundColor: Colors.black, // Black title and icons
-        elevation: 0, // No shadow
-        centerTitle: true, // Center the title
+        backgroundColor: const Color(0xff7FDDE5),
+        foregroundColor: Colors.black,
+        elevation: 0,
+        centerTitle: true,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => VeterinaryHomePage(),
+                ),
+              );
+            },
+          )
       ),
-      body: SingleChildScrollView( // Wrap with SingleChildScrollView
+      body: SingleChildScrollView(
         controller: _scrollController,
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -75,7 +87,6 @@ class _AddAppointmentScreenState extends State<AddAppointmentScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              // Form Fields
               TextFormField(
                 controller: _nameController,
                 decoration: const InputDecoration(labelText: 'Tên của bạn'),
@@ -140,7 +151,7 @@ class _AddAppointmentScreenState extends State<AddAppointmentScreen> {
 
               // Chọn ngày khám
               const Text(
-                'CHỌN NGÀY KHÁM',
+                'Chọn ngày khám',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
@@ -150,7 +161,7 @@ class _AddAppointmentScreenState extends State<AddAppointmentScreen> {
 
               // Chọn giờ khám
               const Text(
-                'CHỌN GIỜ KHÁM',
+                'Chọn giờ khám',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
@@ -170,7 +181,7 @@ class _AddAppointmentScreenState extends State<AddAppointmentScreen> {
                         time: _selectedTime,
                         reason: _reasonController.text,
                         note: _noteController.text,
-                        name: _nameController.text, // Đảm bảo tên tham số khớp
+                        name: _nameController.text,
                         phone: _phoneController.text,
                         vaccinationHistory: _vaccinationHistoryController.text,
                         medicalHistory: _medicalHistoryController.text,
@@ -189,7 +200,7 @@ class _AddAppointmentScreenState extends State<AddAppointmentScreen> {
                     textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   child: const Text(
-                    'ĐẶT LỊCH',
+                    'Đặt lịch',
                     style: TextStyle(color: Colors.white), // White text
                   ),
                 ),

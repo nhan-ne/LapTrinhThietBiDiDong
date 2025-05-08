@@ -7,7 +7,8 @@ class Cat {
   DateTime? dateOfBirth;
   String? gender;
   double? weight;
-  String? imagePath; // Thuộc tính mới để lưu đường dẫn ảnh
+  String? imagePath;
+  String? uid; // Add this line
 
   Cat({
     this.id,
@@ -16,7 +17,8 @@ class Cat {
     this.dateOfBirth,
     this.gender,
     this.weight,
-    this.imagePath, // Cập nhật constructor
+    this.imagePath,
+    this.uid, // Add this line
   });
 
   Map<String, dynamic> toMap() {
@@ -26,7 +28,8 @@ class Cat {
       'dateOfBirth': dateOfBirth,
       'gender': gender,
       'weight': weight,
-      'imagePath': imagePath, // Cập nhật toMap
+      'imagePath': imagePath,
+      'uid': uid,   // Add this line
     };
   }
 
@@ -38,7 +41,8 @@ class Cat {
       dateOfBirth: map['dateOfBirth'] != null ? (map['dateOfBirth'] as Timestamp).toDate() : null,
       gender: map['gender'],
       weight: map['weight'] != null ? map['weight'].toDouble() : null,
-      imagePath: map['imagePath'], // Cập nhật fromMap
+      imagePath: map['imagePath'],
+      uid: map['uid'], // Add this line
     );
   }
 }

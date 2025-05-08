@@ -15,6 +15,10 @@ class CatEvent {
   DateTime? deliveryDate;
   bool? heatStarted;
   bool? deliveryStarted;
+  String? note;
+  String? eventType;
+  String? uid;
+
 
   CatEvent({
     this.id,
@@ -30,6 +34,9 @@ class CatEvent {
     this.deliveryDate,
     this.heatStarted,
     this.deliveryStarted,
+    this.note,
+    this.eventType,
+    this.uid,
   });
 
   Map<String, dynamic> toMap() {
@@ -47,8 +54,12 @@ class CatEvent {
       'deliveryDate': deliveryDate,
       'heatStarted': heatStarted,
       'deliveryStarted': deliveryStarted,
+      'note': note,
+      'eventType': eventType,
+      'uid': uid,
     };
   }
+
 
   factory CatEvent.fromMap(Map<String, dynamic> map) {
     return CatEvent(
@@ -58,13 +69,21 @@ class CatEvent {
       date: map['date'] != null ? (map['date'] as Timestamp).toDate() : null,
       color: map['color'],
       description: map['description'],
-      vaccinationDate: map['vaccinationDate'] != null ? (map['vaccinationDate'] as Timestamp).toDate() : null,
-      matingDate: map['matingDate'] != null ? (map['matingDate'] as Timestamp).toDate() : null,
-      heatStartDate: map['heatStartDate'] != null ? (map['heatStartDate'] as Timestamp).toDate() : null,
-      heatEndDate: map['heatEndDate'] != null ? (map['heatEndDate'] as Timestamp).toDate() : null,
-      deliveryDate: map['deliveryDate'] != null ? (map['deliveryDate'] as Timestamp).toDate() : null,
+      vaccinationDate:
+      map['vaccinationDate'] != null ? (map['vaccinationDate'] as Timestamp).toDate() : null,
+      matingDate:
+      map['matingDate'] != null ? (map['matingDate'] as Timestamp).toDate() : null,
+      heatStartDate:
+      map['heatStartDate'] != null ? (map['heatStartDate'] as Timestamp).toDate() : null,
+      heatEndDate:
+      map['heatEndDate'] != null ? (map['heatEndDate'] as Timestamp).toDate() : null,
+      deliveryDate:
+      map['deliveryDate'] != null ? (map['deliveryDate'] as Timestamp).toDate() : null,
       heatStarted: map['heatStarted'],
       deliveryStarted: map['deliveryStarted'],
+      note: map['note'],
+      eventType: map['eventType'],
+      uid: map['uid'],
     );
   }
 }

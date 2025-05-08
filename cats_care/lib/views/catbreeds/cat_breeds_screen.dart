@@ -41,16 +41,16 @@ class _CatBreedsScreenState extends State<CatBreedsScreen> {
             Navigator.pop(context);
           },
         ),
-        title: Text('GIỐNG MÈO',
+        title: Text('Giống mèo',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 24,
             color: Colors.white,
           ),
         ),
         backgroundColor: const Color(0xff7FDDE5),
         foregroundColor: Colors.black,
         elevation: 0,
-        centerTitle: false,
+        centerTitle: true,
       ),
       body: Column(
         children: [

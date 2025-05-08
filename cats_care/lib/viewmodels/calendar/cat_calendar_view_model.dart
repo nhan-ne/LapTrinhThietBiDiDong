@@ -1,21 +1,29 @@
-// lib/viewmodels/calendar/cat_calendar_view_model.dart
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../models/cat_calendar_model.dart';
 // ignore: unused_import
 import 'package:intl/intl.dart';
-import 'dart:async'; // Import thư viện async
+import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class CatCalendarViewModel extends ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // ignore: unused_field
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   List<CatEvent> events = [];
-  StreamSubscription? _eventSubscription; // Thêm biến để giữ subscription
+  StreamSubscription? _eventSubscription;
+  String? catId;
 
-  CatCalendarViewModel(String catId) {
-    init(catId); // Gọi init trong constructor
+
+  CatCalendarViewModel(this.catId) {
+    if (catId != null) {
+      loadEvents(catId!);
+    }
   }
 
-  void init(String catId) {
+  void loadEvents(String catId) {
+    this.catId = catId;
+    _eventSubscription?.cancel();
     _eventSubscription = _firestore
         .collection('cat_events')
         .where('catId', isEqualTo: catId)
@@ -33,24 +41,50 @@ class CatCalendarViewModel extends ChangeNotifier {
 
   @override
   void dispose() {
-    _eventSubscription?.cancel(); // Hủy bỏ subscription khi ViewModel bị hủy
+    _eventSubscription?.cancel();
     super.dispose();
+  }
+
+
+
+  Future<void> deleteExternalEvent(String catId, String eventId) async {
+    try {
+      await _firestore.collection('cat_events').doc(eventId).delete();
+      notifyListeners();
+    } catch (e) {
+      print('Lỗi khi xóa sự kiện ngoài: $e');
+    }
+  }
+
+  Future<void> addExternalEvent(String catId, DateTime date, String title, String note,  String uid) async {
+    try {
+      await _firestore.collection('cat_events').add({
+        'catId': catId,
+        'date': date,
+        'title': title,
+        'note': note,
+        'eventType': 'external',
+        'uid': uid,
+      });
+      notifyListeners();
+    } catch (e) {
+      print('Lỗi khi thêm sự kiện ngoài: $e');
+    }
   }
 
   Future<void> addCatEvent(CatEvent event) async {
     try {
       await _firestore.collection('cat_events').add(event.toMap());
-      print('Đã thêm sự kiện: ${event.title}');
       notifyListeners();
     } catch (e) {
       print('Lỗi khi thêm sự kiện: $e');
     }
   }
 
-  Future<void> updateCatEvent(String eventId, Map<String, dynamic> updateData) async {
+  Future<void> updateCatEvent(
+      String eventId, Map<String, dynamic> updateData) async {
     try {
       await _firestore.collection('cat_events').doc(eventId).update(updateData);
-      print('Đã cập nhật sự kiện có ID: $eventId');
       notifyListeners();
     } catch (e) {
       print('Lỗi khi cập nhật sự kiện: $e');
@@ -60,31 +94,90 @@ class CatCalendarViewModel extends ChangeNotifier {
   Future<void> deleteCatEvent(String eventId) async {
     try {
       await _firestore.collection('cat_events').doc(eventId).delete();
-      print('Đã xóa sự kiện có ID: $eventId');
       notifyListeners();
     } catch (e) {
       print('Lỗi khi xóa sự kiện: $e');
     }
   }
 
-  // Các hàm tính toán ngày dự kiến:
-
-  DateTime? calculateNextHeatDate(DateTime? lastHeatDate, bool hasMated, bool hasGivenBirth) {
-    if (lastHeatDate == null) return null;
-    if (hasMated) return null; // Nếu đã phối, không tính kỳ động dục tiếp theo ngay
-    if (hasGivenBirth) {
-      return lastHeatDate.add(Duration(days: 30)); // 1 tháng sau sinh
+  Future<void> addVaccinationDate(
+      String catId, DateTime date, String? title,String uid) async {
+    try {
+      await _firestore.collection('cat_events').add({
+        'catId': catId,
+        'vaccinationDate': date,
+        'title': title,
+        'uid': uid,
+      });
+      notifyListeners();
+    } catch (e) {
+      print('Lỗi khi thêm ngày chích ngừa: $e');
     }
-    return lastHeatDate.add(Duration(days: 21)); // Chu kỳ trung bình 3 tuần
   }
 
-  DateTime? calculateEstimatedDeliveryDate(DateTime? matingDate) {
-    if (matingDate == null) return null;
-    return matingDate.add(Duration(days: 63)); // Thai kỳ mèo khoảng 63 ngày
+  Future<void> addMatingDate(String catId, DateTime date, String? title, String uid) async {
+    try {
+      await _firestore.collection('cat_events').add({
+        'catId': catId,
+        'matingDate': date,
+        'title': title,
+        'uid': uid,
+      });
+      notifyListeners();
+    } catch (e) {
+      print('Lỗi khi thêm ngày phối giống: $e');
+    }
   }
 
-  DateTime? calculateFirstHeatDate(DateTime? birthDate) {
-    if (birthDate == null) return null;
-    return birthDate.add(Duration(days: 6 * 30)); // Khoảng 6 tháng sau sinh
+  Future<void> addHeatDate(
+      String catId, DateTime startDate, DateTime? endDate, String? title, String uid) async {
+    try {
+      await _firestore.collection('cat_events').add({
+        'catId': catId,
+        'heatStartDate': startDate,
+        'heatEndDate': endDate,
+        'title': title,
+        'uid': uid,
+      });
+      notifyListeners();
+    } catch (e) {
+      print('Lỗi khi thêm ngày động dục: $e');
+    }
+  }
+
+  Future<void> addDeliveryDate(
+      String catId, DateTime date, String? title, String uid) async {
+    try {
+      await _firestore.collection('cat_events').add({
+        'catId': catId,
+        'deliveryDate': date,
+        'title': title,
+        'uid': uid,
+      });
+      notifyListeners();
+    } catch (e) {
+      print('Lỗi khi thêm ngày sinh đẻ: $e');
+    }
+  }
+
+  Future<void> updateEvent(String catId, String eventId, DateTime newDate) async {
+    try {
+      await _firestore
+          .collection('cat_events')
+          .doc(eventId)
+          .update({'date': newDate});
+      loadEvents(catId); // Tải lại sự kiện sau khi cập nhật
+    } catch (e) {
+      print('Lỗi khi cập nhật sự kiện: $e');
+    }
+  }
+
+  Future<void> deleteEvent(String catId, String eventId) async {
+    try {
+      await _firestore.collection('cat_events').doc(eventId).delete();
+      loadEvents(catId); // Tải lại sự kiện sau khi xóa
+    } catch (e) {
+      print('Lỗi khi xóa sự kiện: $e');
+    }
   }
 }

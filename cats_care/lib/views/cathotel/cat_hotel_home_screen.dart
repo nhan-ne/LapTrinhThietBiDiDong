@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../viewmodels/cat hotel/cat_hotel_view_model.dart';
+import '../../viewmodels/cathotel/cat_hotel_view_model.dart';
+import '../bookinghotel/add_booking_screen.dart';
 import 'cat_hotel_card.dart';
-import '../booking/add_booking_screen.dart'; // Import AddBookingScreen
 
 class CatHotelHomePage extends StatelessWidget {
   @override
@@ -41,15 +41,20 @@ class _CatHotelHomePageContentState extends State<_CatHotelHomePageContent> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('CAT HOTEL'),
+        title: Text(
+          'Khách sạn mèo',
+          style: TextStyle(fontSize: 24,color: Colors.white),
+        ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         backgroundColor: const Color(0xff7FDDE5),
         foregroundColor: Colors.black,
+        elevation: 0,
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

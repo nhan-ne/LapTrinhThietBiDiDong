@@ -43,15 +43,20 @@ class _VeterinaryHomePageContentState extends State<_VeterinaryHomePageContent> 
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('THÚ Y'),
+        title: Text(
+          'Thú y',
+          style: TextStyle(fontSize: 24,color: Colors.white),
+        ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         backgroundColor: const Color(0xff7FDDE5),
         foregroundColor: Colors.black,
+        elevation: 0,
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

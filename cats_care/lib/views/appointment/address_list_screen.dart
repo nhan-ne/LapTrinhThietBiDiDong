@@ -13,7 +13,7 @@ class AppointmentListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Danh Sách Lịch Khám'),
+        title: const Text('Danh sách lịch khám'),
       ),
       body: Consumer<AppointmentViewModel>(
         builder: (context, appointmentViewModel, child) {
@@ -51,7 +51,6 @@ class AppointmentListScreen extends StatelessWidget {
                                 IconButton(
                                   icon: const Icon(Icons.edit),
                                   onPressed: () {
-                                    // TODO: Implement chức năng chỉnh sửa lịch khám
                                   },
                                 ),
                                 IconButton(

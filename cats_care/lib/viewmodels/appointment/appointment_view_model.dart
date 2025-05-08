@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-// ignore: duplicate_import
-import 'package:flutter/material.dart';
-// ignore: duplicate_import
-import 'package:cloud_firestore/cloud_firestore.dart';
-// ignore: duplicate_import
-import 'package:firebase_auth/firebase_auth.dart';
 import '../../models/Appointment.dart';
 
 
@@ -23,7 +17,7 @@ class AppointmentViewModel extends ChangeNotifier {
     required String reason,
     required String note,
     required String veterinaryName,
-    String? name, // Ví dụ: tham số này có thể null
+    String? name,
     String? phone,
     String? vaccinationHistory,
     String? medicalHistory,
@@ -95,6 +89,7 @@ class AppointmentViewModel extends ChangeNotifier {
       if (user == null) {
         throw Exception('Người dùng chưa đăng nhập');
       }
+
 
       await _firestore.collection('appointments').doc(id).update({
         'petName': petName,

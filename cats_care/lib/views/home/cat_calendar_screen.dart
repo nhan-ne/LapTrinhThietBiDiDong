@@ -6,7 +6,8 @@ import '../../models/cat_calendar_model.dart';
 import '../../viewmodels/calendar/cat_calendar_view_model.dart';
 import '../../viewmodels/information/cat_list_view_model.dart';
 import '../../models/cat_information_model.dart';
-import '../home/home_page.dart'; // Import HomePage
+import '../home/home_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class CatCalendarScreen extends StatefulWidget {
   @override
@@ -15,20 +16,14 @@ class CatCalendarScreen extends StatefulWidget {
 
 class _CatCalendarScreenState extends State<CatCalendarScreen> {
   DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
-  CalendarFormat _calendarFormat = CalendarFormat.month;
-  final _formKey = GlobalKey<FormState>();
-  CatEvent? _selectedEvent;
   String? _selectedCatId;
+  Cat? _selectedCat;
+  // ignore: unused_field
+  int _selectedCatIndex = 0;
   List<Cat> _cats = [];
   bool _isLoading = true;
-  late CatCalendarViewModel _catCalendarViewModel;
-
-  final _vaccinationDateController = TextEditingController();
-  final _matingDateController = TextEditingController();
-  final _heatStartDateController = TextEditingController();
-  final _heatEndDateController = TextEditingController();
-  final _deliveryDateController = TextEditingController();
+  // ignore: unused_field
+  DateTime? _selectedDay;
 
   @override
   void initState() {
@@ -46,9 +41,9 @@ class _CatCalendarScreenState extends State<CatCalendarScreen> {
       await catListViewModel.loadCats();
       _cats = catListViewModel.cats;
       if (_cats.isNotEmpty) {
+        _selectedCat = _cats.first;
         _selectedCatId = _cats.first.id;
       }
-      _catCalendarViewModel = CatCalendarViewModel(_selectedCatId ?? "");
     } catch (e) {
       print('Lỗi khi tải dữ liệu: $e');
     } finally {
@@ -59,115 +54,94 @@ class _CatCalendarScreenState extends State<CatCalendarScreen> {
   }
 
   @override
-  void dispose() {
-    _vaccinationDateController.dispose();
-    _matingDateController.dispose();
-    _heatStartDateController.dispose();
-    _heatEndDateController.dispose();
-    _deliveryDateController.dispose();
-    _catCalendarViewModel.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Lịch theo dõi Mèo',
-          style: TextStyle(color: Colors.white),
+          'Lịch theo dõi mèo',
+          style: TextStyle(fontSize: 24,color: Colors.white),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color(0xff7FDDE5),
+        elevation: 0,
+        centerTitle: true,
         iconTheme: IconThemeData(color: Colors.white),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.of(context).pushReplacement(
               MaterialPageRoute(
-                builder: (context) => HomePage(), // Navigate to HomePage
+                builder: (context) => HomePage(),
               ),
             );
           },
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.add_alarm, color: Colors.white),
-            onPressed: () {
-              _showAddEventDialog(
-                  context,
-                  Provider.of<CatCalendarViewModel>(context,
-                      listen: false));
-            },
+            icon: Icon(Icons.add),
+            onPressed: _showAddExternalEventDialog, // Gọi hàm này khi nhấn
           ),
         ],
       ),
+
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
-          : ChangeNotifierProvider.value(
-        value: _catCalendarViewModel,
+          : ChangeNotifierProvider(
+        create: (context) => CatCalendarViewModel(_selectedCatId),
         child: Consumer<CatCalendarViewModel>(
           builder: (context, viewModel, _) {
+            if (_selectedCatId != viewModel.catId) {
+              viewModel.loadEvents(_selectedCatId!);
+            }
             return SingleChildScrollView(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  _buildCatDropdown(),
+                  _buildCatSelectionDropdown(),
                   _buildCalendar(viewModel.events),
-                  _buildEventDetails(),
+                  _buildEventDetails(viewModel),
                 ],
               ),
             );
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showAddEventDialog(
-              context,
-              Provider.of<CatCalendarViewModel>(context,
-                  listen: false));
-        },
-        child: Icon(Icons.add),
-        backgroundColor: Colors.blue,
-      ),
     );
   }
 
-  Widget _buildCatDropdown() {
+  Widget _buildCatSelectionDropdown() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12.0),
+      padding: EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
         border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(8.0),
       ),
-      child: DropdownButton<String>(
-        value: _selectedCatId,
-        hint: Text('Chọn mèo'),
-        items: _cats.map((Cat cat) {
-          return DropdownMenuItem<String>(
-            value: cat.id,
-            child: Row(
-              children: [
-                CircleAvatar(
-                  backgroundColor: Colors.blue.shade100,
-                  child: Text(cat.name![0]),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            _selectedCat?.name ?? 'Chọn một con mèo',
+            style: TextStyle(fontSize: 20),
+          ),
+          PopupMenuButton<int>(
+            icon: Icon(Icons.arrow_drop_down),
+            onSelected: (int index) {
+              setState(() {
+                _selectedCat = _cats[index];
+                _selectedCatId = _cats[index].id;
+                _selectedCatIndex = index;
+              });
+            },
+            itemBuilder: (BuildContext context) {
+              return List<PopupMenuEntry<int>>.generate(
+                _cats.length,
+                    (int index) => PopupMenuItem<int>(
+                  value: index,
+                  child: Text(_cats[index].name ?? 'Không có tên'),
                 ),
-                SizedBox(width: 8.0),
-                Text(cat.name ?? 'Không tên'),
-              ],
-            ),
-          );
-        }).toList(),
-        onChanged: (String? newValue) {
-          setState(() {
-            _selectedCatId = newValue;
-          });
-          if (newValue != null) {
-            _catCalendarViewModel.init(newValue);
-          }
-        },
-        isExpanded: true,
-        underline: Container(),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
@@ -186,41 +160,22 @@ class _CatCalendarScreenState extends State<CatCalendarScreen> {
           firstDay: DateTime.utc(2010, 10, 16),
           lastDay: DateTime.utc(2030, 3, 14),
           focusedDay: _focusedDay,
-          calendarFormat: _calendarFormat,
+          calendarFormat: CalendarFormat.month,
           selectedDayPredicate: (day) {
-            return isSameDay(_selectedDay, day);
+            return _isSameDay(_focusedDay, day);
           },
           onDaySelected: (selectedDay, focusedDay) {
             setState(() {
-              _selectedDay = selectedDay;
-              _focusedDay = focusedDay;
-              _loadSelectedEvent(events);
-              _updateControllers();
+              _focusedDay = selectedDay;
             });
-          },
-          onFormatChanged: (format) {
-            setState(() {
-              _calendarFormat = format;
-            });
+            _showEventsForSelectedDay(selectedDay, events); // Hiển thị sự kiện khi chọn ngày
           },
           headerStyle: HeaderStyle(
             titleTextStyle:
             TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-            formatButtonTextStyle: TextStyle(color: Colors.white),
-            formatButtonDecoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(5.0),
-            ),
+            formatButtonVisible: false,
           ),
           calendarStyle: CalendarStyle(
-            selectedDecoration: BoxDecoration(
-              color: Colors.blue,
-              shape: BoxShape.circle,
-            ),
-            todayDecoration: BoxDecoration(
-              color: Colors.blue.withOpacity(0.3),
-              shape: BoxShape.circle,
-            ),
             markerDecoration: BoxDecoration(
               color: Colors.red,
               shape: BoxShape.circle,
@@ -242,15 +197,49 @@ class _CatCalendarScreenState extends State<CatCalendarScreen> {
     );
   }
 
-  List<CatEvent> _getEventsForDay(DateTime day, List<CatEvent> events) {
-    return events.where((event) => _isSameDay(event.date, day)).toList();
+  void _showEventsForSelectedDay(DateTime day, List<CatEvent> events) {
+    final selectedEvents = _getEventsForDay(day, events);
+    if (selectedEvents.isNotEmpty) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text("Sự kiện trong ngày"),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: selectedEvents.map((event) => _buildEventDetail(event)).toList(),
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: Text("Đóng"),
+              onPressed: () => Navigator.of(context).pop(),
+            )
+          ],
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Không có sự kiện nào trong ngày này.')),
+      );
+    }
   }
 
-  Future<void> _loadSelectedEvent(List<CatEvent> events) async {
-    _selectedEvent = events.firstWhere(
-          (event) => _isSameDay(event.date, _selectedDay),
-      orElse: () => CatEvent(catId: _selectedCatId, date: _selectedDay),
+  Widget _buildEventDetail(CatEvent event) {
+    return ListTile(
+      title: Text(event.title ?? 'Không có tiêu đề'),
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Ngày: ${DateFormat('dd/MM/yyyy').format(event.date ?? DateTime.now())}'),
+          if (event.note != null) Text('Ghi chú: ${event.note}'),
+        ],
+      ),
     );
+  }
+
+  List<CatEvent> _getEventsForDay(DateTime day, List<CatEvent> events) {
+    return events.where((event) => _isSameDay(event.date, day)).toList();
   }
 
   Widget _buildEventsMarkers(DateTime date, List events) {
@@ -278,274 +267,344 @@ class _CatCalendarScreenState extends State<CatCalendarScreen> {
     );
   }
 
-  Widget _buildEventDetails() {
-    final catListViewModel =
-    Provider.of<CatListViewModel>(context, listen: false);
-    Cat? selectedCat;
-    if (_selectedCatId != null) {
-      selectedCat = catListViewModel.cats.firstWhere(
-            (cat) => cat.id == _selectedCatId,
-        orElse: () => Cat(),
-      );
-    }
-
+  Widget _buildEventDetails(CatCalendarViewModel viewModel) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Chi tiết sự kiện',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 16.0),
+          _buildVaccinationSection(viewModel),
+          _buildMatingSection(viewModel),
+          _buildHeatSection(viewModel),
+          _buildDeliverySection(viewModel),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildVaccinationSection(CatCalendarViewModel viewModel) {
+    return _buildEventSection(
+      'Lịch Chích Ngừa',
+      viewModel.events.where((event) => event.vaccinationDate != null).toList(),
+          (event) => event.vaccinationDate!,
+          () => _showAddVaccinationDialog(context, viewModel),
+      viewModel,
+    );
+  }
+
+  Widget _buildMatingSection(CatCalendarViewModel viewModel) {
+    return _buildEventSection(
+      'Lịch Phối Giống',
+      viewModel.events.where((event) => event.matingDate != null).toList(),
+          (event) => event.matingDate!,
+          () => _showAddMatingDialog(context, viewModel),
+      viewModel,
+    );
+  }
+
+  Widget _buildHeatSection(CatCalendarViewModel viewModel) {
+    return _buildEventSection(
+      'Lịch Động Dục',
+      viewModel.events.where((event) => event.heatStartDate != null).toList(),
+          (event) => event.heatStartDate!,
+          () => _showAddHeatDialog(context, viewModel),
+      viewModel,
+    );
+  }
+
+  Widget _buildDeliverySection(CatCalendarViewModel viewModel) {
+    return _buildEventSection(
+      'Lịch Sinh Đẻ',
+      viewModel.events.where((event) => event.deliveryDate != null).toList(),
+          (event) => event.deliveryDate!,
+          () => _showAddDeliveryDialog(context, viewModel),
+      viewModel,
+    );
+  }
+
+  Widget _buildEventSection(
+      String title,
+      List<CatEvent> events,
+      DateTime? Function(CatEvent) getDate,
+      VoidCallback onAddPressed,
+      CatCalendarViewModel viewModel,
+      ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              _selectedDay != null
-                  ? 'Chi tiết sự kiện ngày: ${DateFormat('dd/MM/yyyy').format(_selectedDay!)}'
-                  : 'Chi tiết sự kiện',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 16.0),
-            _buildVaccinationDateInput(),
-            _buildMatingDateInput(),
-            _buildHeatCycleInput(),
-            if (selectedCat != null && selectedCat.gender == 'Cái')
-              _buildDeliveryDateInput(),
-            SizedBox(height: 16.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _saveEventChanges(context);
-                    }
-                  },
-                  child: Text('Lưu thay đổi', style: TextStyle(color: Colors.white)),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+            Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            SizedBox(
+              width: 150,
+              child: ElevatedButton(
+                onPressed: onAddPressed,
+                style: ElevatedButton.styleFrom(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+                  minimumSize: Size.zero,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    _deleteEvent(context);
-                  },
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                  child: Text('Xóa', style: TextStyle(color: Colors.white)),
+                child: Text(
+                  'Thêm $title',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
-              ],
+              ),
             ),
           ],
         ),
-      ),
+        if (events.isEmpty)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(''),
+          )
+        else
+          ...events.map((event) => _buildEventItem(event, getDate(event)!, viewModel)),
+        SizedBox(height: 16.0),
+      ],
     );
   }
 
-  Future<void> _deleteEvent(BuildContext context) async {
-    if (_selectedEvent != null && _selectedEvent!.id != null) {
-      final viewModel = Provider.of<CatCalendarViewModel>(context, listen: false);
-      await viewModel.deleteCatEvent(_selectedEvent!.id!);
-      setState(() {
-        _selectedEvent = null;
-        _updateControllers();
-      });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Đã xóa sự kiện')),
-      );
-    }
-  }
-
-  Widget _buildVaccinationDateInput() {
-    return _buildDateInput('Ngày chích ngừa', _vaccinationDateController,
-        Icons.local_hospital);
-  }
-
-  Widget _buildMatingDateInput() {
-    return _buildDateInput('Ngày phối giống', _matingDateController, Icons.favorite);
-  }
-
-  Widget _buildHeatCycleInput() {
-    return _buildDateInput('Ngày động dục', _heatStartDateController,
-        Icons.local_fire_department);
-  }
-
-  Widget _buildDeliveryDateInput() {
-    return _buildDateInput('Ngày sinh đẻ', _deliveryDateController, Icons.child_care);
-  }
-
-  Widget _buildDateInput(String label, TextEditingController controller,
-      IconData icon) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 8.0),
-      child: InkWell(
-        onTap: () => _selectDate(controller),
-        child: IgnorePointer(
-          child: TextFormField(
-            controller: controller,
-            decoration: InputDecoration(
-              labelText: label,
-              hintText: 'Chọn ngày',
-              suffixIcon: Icon(icon),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-            ),
-            validator: (value) {
-              return null;
+  Widget _buildEventItem(CatEvent event, DateTime date, CatCalendarViewModel viewModel) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        children: [
+          Icon(Icons.event),
+          SizedBox(width: 8.0),
+          Text(DateFormat('dd/MM/yyyy').format(date)),
+          if (event.title != null) ...[
+            SizedBox(width: 8.0),
+            Text(event.title!),
+          ],
+          Spacer(),
+          IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: () {
+              _showDeleteEventDialog(context, viewModel, event);
             },
           ),
-        ),
+        ],
       ),
     );
   }
 
-  Future<void> _selectDate(TextEditingController controller) async {
-    final DateTime? picked = await showDatePicker(
+  Future<void> _showDeleteEventDialog(
+      BuildContext context, CatCalendarViewModel viewModel, CatEvent event) async {
+    await showDialog(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2100),
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Xóa Sự Kiện'),
+          content: Text('Bạn có chắc chắn muốn xóa sự kiện này?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('Hủy'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await viewModel.deleteEvent(_selectedCatId!, event.id!);
+                Navigator.of(context).pop();
+              },
+              child: Text('Xóa'),
+            ),
+          ],
+        );
+      },
     );
-    if (picked != null) {
-      setState(() {
-        controller.text = DateFormat('dd/MM/yyyy').format(picked);
-      });
-    }
   }
 
-  void _updateControllers() {
-    _vaccinationDateController.text =
-        _formatDate(_selectedEvent?.vaccinationDate);
-    _matingDateController.text = _formatDate(_selectedEvent?.matingDate);
-    _heatStartDateController.text =
-        _formatDate(_selectedEvent?.heatStartDate);
-    _heatEndDateController.text = _formatDate(_selectedEvent?.heatEndDate);
-    _deliveryDateController.text =
-        _formatDate(_selectedEvent?.deliveryDate);
-  }
-
-  String _formatDate(DateTime? date) {
-    return date != null ? DateFormat('dd/MM/yyyy').format(date) : '';
-  }
-
-  Future<void> _saveEventChanges(BuildContext context) async {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      final viewModel =
-      Provider.of<CatCalendarViewModel>(context, listen: false);
-
-      if (_selectedEvent != null) {
-        _selectedEvent!.vaccinationDate =
-            _parseDate(_vaccinationDateController.text);
-        _selectedEvent!.matingDate = _parseDate(_matingDateController.text);
-        _selectedEvent!.heatStartDate =
-            _parseDate(_heatStartDateController.text);
-        _selectedEvent!.heatEndDate =
-            _parseDate(_heatEndDateController.text);
-        _selectedEvent!.deliveryDate =
-            _parseDate(_deliveryDateController.text);
-
-        print('vaccinationDate: ${_selectedEvent!.vaccinationDate}');
-        print('matingDate: ${_selectedEvent!.matingDate}');
-
-        if (_selectedEvent!.catId != null) {
-          await viewModel.updateCatEvent(
-              _selectedEvent!.catId!, _selectedEvent!.toMap());
-        } else {
-          await viewModel.addCatEvent(_selectedEvent!.toMap() as CatEvent);
-        }
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Đã lưu thay đổi')),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Không có sự kiện nào để lưu')),
-        );
-      }
-    }
-  }
-
-  DateTime? _parseDate(String? dateString) {
-    print('dateString: $dateString');
-    try {
-      return dateString != null && dateString.isNotEmpty
-          ? DateFormat('dd/MM/yyyy').parse(dateString)
-          : null;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  Future<void> _showAddEventDialog(
+  Future<void> _showAddVaccinationDialog(
       BuildContext context, CatCalendarViewModel viewModel) async {
+    if (_selectedCatId == null) {
+      _showMissingCatDialog(context);
+      return;
+    }
+    final dateController = TextEditingController();
+    await _showAddEventDialog(context, 'Thêm Lịch Chích Ngừa', dateController,
+            (date) async {
+      String? uid = FirebaseAuth.instance.currentUser?.uid;
+      if (uid != null) {
+          await viewModel.addVaccinationDate(
+              _selectedCatId!, date, null, uid); // title
+          Navigator.of(context).pop();
+          viewModel.loadEvents(_selectedCatId!);
+        }
+      else {
+        // Xử lý trường hợp không có uid
+      }
+    });
+  }
+
+  Future<void> _showAddMatingDialog(
+      BuildContext context, CatCalendarViewModel viewModel) async {
+    if (_selectedCatId == null) {
+      _showMissingCatDialog(context);
+      return;
+    }
+    final dateController = TextEditingController();
+    await _showAddEventDialog(context, 'Thêm Lịch Phối Giống', dateController,
+            (date) async {
+        String? uid = FirebaseAuth.instance.currentUser?.uid; // Lấy uid
+        if (uid != null) {
+          await viewModel.addMatingDate(
+              _selectedCatId!, date, null, uid); // title
+          Navigator.of(context).pop();
+          viewModel.loadEvents(_selectedCatId!);
+          }
+        else {
+          // Xử lý trường hợp không có uid
+        }
+        });
+  }
+
+  Future<void> _showAddHeatDialog(
+      BuildContext context, CatCalendarViewModel viewModel) async {
+    if (_selectedCatId == null) {
+      _showMissingCatDialog(context);
+      return;
+    }
+    final dateController = TextEditingController();
+    await _showAddEventDialog(context, 'Thêm Lịch Động Dục', dateController,
+            (date) async {
+      String? uid = FirebaseAuth.instance.currentUser?.uid; // Lấy uid
+      if (uid != null) {
+        await viewModel.addHeatDate(
+            _selectedCatId!, date, null, null, uid); // start, end
+        Navigator.of(context).pop();
+        viewModel.loadEvents(_selectedCatId!);
+      }
+        });
+  }
+
+  Future<void> _showAddDeliveryDialog(
+      BuildContext context, CatCalendarViewModel viewModel) async {
+    if (_selectedCatId == null) {
+      _showMissingCatDialog(context);
+      return;
+    }
+    final dateController = TextEditingController();
+    await _showAddEventDialog(context, 'Thêm Lịch Sinh Đẻ', dateController,
+            (date) async {
+      String? uid = FirebaseAuth.instance.currentUser?.uid; // Lấy uid
+      if (uid != null) {
+        await viewModel.addDeliveryDate(
+            _selectedCatId!, date, null, uid); // title
+        Navigator.of(context).pop();
+        viewModel.loadEvents(_selectedCatId!);
+      }
+        });
+  }
+
+  void _showMissingCatDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Chưa chọn mèo'),
+        content: Text('Vui lòng chọn mèo trước khi lưu sự kiện.'),
+        actions: [
+          TextButton(
+            child: Text('OK'),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _showAddEventDialog(BuildContext context, String title,
+      TextEditingController dateController,
+      Function(DateTime) onSave) async {
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(title),
+          content: TextField(
+            controller: dateController,
+            decoration: InputDecoration(labelText: 'Chọn ngày'),
+            onTap: () async {
+              final DateTime? picked = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(2000),
+                lastDate: DateTime(2100),
+              );
+              if (picked != null) {
+                dateController.text = DateFormat('dd/MM/yyyy').format(picked);
+              }
+            },
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('Hủy'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                final date = DateFormat('dd/MM/yyyy')
+                    .parse(dateController.text);
+                onSave(date);
+              },
+              child: Text('Lưu'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _showAddExternalEventDialog({CatEvent? event}) async {
+    final dateController = TextEditingController();
     final titleController = TextEditingController();
-    final descriptionController = TextEditingController();
-    DateTime selectedTime = DateTime.now();
-    Color selectedColor = Colors.orange;
+    final noteController = TextEditingController();
+
+    if (event != null) {
+      dateController.text = DateFormat('dd/MM/yyyy').format(event.date!);
+      titleController.text = event.title ?? '';
+      noteController.text = event.note ?? '';
+    }
 
     await showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Thêm sự kiện'),
+          title: Text(event == null ? 'Thêm Sự Kiện' : 'Sửa Sự Kiện'),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
-                  controller: titleController,
-                  decoration: InputDecoration(labelText: 'Tiêu đề'),
-                ),
-                TextField(
-                  controller: descriptionController,
-                  decoration: InputDecoration(labelText: 'Mô tả'),
-                ),
-                SizedBox(height: 16.0),
-                ElevatedButton(
-                  onPressed: () async {
-                    final TimeOfDay? pickedTime = await showTimePicker(
+                  controller: dateController,
+                  decoration: InputDecoration(labelText: 'Chọn ngày'),
+                  onTap: () async {
+                    final DateTime? picked = await showDatePicker(
                       context: context,
-                      initialTime: TimeOfDay.fromDateTime(selectedTime),
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100),
                     );
-                    if (pickedTime != null) {
-                      setState(() {
-                        selectedTime = DateTime(
-                          _selectedDay!.year,
-                          _selectedDay!.month,
-                          _selectedDay!.day,
-                          pickedTime.hour,
-                          pickedTime.minute,
-                        );
-                      });
+                    if (picked != null) {
+                      dateController.text =
+                          DateFormat('dd/MM/yyyy').format(picked);
                     }
                   },
-                  child: Text('Chọn thời gian'),
                 ),
-                Text(
-                  selectedTime != null
-                      ? 'Thời gian đã chọn: ${DateFormat('HH:mm').format(selectedTime)}'
-                      : 'Chưa chọn thời gian',
+                TextField(
+                  controller: titleController,
+                  decoration: InputDecoration(labelText: 'Tên sự kiện'),
                 ),
-                SizedBox(height: 16.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _buildColorOption(Colors.red, selectedColor, (color) {
-                      setState(() {
-                        selectedColor = color;
-                      });
-                    }),
-                    _buildColorOption(Colors.blue, selectedColor, (color) {
-                      setState(() {
-                        selectedColor = color;
-                      });
-                    }),
-                    _buildColorOption(Colors.green, selectedColor, (color) {
-                      setState(() {
-                        selectedColor = color;
-                      });
-                    }),
-                    _buildColorOption(Colors.orange, selectedColor, (color) {
-                      setState(() {
-                        selectedColor = color;
-                      });
-                    }),
-                  ],
+                TextField(
+                  controller: noteController,
+                  decoration: InputDecoration(labelText: 'Ghi chú'),
                 ),
               ],
             ),
@@ -557,49 +616,42 @@ class _CatCalendarScreenState extends State<CatCalendarScreen> {
             ),
             ElevatedButton(
               onPressed: () {
-                if (titleController.text.isNotEmpty) {
-                  final newEvent = CatEvent(
-                    catId: _selectedCatId,
-                    title: titleController.text,
-                    date: selectedTime,
-                    color: _colorToString(selectedColor),
-                    description: descriptionController.text,
-                  );
-                  viewModel.addCatEvent(newEvent);
-                  Navigator.of(context).pop();
+                final date = DateFormat('dd/MM/yyyy').parse(dateController.text);
+                final title = titleController.text;
+                final note = noteController.text;
+                final user = FirebaseAuth.instance.currentUser;
+
+                final viewModel = Provider.of<CatCalendarViewModel>(context, listen: false);
+
+                if (event == null) {
+                  // Thêm sự kiện mới
+                  viewModel.addExternalEvent(_selectedCatId!, date, title, note, user!.uid);
+                } else {
+                  // Cập nhật sự kiện
+                  viewModel.updateCatEvent(event.id!, {
+                    'date': date,
+                    'title': title,
+                    'note': note,
+                  });
                 }
+                Navigator.of(context).pop();
               },
-              child: Text('Thêm'),
+              child: Text('Lưu'),
             ),
+            if (event != null) // Chỉ hiển thị nút xóa khi đang sửa sự kiện
+              ElevatedButton(
+                onPressed: () {
+                  final viewModel = Provider.of<CatCalendarViewModel>(context, listen: false);
+                  viewModel.deleteExternalEvent(_selectedCatId!, event.id!);
+                  Navigator.of(context).pop();
+                },
+                child: Text('Xóa'),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+              ),
           ],
         );
       },
     );
-  }
-
-  Widget _buildColorOption(Color color, Color selectedColor,
-      ValueChanged<Color> onSelect) {
-    return GestureDetector(
-      onTap: () {
-        onSelect(color);
-      },
-      child: CircleAvatar(
-        backgroundColor: color,
-        radius: 16.0,
-        child: color == selectedColor
-            ? Icon(Icons.check, color: Colors.white)
-            : null,
-      ),
-    );
-  }
-
-  String _colorToString(Color color) {
-    return '0x${color.value.toRadixString(16).padLeft(8, '0').toUpperCase()}';
-  }
-
-  // ignore: unused_element
-  Color _stringToColor(String colorString) {
-    return Color(int.parse(colorString.substring(2), radix: 16));
   }
 
   bool _isSameDay(DateTime? d1, DateTime? d2) {

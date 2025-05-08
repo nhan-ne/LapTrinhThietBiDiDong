@@ -15,7 +15,7 @@ class _AddCatScreenState extends State<AddCatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<AddCatViewModel>(context); // <-- Lấy ViewModel từ Provider
+    final viewModel = Provider.of<AddCatViewModel>(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -27,11 +27,13 @@ class _AddCatScreenState extends State<AddCatScreen> {
         title: const Text(
           'Thông tin thú cưng',
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 24,
             color: Colors.white,
           ),
         ),
         backgroundColor: const Color(0xff7FDDE5),
+        elevation: 0,
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),

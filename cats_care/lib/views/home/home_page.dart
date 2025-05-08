@@ -6,6 +6,7 @@ import '../catbreeds/cat_breeds_screen.dart';
 import '../cathotel/cat_hotel_home_screen.dart';
 import '../veterinary/veterinary_home_screen.dart';
 import 'cat_calendar_screen.dart';
+//import 'notification_screen.dart';
 import 'profile.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,7 +28,6 @@ class _HomePageState extends State<HomePage> {
       HomeScreen(),
       CatCalendarScreen(),
       InfoAccount(),
-
     ];
   }
 
@@ -153,7 +153,12 @@ class HomeScreen extends StatelessWidget {
                   const Spacer(),
                   IconButton(
                     icon: const Icon(Icons.notifications),
-                    onPressed: () {},
+                    onPressed: () {
+                      //Navigator.push(
+                        //context,
+                        //MaterialPageRoute(builder: (context) => NotificationScreen()),
+                      //);
+                    },
                   ),
                   const SizedBox(width: 8),
                   Container(
