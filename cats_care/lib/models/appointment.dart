@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart'; // Import TimeOfDay
-import 'package:cloud_firestore/cloud_firestore.dart'; // Import Timestamp
+import 'package:flutter/material.dart'; 
+import 'package:cloud_firestore/cloud_firestore.dart'; 
 
 class Appointment {
   final String id;
@@ -29,7 +29,7 @@ class Appointment {
       id: id,
       petName: data['petName'],
       breed: data['breed'],
-      date: (data['date'] as Timestamp).toDate(), // Sử dụng Timestamp
+      date: (data['date'] as Timestamp).toDate(), 
       time: TimeOfDay.fromDateTime((data['time'] as Timestamp).toDate()),
       reason: data['reason'],
       note: data['note'],
